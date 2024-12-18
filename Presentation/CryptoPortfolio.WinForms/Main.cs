@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.Windows.Forms.DataVisualization.Charting;
 using Application.Interfaces;
 using Application.Models;
@@ -23,6 +22,8 @@ namespace CryptoPortfolio.WinForms
         private void Main_Load(object sender, EventArgs e)
         {
             string filePath = "investments.csv"; // check this
+
+            comboBox_ChartFilterType.SelectedIndex = 1; // CurrentValue
 
             CreateExampleCSV(filePath);
             UpdatePortfolio();
@@ -76,7 +77,8 @@ namespace CryptoPortfolio.WinForms
 
                 label_TotalInvested.Text = portfolio.TotalInvested.ToString();
                 UpdateDatagridViewValues(portfolio);
-                UpdateRiskDistributionChart(portfolio);               
+                UpdateRiskDistributionChart(portfolio);
+                UpdateCryptoDistributionChart(portfolio);
 
             }
             catch (Exception ex)
@@ -104,23 +106,30 @@ namespace CryptoPortfolio.WinForms
         {
             try
             {
-                // Agrupa os dados do portfolio por risco e calcula o total investido
+                string selectedItem = comboBox_ChartFilterType.SelectedItem.ToString();
+
                 var riskGroups = portfolio.Cryptos
                     .GroupBy(c => c.Risk)
                     .Select(group => new
                     {
                         Risk = group.Key,
-                        CurrentValue = group.Sum(c => c.CurrentValue)
+                        Total = selectedItem switch
+                        {
+                            "TotalInvested" => group.Sum(c => c.TotalInvested),
+                            "CurrentValue" => group.Sum(c => c.CurrentValue),
+                            "Profit" => group.Sum(c => c.Profit),
+                            _ => 0m // Valor padrão se nenhum filtro for aplicado
+                        }
                     })
-                    .Where(group => group.CurrentValue > 0) // Remove riscos com total 0
+                    .Where(group => group.Total > 0) // Remove riscos com total 0
                     .ToList();
 
                 // Limpa os dados anteriores no Chart
-                chart1.Series.Clear();
-                chart1.Titles.Clear();
+                chart_Risk.Series.Clear();
+                chart_Risk.Titles.Clear();
 
                 // Configura o Chart
-                chart1.Titles.Add("Wallet Distribution by Risk");
+                chart_Risk.Titles.Add("Wallet Distribution by Risk");
 
                 var series = new Series
                 {
@@ -128,12 +137,12 @@ namespace CryptoPortfolio.WinForms
                     ChartType = SeriesChartType.Pie
                 };
 
-                chart1.Series.Add(series);
+                chart_Risk.Series.Add(series);
 
                 // Adiciona os dados ao Chart
                 foreach (var group in riskGroups)
                 {
-                    series.Points.AddXY(group.Risk, group.CurrentValue);
+                    series.Points.AddXY(group.Risk, group.Total);
                 }
 
                 // Configura os rótulos no gráfico
@@ -146,6 +155,60 @@ namespace CryptoPortfolio.WinForms
                 //{
                 //    Docking = Docking.Bottom
                 //});
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating chart: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void UpdateCryptoDistributionChart(PortfolioDto portfolio)
+        {
+            try
+            {
+                string selectedItem = comboBox_ChartFilterType.SelectedItem?.ToString();
+
+                var cryptoGroups = portfolio.Cryptos
+                    .GroupBy(c => c.CryptoName) // Agrupa por CryptoName
+                    .Select(group => new
+                    {
+                        CryptoName = group.Key,
+                        Total = selectedItem switch
+                        {
+                            "TotalInvested" => group.Sum(c => c.TotalInvested),
+                            "CurrentValue" => group.Sum(c => c.CurrentValue),
+                            "Profit" => group.Sum(c => c.Profit),
+                            _ => 0m
+                        }
+                    })
+                    .Where(group => group.Total > 0) // Remove criptos com total 0
+                    .ToList();
+
+                // Limpa os dados anteriores no Chart
+                chart_TotalCrypto.Series.Clear();
+                chart_TotalCrypto.Titles.Clear();
+
+                // Configura o Chart
+                chart_TotalCrypto.Titles.Add($"Wallet Distribution by {selectedItem}");
+
+                var series = new Series
+                {
+                    Name = "CryptoDistribution",
+                    ChartType = SeriesChartType.Pie
+                };
+
+                chart_TotalCrypto.Series.Add(series);
+
+                // Adiciona os dados ao Chart
+                foreach (var group in cryptoGroups)
+                {
+                    series.Points.AddXY(group.CryptoName, group.Total);
+                }
+
+                // Configura os rótulos no gráfico
+                //series.Label = "#PERCENT{P2}"; // Exibe a porcentagem com duas casas decimais
+                series.Label = "#AXISLABEL: #PERCENT{P2}";
+                series.LegendText = "#AXISLABEL"; // Exibe o nome da cripto na legenda
             }
             catch (Exception ex)
             {
@@ -216,6 +279,11 @@ namespace CryptoPortfolio.WinForms
                 }
             }
 
+        }
+
+        private void comboBox_ChartFilterType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePortfolio();
         }
     }
 }
