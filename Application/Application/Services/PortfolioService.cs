@@ -1,41 +1,39 @@
 ﻿using Application.Interfaces;
-using Domain.Entities;
-using Domain.Interfaces;
+using Application.Models;
 
 namespace Application.Services
 {
     public class PortfolioService : IPortfolioService
     {
-        private readonly IInvestmentRepository _investmentRepository;
+        private readonly IInvestmentService _investmentService;
 
-        public PortfolioService(IInvestmentRepository investmentRepository)
+        public PortfolioService(IInvestmentService investmentService)
         {
-            _investmentRepository = investmentRepository;
+            _investmentService = investmentService;
         }
 
-        public List<Portfolio> ConsolidatePortfolio(Dictionary<string, decimal> currentValues)
+        public List<PortfolioDto> ConsolidatePortfolio()
         {
-            var investments = _investmentRepository.GetAll();
+            var investments = _investmentService.GetAllInvestments();
 
-            var portfolio = investments
+            if (investments == null || !investments.Any())
+                throw new InvalidOperationException("No investments found to consolidate.");
+
+            var consolidatedByCrypto = investments
                 .GroupBy(i => i.CryptoName)
-                .Select(g => new Portfolio
+                .Select(group => new PortfolioDto
                 {
-                    CryptoName = g.Key,
-                    TotalInvested = g.Sum(i => i.InvestedValue),
-                    CurrentValue = currentValues.ContainsKey(g.Key) ? currentValues[g.Key] : 0,
-                    Profit = (currentValues.ContainsKey(g.Key) ? currentValues[g.Key] : 0) - g.Sum(i => i.InvestedValue)
+                    CryptoName = group.Key,
+                    TotalInvested = group.Sum(i => i.InvestedValue),
+                    CurrentValue = 0,
+                    Profit = 0,
+                    ProfitPercentage = 0,
+                    Risk = string.Empty
                 })
+                .OrderByDescending(x => x.TotalInvested)
                 .ToList();
 
-            foreach (var item in portfolio)
-            {
-                item.ProfitPercentage = item.TotalInvested > 0
-                    ? (item.Profit / item.TotalInvested) * 100
-                    : 0;
-            }
-
-            return portfolio;
+            return consolidatedByCrypto;
         }
     }
 }

@@ -6,12 +6,14 @@ namespace CryptoPortfolio.WinForms
     public partial class Main : Form
     {
         private readonly IInvestmentService _investmentService;
+        private readonly IPortfolioService _portfolioService;
 
-        public Main(IInvestmentService investmentService)
+        public Main(IInvestmentService investmentService, IPortfolioService portfolioService)
         {
-            _investmentService = investmentService;
-
             InitializeComponent();
+
+            _investmentService = investmentService;
+            _portfolioService = portfolioService;
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -64,7 +66,18 @@ namespace CryptoPortfolio.WinForms
 
         public void UpdatePortfolio()
         {
-            MessageBox.Show("AAA");
+            try // remove this try catch create a midlesware
+            {
+                var portfolio = _portfolioService.ConsolidatePortfolio();
+
+                dataGridView1.AutoGenerateColumns = false;
+                dataGridView1.DataSource = portfolio;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao carregar os investimentos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

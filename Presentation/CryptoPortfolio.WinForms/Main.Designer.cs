@@ -39,6 +39,12 @@
             toolStripButton_Settings = new ToolStripButton();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             pictureBox1 = new PictureBox();
+            CryptoName = new DataGridViewTextBoxColumn();
+            TotalInvested = new DataGridViewTextBoxColumn();
+            CurrentValue = new DataGridViewTextBoxColumn();
+            Profit = new DataGridViewTextBoxColumn();
+            ProfitPercentage = new DataGridViewTextBoxColumn();
+            Risk = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
@@ -48,10 +54,11 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { CryptoName, TotalInvested, CurrentValue, Profit, ProfitPercentage, Risk });
             dataGridView1.Location = new Point(12, 35);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(954, 607);
+            dataGridView1.Size = new Size(804, 607);
             dataGridView1.TabIndex = 1;
             // 
             // toolStrip1
@@ -60,7 +67,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_NewInvestment, toolStripButton_ViewInvestments, toolStripButton_Settings });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1376, 32);
+            toolStrip1.Size = new Size(1331, 32);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -97,7 +104,7 @@
             chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             chart1.Legends.Add(legend1);
-            chart1.Location = new Point(989, 141);
+            chart1.Location = new Point(836, 35);
             chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
@@ -109,19 +116,68 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = Properties.Resources.coin_statistics_2476;
-            pictureBox1.Location = new Point(1264, 35);
+            pictureBox1.Location = new Point(1219, 35);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
             // 
+            // CryptoName
+            // 
+            CryptoName.DataPropertyName = "CryptoName";
+            CryptoName.HeaderText = "CryptoName";
+            CryptoName.MinimumWidth = 6;
+            CryptoName.Name = "CryptoName";
+            CryptoName.Width = 125;
+            // 
+            // TotalInvested
+            // 
+            TotalInvested.DataPropertyName = "TotalInvested";
+            TotalInvested.HeaderText = "TotalInvested";
+            TotalInvested.MinimumWidth = 6;
+            TotalInvested.Name = "TotalInvested";
+            TotalInvested.Width = 125;
+            // 
+            // CurrentValue
+            // 
+            CurrentValue.DataPropertyName = "CurrentValue";
+            CurrentValue.HeaderText = "CurrentValue";
+            CurrentValue.MinimumWidth = 6;
+            CurrentValue.Name = "CurrentValue";
+            CurrentValue.Width = 125;
+            // 
+            // Profit
+            // 
+            Profit.DataPropertyName = "Profit";
+            Profit.HeaderText = "Profit";
+            Profit.MinimumWidth = 6;
+            Profit.Name = "Profit";
+            Profit.Width = 125;
+            // 
+            // ProfitPercentage
+            // 
+            ProfitPercentage.DataPropertyName = "ProfitPercentage";
+            ProfitPercentage.HeaderText = "ProfitPercentage";
+            ProfitPercentage.MinimumWidth = 6;
+            ProfitPercentage.Name = "ProfitPercentage";
+            ProfitPercentage.Width = 125;
+            // 
+            // Risk
+            // 
+            Risk.DataPropertyName = "Risk";
+            Risk.HeaderText = "Risk";
+            Risk.MinimumWidth = 6;
+            Risk.Name = "Risk";
+            Risk.Width = 125;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1376, 655);
+            ClientSize = new Size(1331, 655);
             Controls.Add(pictureBox1);
             Controls.Add(chart1);
             Controls.Add(toolStrip1);
@@ -150,5 +206,11 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private ToolStripButton toolStripButton_Settings;
         private PictureBox pictureBox1;
+        private DataGridViewTextBoxColumn CryptoName;
+        private DataGridViewTextBoxColumn TotalInvested;
+        private DataGridViewTextBoxColumn CurrentValue;
+        private DataGridViewTextBoxColumn Profit;
+        private DataGridViewTextBoxColumn ProfitPercentage;
+        private DataGridViewTextBoxColumn Risk;
     }
 }
