@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Windows.Forms.DataVisualization.Charting;
 using Application.Interfaces;
 using Application.Models;
 using CryptoPortfolio.WinForms.Forms;
@@ -72,7 +73,10 @@ namespace CryptoPortfolio.WinForms
             try // remove this try catch create a midlesware
             {
                 var portfolio = _portfolioService.GetPortfolio();
-                UpdateFormPortfolioValues(portfolio);
+
+                label_TotalInvested.Text = portfolio.TotalInvested.ToString();
+                UpdateDatagridViewValues(portfolio);
+                UpdateRiskDistributionChart(portfolio);               
 
             }
             catch (Exception ex)
@@ -81,7 +85,7 @@ namespace CryptoPortfolio.WinForms
             }
         }
 
-        private void UpdateFormPortfolioValues(PortfolioDto portfolio)
+        private void UpdateDatagridViewValues(PortfolioDto portfolio)
         {
             if (_portfolioBindingSource == null)
             {
@@ -94,8 +98,59 @@ namespace CryptoPortfolio.WinForms
                 _portfolioBindingSource.DataSource = portfolio.Cryptos;
                 _portfolioBindingSource.ResetBindings(false);
             }
+        }
 
-            label_TotalInvested.Text = portfolio.TotalInvested.ToString();
+        private void UpdateRiskDistributionChart(PortfolioDto portfolio)
+        {
+            try
+            {
+                // Agrupa os dados do portfolio por risco e calcula o total investido
+                var riskGroups = portfolio.Cryptos
+                    .GroupBy(c => c.Risk)
+                    .Select(group => new
+                    {
+                        Risk = group.Key,
+                        CurrentValue = group.Sum(c => c.CurrentValue)
+                    })
+                    .Where(group => group.CurrentValue > 0) // Remove riscos com total 0
+                    .ToList();
+
+                // Limpa os dados anteriores no Chart
+                chart1.Series.Clear();
+                chart1.Titles.Clear();
+
+                // Configura o Chart
+                chart1.Titles.Add("Wallet Distribution by Risk");
+
+                var series = new Series
+                {
+                    Name = "RiskDistribution",
+                    ChartType = SeriesChartType.Pie
+                };
+
+                chart1.Series.Add(series);
+
+                // Adiciona os dados ao Chart
+                foreach (var group in riskGroups)
+                {
+                    series.Points.AddXY(group.Risk, group.CurrentValue);
+                }
+
+                // Configura os rótulos no gráfico
+                series.Label = "#PERCENT{P2}"; // Exibe a porcentagem com duas casas decimais
+                series.LegendText = "#AXISLABEL"; // Exibe o nome do risco na legenda
+
+                // Exibe a legenda
+                //chart1.Legends.Clear();
+                //chart1.Legends.Add(new Legend("RiskLegend")
+                //{
+                //    Docking = Docking.Bottom
+                //});
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating chart: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
