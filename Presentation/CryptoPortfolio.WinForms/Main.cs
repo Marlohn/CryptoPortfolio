@@ -1,5 +1,6 @@
 using System.Data;
 using Application.Interfaces;
+using CryptoPortfolio.WinForms.Forms;
 
 namespace CryptoPortfolio.WinForms
 {
@@ -10,12 +11,12 @@ namespace CryptoPortfolio.WinForms
         public Main(IInvestmentService investmentService)
         {
             _investmentService = investmentService;
+
             InitializeComponent();
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-
             string filePath = "investments.csv";
 
             CreateExampleCSV(filePath);
@@ -89,6 +90,20 @@ namespace CryptoPortfolio.WinForms
             {
                 MessageBox.Show($"Erro ao ler o arquivo: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void toolStripButton_NewInvestment_Click(object sender, EventArgs e)
+        {
+            var addInvestmentForm = new AddInvestment(_investmentService);
+
+            addInvestmentForm.Show();
+        }
+
+        private void toolStripButton_ViewInvestments_Click(object sender, EventArgs e)
+        {
+            var investmentsForm = new Investments();
+
+            investmentsForm.Show();
         }
     }
 }

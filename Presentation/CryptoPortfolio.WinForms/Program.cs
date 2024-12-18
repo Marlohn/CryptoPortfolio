@@ -1,3 +1,4 @@
+using CryptoPortfolio.WinForms.Forms;
 using IoC;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,11 +32,12 @@ namespace CryptoPortfolio.WinForms
         {
             var services = new ServiceCollection();
 
-            // Chama o método de configuração IoC da Infrastructure
             services.AddInfrastructure();
 
-            // Registra a Main Form para permitir injeção de dependências
+            // Register forms to allow dependency injection
             services.AddTransient<Main>();
+            services.AddTransient<Investments>();
+            services.AddTransient<AddInvestment>();
 
             return services.BuildServiceProvider();
         }

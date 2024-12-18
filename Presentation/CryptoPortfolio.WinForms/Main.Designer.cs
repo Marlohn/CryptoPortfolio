@@ -28,104 +28,115 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             dataGridView1 = new DataGridView();
             toolStrip1 = new ToolStrip();
-            toolStripButton1 = new ToolStripButton();
-            toolStripLabel1 = new ToolStripLabel();
-            toolStripButton2 = new ToolStripButton();
-            toolStripLabel2 = new ToolStripLabel();
+            toolStripButton_NewInvestment = new ToolStripButton();
+            toolStripButton_ViewInvestments = new ToolStripButton();
+            toolStripButton_Settings = new ToolStripButton();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 54);
+            dataGridView1.Location = new Point(12, 35);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(903, 607);
+            dataGridView1.Size = new Size(954, 607);
             dataGridView1.TabIndex = 1;
             // 
             // toolStrip1
             // 
-            toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripLabel1, toolStripButton2, toolStripLabel2 });
+            toolStrip1.ImageScalingSize = new Size(25, 25);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_NewInvestment, toolStripButton_ViewInvestments, toolStripButton_Settings });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1376, 27);
+            toolStrip1.Size = new Size(1376, 32);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // toolStripButton_NewInvestment
             // 
-            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(29, 24);
-            toolStripButton1.Text = "toolStripButton1";
+            toolStripButton_NewInvestment.Image = Properties.Resources.plus_321;
+            toolStripButton_NewInvestment.ImageTransparentColor = Color.Magenta;
+            toolStripButton_NewInvestment.Name = "toolStripButton_NewInvestment";
+            toolStripButton_NewInvestment.Size = new Size(144, 29);
+            toolStripButton_NewInvestment.Text = "New investment";
+            toolStripButton_NewInvestment.Click += toolStripButton_NewInvestment_Click;
             // 
-            // toolStripLabel1
+            // toolStripButton_ViewInvestments
             // 
-            toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new Size(115, 24);
-            toolStripLabel1.Text = "New investment";
+            toolStripButton_ViewInvestments.Image = Properties.Resources.list_6216;
+            toolStripButton_ViewInvestments.ImageTransparentColor = Color.Magenta;
+            toolStripButton_ViewInvestments.Name = "toolStripButton_ViewInvestments";
+            toolStripButton_ViewInvestments.Size = new Size(152, 29);
+            toolStripButton_ViewInvestments.Text = "View Investments";
+            toolStripButton_ViewInvestments.Click += toolStripButton_ViewInvestments_Click;
             // 
-            // toolStripButton2
+            // toolStripButton_Settings
             // 
-            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
-            toolStripButton2.ImageTransparentColor = Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new Size(29, 24);
-            toolStripButton2.Text = "toolStripButton2";
-            // 
-            // toolStripLabel2
-            // 
-            toolStripLabel2.Name = "toolStripLabel2";
-            toolStripLabel2.Size = new Size(123, 24);
-            toolStripLabel2.Text = "View Investments";
+            toolStripButton_Settings.Alignment = ToolStripItemAlignment.Right;
+            toolStripButton_Settings.Image = Properties.Resources.settings_5666;
+            toolStripButton_Settings.ImageTransparentColor = Color.Magenta;
+            toolStripButton_Settings.Name = "toolStripButton_Settings";
+            toolStripButton_Settings.Size = new Size(91, 29);
+            toolStripButton_Settings.Text = "Settings";
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            chart1.Legends.Add(legend2);
-            chart1.Location = new Point(971, 152);
+            chartArea1.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chart1.Legends.Add(legend1);
+            chart1.Location = new Point(989, 141);
             chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chart1.Series.Add(series1);
             chart1.Size = new Size(375, 375);
             chart1.TabIndex = 3;
             chart1.Text = "chart1";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.coin_statistics_2476;
+            pictureBox1.Location = new Point(1264, 35);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(100, 100);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1376, 699);
+            ClientSize = new Size(1376, 655);
+            Controls.Add(pictureBox1);
             Controls.Add(chart1);
             Controls.Add(toolStrip1);
             Controls.Add(dataGridView1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "Main";
-            Text = "CryptoPortfolio";
+            Text = "Crypto Portfolio";
             Load += Main_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -134,10 +145,10 @@
 
         private DataGridView dataGridView1;
         private ToolStrip toolStrip1;
-        private ToolStripButton toolStripButton1;
-        private ToolStripLabel toolStripLabel1;
-        private ToolStripButton toolStripButton2;
-        private ToolStripLabel toolStripLabel2;
+        private ToolStripButton toolStripButton_NewInvestment;
+        private ToolStripButton toolStripButton_ViewInvestments;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private ToolStripButton toolStripButton_Settings;
+        private PictureBox pictureBox1;
     }
 }
