@@ -31,6 +31,9 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             dataGridView1 = new DataGridView();
             CryptoName = new DataGridViewTextBoxColumn();
@@ -48,11 +51,13 @@
             label1 = new Label();
             groupBox1 = new GroupBox();
             label_TotalInvested = new Label();
+            chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chart2).BeginInit();
             SuspendLayout();
             // 
             // dataGridView1
@@ -64,6 +69,7 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(804, 607);
             dataGridView1.TabIndex = 1;
+            dataGridView1.CellFormatting += dataGridView1_CellFormatting;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
             // 
             // CryptoName
@@ -163,7 +169,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             chart1.Series.Add(series1);
-            chart1.Size = new Size(485, 435);
+            chart1.Size = new Size(329, 205);
             chart1.TabIndex = 3;
             chart1.Text = "chart1";
             // 
@@ -190,6 +196,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(chart2);
             groupBox1.Controls.Add(label_TotalInvested);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(chart1);
@@ -210,6 +217,22 @@
             label_TotalInvested.Size = new Size(23, 28);
             label_TotalInvested.TabIndex = 6;
             label_TotalInvested.Text = "0";
+            // 
+            // chart2
+            // 
+            chartArea2.Name = "ChartArea1";
+            chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chart2.Legends.Add(legend2);
+            chart2.Location = new Point(0, 378);
+            chart2.Name = "chart2";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chart2.Series.Add(series2);
+            chart2.Size = new Size(347, 230);
+            chart2.TabIndex = 7;
+            chart2.Text = "chart2";
             // 
             // Main
             // 
@@ -232,6 +255,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)chart2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -254,5 +278,6 @@
         private Label label1;
         private GroupBox groupBox1;
         private Label label_TotalInvested;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
     }
 }

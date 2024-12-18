@@ -122,7 +122,8 @@ namespace CryptoPortfolio.WinForms
                         currentValue = parsedCurrentValue;
                     }
 
-                    _portfolioService.UpdateCrypto(new CryptoStatusDto () {
+                    _portfolioService.UpdateCrypto(new CryptoStatusDto()
+                    {
                         CryptoName = cryptoName,
                         Risk = risk,
                         CurrentValue = currentValue,
@@ -135,6 +136,31 @@ namespace CryptoPortfolio.WinForms
             {
                 MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) // improve this
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "ProfitPercentage")
+            {
+                if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
+                {
+                    e.Value = $"{value:F2} %";
+                    e.FormattingApplied = true;
+                }
+            }
+
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "TotalInvested" ||
+                dataGridView1.Columns[e.ColumnIndex].Name == "CurrentValue" ||
+                dataGridView1.Columns[e.ColumnIndex].Name == "Profit")
+            {
+                if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value2))
+                {
+                    // Formata como valor monetário com símbolo do dólar
+                    e.Value = $"${value2:F2}";
+                    e.FormattingApplied = true;
+                }
+            }
+
         }
     }
 }
