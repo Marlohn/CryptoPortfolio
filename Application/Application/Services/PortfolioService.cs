@@ -1,9 +1,10 @@
-﻿using Domain.Entities;
+﻿using Application.Interfaces;
+using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Application.Services
 {
-    public class PortfolioService
+    public class PortfolioService : IPortfolioService
     {
         private readonly IInvestmentRepository _investmentRepository;
 

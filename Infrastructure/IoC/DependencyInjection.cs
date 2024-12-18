@@ -14,8 +14,9 @@ namespace IoC
 
             services.AddScoped<IInvestmentService, InvestmentService>();
 
-            services.AddScoped<IInvestmentRepository>(provider => new CsvInvestmentRepository("investments.csv")); // change it
-            services.AddScoped<PortfolioService>();
+            services.AddScoped<IPortfolioService, PortfolioService>();
+
+            services.AddScoped<IInvestmentRepository>(provider => new CsvInvestmentRepository("investments.csv")); // change it           
 
             return services;
         }
