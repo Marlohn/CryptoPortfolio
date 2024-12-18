@@ -59,7 +59,7 @@ public class PortfolioService : IPortfolioService
                 var status = cryptoStatusList.SingleOrDefault(cs => cs.CryptoName == cryptoName);
 
                 var currentValue = status?.CurrentValue ?? null;
-                var risk = status?.Risk ?? "Unknown";
+                var risk = status?.Risk ?? string.Empty;
                 var profit = currentValue - totalInvested;
                 var profitPercentage = totalInvested > 0 ? (profit / totalInvested) * 100 : null;
 
