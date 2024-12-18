@@ -1,39 +1,61 @@
 ﻿using Application.Interfaces;
 using Application.Models;
 
-namespace Application.Services
+public class PortfolioService : IPortfolioService
 {
-    public class PortfolioService : IPortfolioService
+    private readonly IInvestmentService _investmentService;
+    private PortfolioDto _portfolio;
+
+    public PortfolioService(IInvestmentService investmentService)
     {
-        private readonly IInvestmentService _investmentService;
+        _investmentService = investmentService;
+        _portfolio = ConsolidatePortfolio();
+    }
 
-        public PortfolioService(IInvestmentService investmentService)
+    public PortfolioDto GetPortfolio()
+    {
+        return _portfolio;
+    }
+
+    public void UpdateCrypto(string cryptoName, decimal currentValue)
+    {
+        var crypto = _portfolio.Cryptos.SingleOrDefault(x => x.CryptoName == cryptoName);
+
+        if (crypto == null)
+            throw new ArgumentException($"Crypto '{cryptoName}' not found.");
+
+        crypto.CurrentValue = currentValue;
+        crypto.Profit = crypto.CurrentValue - crypto.TotalInvested;
+
+        if (crypto.TotalInvested > 0)
         {
-            _investmentService = investmentService;
+            crypto.ProfitPercentage = (crypto.Profit / crypto.TotalInvested) * 100;
         }
+    }
 
-        public List<PortfolioDto> ConsolidatePortfolio()
+    private PortfolioDto ConsolidatePortfolio()
+    {
+        var investments = _investmentService.GetAllInvestments();
+
+        if (investments == null || !investments.Any())
+            throw new InvalidOperationException("No investments found to consolidate.");
+
+        var cryptos = investments
+            .GroupBy(i => i.CryptoName)
+            .Select(group => new CryptoDto
+            {
+                CryptoName = group.Key,
+                TotalInvested = group.Sum(i => i.InvestedValue),
+                CurrentValue = 0,
+                Profit = 0,
+                ProfitPercentage = 0,
+                Risk = string.Empty //group.FirstOrDefault()?.Risk ?? string.Empty
+            })
+            .ToList();
+
+        return new PortfolioDto
         {
-            var investments = _investmentService.GetAllInvestments();
-
-            if (investments == null || !investments.Any())
-                throw new InvalidOperationException("No investments found to consolidate.");
-
-            var consolidatedByCrypto = investments
-                .GroupBy(i => i.CryptoName)
-                .Select(group => new PortfolioDto
-                {
-                    CryptoName = group.Key,
-                    TotalInvested = group.Sum(i => i.InvestedValue),
-                    CurrentValue = 0,
-                    Profit = 0,
-                    ProfitPercentage = 0,
-                    Risk = string.Empty
-                })
-                .OrderByDescending(x => x.TotalInvested)
-                .ToList();
-
-            return consolidatedByCrypto;
-        }
+            Cryptos = cryptos
+        };
     }
 }

@@ -1,4 +1,6 @@
+using System.ComponentModel;
 using Application.Interfaces;
+using Application.Models;
 using CryptoPortfolio.WinForms.Forms;
 
 namespace CryptoPortfolio.WinForms
@@ -7,6 +9,7 @@ namespace CryptoPortfolio.WinForms
     {
         private readonly IInvestmentService _investmentService;
         private readonly IPortfolioService _portfolioService;
+        private BindingSource _portfolioBindingSource;
 
         public Main(IInvestmentService investmentService, IPortfolioService portfolioService)
         {
@@ -68,15 +71,60 @@ namespace CryptoPortfolio.WinForms
         {
             try // remove this try catch create a midlesware
             {
-                var portfolio = _portfolioService.ConsolidatePortfolio();
-
-                dataGridView1.AutoGenerateColumns = false;
-                dataGridView1.DataSource = portfolio;
+                var portfolio = _portfolioService.GetPortfolio();
+                UpdatePortfolioGridview(portfolio);
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao carregar os investimentos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void UpdatePortfolioGridview(PortfolioDto portfolio)
+        {
+            if (_portfolioBindingSource == null)
+            {
+                _portfolioBindingSource = new BindingSource();
+                _portfolioBindingSource.DataSource = portfolio.Cryptos;
+                dataGridView1.DataSource = _portfolioBindingSource;
+            }
+            else
+            {
+                //_portfolioBindingSource.DataSource = portfolio.Cryptos;
+                _portfolioBindingSource.ResetBindings(false);
+            }
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    var row = dataGridView1.Rows[e.RowIndex];
+                    string cryptoName = row.Cells["CryptoName"].Value?.ToString();
+
+                    if (string.IsNullOrWhiteSpace(cryptoName))
+                    {
+                        MessageBox.Show("CryptoName is missing or invalid.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (!decimal.TryParse(row.Cells["CurrentValue"].Value?.ToString(), out decimal currentValue))
+                    {
+                        MessageBox.Show("Invalid value for CurrentValue. Please enter a valid decimal number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    _portfolioService.UpdateCrypto(cryptoName, currentValue);
+
+                    UpdatePortfolio();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

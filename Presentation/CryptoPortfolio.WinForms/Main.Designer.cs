@@ -33,18 +33,18 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             dataGridView1 = new DataGridView();
-            toolStrip1 = new ToolStrip();
-            toolStripButton_NewInvestment = new ToolStripButton();
-            toolStripButton_ViewInvestments = new ToolStripButton();
-            toolStripButton_Settings = new ToolStripButton();
-            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            pictureBox1 = new PictureBox();
             CryptoName = new DataGridViewTextBoxColumn();
             TotalInvested = new DataGridViewTextBoxColumn();
             CurrentValue = new DataGridViewTextBoxColumn();
             Profit = new DataGridViewTextBoxColumn();
             ProfitPercentage = new DataGridViewTextBoxColumn();
             Risk = new DataGridViewTextBoxColumn();
+            toolStrip1 = new ToolStrip();
+            toolStripButton_NewInvestment = new ToolStripButton();
+            toolStripButton_ViewInvestments = new ToolStripButton();
+            toolStripButton_Settings = new ToolStripButton();
+            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
@@ -60,6 +60,55 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(804, 607);
             dataGridView1.TabIndex = 1;
+            dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
+            // 
+            // CryptoName
+            // 
+            CryptoName.DataPropertyName = "CryptoName";
+            CryptoName.HeaderText = "CryptoName";
+            CryptoName.MinimumWidth = 6;
+            CryptoName.Name = "CryptoName";
+            CryptoName.Width = 125;
+            // 
+            // TotalInvested
+            // 
+            TotalInvested.DataPropertyName = "TotalInvested";
+            TotalInvested.HeaderText = "TotalInvested";
+            TotalInvested.MinimumWidth = 6;
+            TotalInvested.Name = "TotalInvested";
+            TotalInvested.Width = 125;
+            // 
+            // CurrentValue
+            // 
+            CurrentValue.DataPropertyName = "CurrentValue";
+            CurrentValue.HeaderText = "CurrentValue";
+            CurrentValue.MinimumWidth = 6;
+            CurrentValue.Name = "CurrentValue";
+            CurrentValue.Width = 125;
+            // 
+            // Profit
+            // 
+            Profit.DataPropertyName = "Profit";
+            Profit.HeaderText = "Profit";
+            Profit.MinimumWidth = 6;
+            Profit.Name = "Profit";
+            Profit.Width = 125;
+            // 
+            // ProfitPercentage
+            // 
+            ProfitPercentage.DataPropertyName = "ProfitPercentage";
+            ProfitPercentage.HeaderText = "ProfitPercentage";
+            ProfitPercentage.MinimumWidth = 6;
+            ProfitPercentage.Name = "ProfitPercentage";
+            ProfitPercentage.Width = 125;
+            // 
+            // Risk
+            // 
+            Risk.DataPropertyName = "Risk";
+            Risk.HeaderText = "Risk";
+            Risk.MinimumWidth = 6;
+            Risk.Name = "Risk";
+            Risk.Width = 125;
             // 
             // toolStrip1
             // 
@@ -124,54 +173,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
-            // 
-            // CryptoName
-            // 
-            CryptoName.DataPropertyName = "CryptoName";
-            CryptoName.HeaderText = "CryptoName";
-            CryptoName.MinimumWidth = 6;
-            CryptoName.Name = "CryptoName";
-            CryptoName.Width = 125;
-            // 
-            // TotalInvested
-            // 
-            TotalInvested.DataPropertyName = "TotalInvested";
-            TotalInvested.HeaderText = "TotalInvested";
-            TotalInvested.MinimumWidth = 6;
-            TotalInvested.Name = "TotalInvested";
-            TotalInvested.Width = 125;
-            // 
-            // CurrentValue
-            // 
-            CurrentValue.DataPropertyName = "CurrentValue";
-            CurrentValue.HeaderText = "CurrentValue";
-            CurrentValue.MinimumWidth = 6;
-            CurrentValue.Name = "CurrentValue";
-            CurrentValue.Width = 125;
-            // 
-            // Profit
-            // 
-            Profit.DataPropertyName = "Profit";
-            Profit.HeaderText = "Profit";
-            Profit.MinimumWidth = 6;
-            Profit.Name = "Profit";
-            Profit.Width = 125;
-            // 
-            // ProfitPercentage
-            // 
-            ProfitPercentage.DataPropertyName = "ProfitPercentage";
-            ProfitPercentage.HeaderText = "ProfitPercentage";
-            ProfitPercentage.MinimumWidth = 6;
-            ProfitPercentage.Name = "ProfitPercentage";
-            ProfitPercentage.Width = 125;
-            // 
-            // Risk
-            // 
-            Risk.DataPropertyName = "Risk";
-            Risk.HeaderText = "Risk";
-            Risk.MinimumWidth = 6;
-            Risk.Name = "Risk";
-            Risk.Width = 125;
             // 
             // Main
             // 
