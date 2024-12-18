@@ -130,6 +130,7 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "AddInvestment";
             Text = "AddInvestment";
+            FormClosing += AddInvestment_FormClosing;
             Load += AddInvestment_Load;
             ResumeLayout(false);
             PerformLayout();

@@ -88,6 +88,7 @@
             MaximizeBox = false;
             Name = "Investments";
             Text = "Investments";
+            FormClosing += Investments_FormClosing;
             Load += Investments_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);

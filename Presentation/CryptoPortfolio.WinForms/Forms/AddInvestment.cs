@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using System.DirectoryServices.ActiveDirectory;
+using Application.Interfaces;
 using Application.Models;
 using UtilityExtensions;
 
@@ -7,16 +8,23 @@ namespace CryptoPortfolio.WinForms.Forms
     public partial class AddInvestment : Form
     {
         private readonly IInvestmentService _investmentService;
+        private readonly Main _main;
 
-        public AddInvestment(IInvestmentService investmentService)
+        public AddInvestment(IInvestmentService investmentService, Main main)
         {
             InitializeComponent();
             _investmentService = investmentService;
+            _main = main;
         }
 
         private void AddInvestment_Load(object sender, EventArgs e)
         {
             textBox_Date.Text = DateTime.Now.ToString("yyyy-MM-dd");
+        }
+
+        private void AddInvestment_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _main.UpdatePortfolio();
         }
 
         private void buttonAddInvestment_Click(object sender, EventArgs e)
