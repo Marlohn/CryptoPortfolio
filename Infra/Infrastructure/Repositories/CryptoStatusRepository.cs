@@ -38,7 +38,7 @@ namespace Infrastructure.Repositories
                     cryptoStatusList.Add(new CryptoStatus
                     {
                         CryptoName = values[0],
-                        CurrentValue = decimal.TryParse(values[1], out var investedValue) ? investedValue : 0,
+                        CurrentValue = decimal.TryParse(values[1], out var investedValue) ? investedValue : null, // maybe error?
                         Risk = values[2]
                     });
                 }

@@ -87,6 +87,7 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             MaximizeBox = false;
             Name = "Investments";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Investments";
             FormClosing += Investments_FormClosing;
             Load += Investments_Load;

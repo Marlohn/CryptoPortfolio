@@ -115,6 +115,7 @@
             // 
             // AddInvestment
             // 
+            AcceptButton = buttonAddInvestment;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(401, 233);
@@ -129,7 +130,9 @@
             Controls.Add(buttonAddInvestment);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "AddInvestment";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AddInvestment";
+            TopMost = true;
             FormClosing += AddInvestment_FormClosing;
             Load += AddInvestment_Load;
             ResumeLayout(false);

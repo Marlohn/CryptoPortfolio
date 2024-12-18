@@ -45,10 +45,14 @@
             toolStripButton_Settings = new ToolStripButton();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             pictureBox1 = new PictureBox();
+            label1 = new Label();
+            groupBox1 = new GroupBox();
+            label_TotalInvested = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
@@ -153,13 +157,13 @@
             chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             chart1.Legends.Add(legend1);
-            chart1.Location = new Point(836, 35);
+            chart1.Location = new Point(6, 167);
             chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             chart1.Series.Add(series1);
-            chart1.Size = new Size(375, 375);
+            chart1.Size = new Size(485, 435);
             chart1.TabIndex = 3;
             chart1.Text = "chart1";
             // 
@@ -167,20 +171,52 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = Properties.Resources.coin_statistics_2476;
-            pictureBox1.Location = new Point(1219, 35);
+            pictureBox1.Location = new Point(391, 16);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(22, 34);
+            label1.Name = "label1";
+            label1.Size = new Size(136, 28);
+            label1.TabIndex = 5;
+            label1.Text = "Total invested:";
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(label_TotalInvested);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(chart1);
+            groupBox1.Controls.Add(pictureBox1);
+            groupBox1.Location = new Point(822, 35);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(497, 608);
+            groupBox1.TabIndex = 6;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Wallet Details:";
+            // 
+            // label_TotalInvested
+            // 
+            label_TotalInvested.AutoSize = true;
+            label_TotalInvested.Font = new Font("Segoe UI", 12F);
+            label_TotalInvested.Location = new Point(164, 34);
+            label_TotalInvested.Name = "label_TotalInvested";
+            label_TotalInvested.Size = new Size(23, 28);
+            label_TotalInvested.TabIndex = 6;
+            label_TotalInvested.Text = "0";
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1331, 655);
-            Controls.Add(pictureBox1);
-            Controls.Add(chart1);
+            Controls.Add(groupBox1);
             Controls.Add(toolStrip1);
             Controls.Add(dataGridView1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -194,6 +230,8 @@
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -213,5 +251,8 @@
         private DataGridViewTextBoxColumn Profit;
         private DataGridViewTextBoxColumn ProfitPercentage;
         private DataGridViewTextBoxColumn Risk;
+        private Label label1;
+        private GroupBox groupBox1;
+        private Label label_TotalInvested;
     }
 }

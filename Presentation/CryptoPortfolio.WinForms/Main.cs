@@ -72,7 +72,7 @@ namespace CryptoPortfolio.WinForms
             try // remove this try catch create a midlesware
             {
                 var portfolio = _portfolioService.GetPortfolio();
-                UpdatePortfolioGridview(portfolio);
+                UpdateFormPortfolioValues(portfolio);
 
             }
             catch (Exception ex)
@@ -81,7 +81,7 @@ namespace CryptoPortfolio.WinForms
             }
         }
 
-        private void UpdatePortfolioGridview(PortfolioDto portfolio)
+        private void UpdateFormPortfolioValues(PortfolioDto portfolio)
         {
             if (_portfolioBindingSource == null)
             {
@@ -94,6 +94,8 @@ namespace CryptoPortfolio.WinForms
                 _portfolioBindingSource.DataSource = portfolio.Cryptos;
                 _portfolioBindingSource.ResetBindings(false);
             }
+
+            label_TotalInvested.Text = portfolio.TotalInvested.ToString();
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -113,10 +115,11 @@ namespace CryptoPortfolio.WinForms
 
                     string risk = row.Cells["Risk"].Value?.ToString() ?? string.Empty;  // is that the best approach?
 
-                    if (!decimal.TryParse(row.Cells["CurrentValue"].Value?.ToString(), out decimal currentValue))
+                    decimal? currentValue = null;
+                    var currentValueString = row.Cells["CurrentValue"].Value?.ToString();
+                    if (!string.IsNullOrWhiteSpace(currentValueString) && decimal.TryParse(currentValueString, out var parsedCurrentValue))
                     {
-                        MessageBox.Show("Invalid value for CurrentValue. Please enter a valid decimal number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
+                        currentValue = parsedCurrentValue;
                     }
 
                     _portfolioService.UpdateCrypto(new CryptoStatusDto () {

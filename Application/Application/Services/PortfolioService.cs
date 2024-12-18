@@ -58,8 +58,8 @@ public class PortfolioService : IPortfolioService
                 // Tenta encontrar o status atual da criptomoeda no arquivo CSV
                 var status = cryptoStatusList.SingleOrDefault(cs => cs.CryptoName == cryptoName);
 
-                var currentValue = status?.CurrentValue ?? null; 
-                var risk = status?.Risk ?? "Unknown";      
+                var currentValue = status?.CurrentValue ?? null;
+                var risk = status?.Risk ?? "Unknown";
                 var profit = currentValue - totalInvested;
                 var profitPercentage = totalInvested > 0 ? (profit / totalInvested) * 100 : null;
 
@@ -73,6 +73,7 @@ public class PortfolioService : IPortfolioService
                     Risk = risk
                 };
             })
+            .OrderByDescending(x => x.TotalInvested)
             .ToList();
 
         var totalInvested = cryptos.Sum(c => c.TotalInvested);
