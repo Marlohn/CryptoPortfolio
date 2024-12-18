@@ -10,13 +10,15 @@ namespace IoC
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddScoped<IInvestmentRepository, CsvInvestmentRepository>();
+            //Domain
+            services.AddScoped<IInvestmentRepository, InvestmentRepository>();
+            services.AddScoped<IInvestmentRepository>(provider => new InvestmentRepository("investments.csv")); // change it 
+            services.AddScoped<ICryptoStatusRepository>(provider => new CryptoStatusRepository("cryptostatus.csv")); // change it 
 
+            //Application
             services.AddScoped<IInvestmentService, InvestmentService>();
-
             services.AddScoped<IPortfolioService, PortfolioService>();
-
-            services.AddScoped<IInvestmentRepository>(provider => new CsvInvestmentRepository("investments.csv")); // change it           
+            services.AddScoped<ICryptoStatusService, CryptoStatusService>();
 
             return services;
         }

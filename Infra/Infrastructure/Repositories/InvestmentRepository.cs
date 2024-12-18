@@ -3,24 +3,18 @@ using Domain.Interfaces;
 
 namespace Infrastructure.Repositories
 {
-    public class CsvInvestmentRepository : IInvestmentRepository
+    public class InvestmentRepository : IInvestmentRepository
     {
         private readonly string _filePath;
 
-        public CsvInvestmentRepository(string filePath)
+        public InvestmentRepository(string filePath)
         {
             _filePath = filePath;
 
             if (!File.Exists(_filePath))
             {
-                File.WriteAllText(_filePath, "Date,CryptoName,InvestedValue,Notes\n");
+                File.WriteAllText(_filePath, "Date,CryptoName,InvestedValue,Notes");
             }
-        }
-
-        public void Add(Investment investment)
-        {
-            var line = $"{investment.Date},{investment.CryptoName},{investment.InvestedValue},{investment.Notes}";
-            File.AppendAllText(_filePath, line + "\n");
         }
 
         public List<Investment> GetAll()
@@ -42,20 +36,23 @@ namespace Infrastructure.Repositories
 
                     var values = line.Split(',');
 
-                    if (values.Length == 4)
+                    investments.Add(new Investment
                     {
-                        investments.Add(new Investment
-                        {
-                            Date = values[0],
-                            CryptoName = values[1],
-                            InvestedValue = decimal.TryParse(values[2], out var investedValue) ? investedValue : 0,
-                            Notes = values[3]
-                        });
-                    }
+                        Date = values[0],
+                        CryptoName = values[1],
+                        InvestedValue = decimal.TryParse(values[2], out var investedValue) ? investedValue : 0,
+                        Notes = values[3]
+                    });
                 }
             }
 
             return investments;
+        }
+
+        public void Add(Investment investment)
+        {
+            var line = $"{investment.Date},{investment.CryptoName},{investment.InvestedValue},{investment.Notes}";
+            File.AppendAllText(_filePath, line + "\n");
         }
     }
 }

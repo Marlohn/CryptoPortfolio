@@ -5,6 +5,6 @@ namespace Application.Interfaces
     public interface IPortfolioService
     {
         PortfolioDto GetPortfolio();
-        void UpdateCrypto(string cryptoName, decimal currentValue);
+        void UpdateCrypto(CryptoStatusDto cryptoStatusDto);
     }
 }

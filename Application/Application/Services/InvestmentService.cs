@@ -14,6 +14,21 @@ namespace Application.Services
         {
             _investmentRepository = investmentRepository;
         }
+        public List<InvestmentDto> GetAllInvestments()
+        {
+            var investments = _investmentRepository.GetAll();
+
+            var investmentDtos = investments.Select(investment => new InvestmentDto
+            {
+                Date = investment.Date,
+                CryptoName = investment.CryptoName,
+                InvestedValue = investment.InvestedValue,
+                Notes = investment.Notes
+            }).ToList();
+
+            return investmentDtos;
+        }
+
 
         public void AddInvestment(InvestmentDto investmentDto)
         {
@@ -33,21 +48,5 @@ namespace Application.Services
                 Notes = investmentDto.Notes
             });
         }
-
-        public List<InvestmentDto> GetAllInvestments()
-        {
-            var investments = _investmentRepository.GetAll();
-
-            var investmentDtos = investments.Select(investment => new InvestmentDto
-            {
-                Date = investment.Date,
-                CryptoName = investment.CryptoName,
-                InvestedValue = investment.InvestedValue,
-                Notes = investment.Notes
-            }).ToList();
-
-            return investmentDtos;
-        }
-
     }
 }

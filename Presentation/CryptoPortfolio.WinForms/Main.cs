@@ -91,7 +91,7 @@ namespace CryptoPortfolio.WinForms
             }
             else
             {
-                //_portfolioBindingSource.DataSource = portfolio.Cryptos;
+                _portfolioBindingSource.DataSource = portfolio.Cryptos;
                 _portfolioBindingSource.ResetBindings(false);
             }
         }
@@ -103,7 +103,7 @@ namespace CryptoPortfolio.WinForms
                 if (e.RowIndex >= 0)
                 {
                     var row = dataGridView1.Rows[e.RowIndex];
-                    string cryptoName = row.Cells["CryptoName"].Value?.ToString();
+                    string cryptoName = row.Cells["CryptoName"].Value?.ToString() ?? string.Empty; // is that the best approach? maybe exeption
 
                     if (string.IsNullOrWhiteSpace(cryptoName))
                     {
@@ -111,13 +111,19 @@ namespace CryptoPortfolio.WinForms
                         return;
                     }
 
+                    string risk = row.Cells["Risk"].Value?.ToString() ?? string.Empty;  // is that the best approach?
+
                     if (!decimal.TryParse(row.Cells["CurrentValue"].Value?.ToString(), out decimal currentValue))
                     {
                         MessageBox.Show("Invalid value for CurrentValue. Please enter a valid decimal number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    _portfolioService.UpdateCrypto(cryptoName, currentValue);
+                    _portfolioService.UpdateCrypto(new CryptoStatusDto () {
+                        CryptoName = cryptoName,
+                        Risk = risk,
+                        CurrentValue = currentValue,
+                    });
 
                     UpdatePortfolio();
                 }
