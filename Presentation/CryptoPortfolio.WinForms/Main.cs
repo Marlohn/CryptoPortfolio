@@ -21,7 +21,7 @@ namespace CryptoPortfolio.WinForms
 
             CreateExampleCSV(filePath);
 
-            LoadInvestments(filePath);
+            //LoadInvestments(filePath);
         }
 
         private void CreateExampleCSV(string filePath)
@@ -52,45 +52,45 @@ namespace CryptoPortfolio.WinForms
             }
         }
 
-        private void LoadInvestments(string filePath)
-        {
-            try
-            {
-                var investments = _investmentService.GetAllInvestments();
+        //private void LoadInvestments(string filePath)
+        //{
+        //    try
+        //    {
+        //        var investments = _investmentService.GetAllInvestments();
 
-                DataTable tabela = new DataTable();
+        //        DataTable tabela = new DataTable();
 
-                // Lê o arquivo CSV
-                using (StreamReader leitor = new StreamReader(filePath))
-                {
-                    string linha = leitor.ReadLine(); // Lê a primeira linha (cabeçalho)
+        //        // Lê o arquivo CSV
+        //        using (StreamReader leitor = new StreamReader(filePath))
+        //        {
+        //            string linha = leitor.ReadLine(); // Lê a primeira linha (cabeçalho)
 
-                    if (linha != null)
-                    {
-                        // Define as colunas com base no cabeçalho
-                        string[] colunas = linha.Split(',');
-                        foreach (string coluna in colunas)
-                        {
-                            tabela.Columns.Add(coluna.Trim());
-                        }
+        //            if (linha != null)
+        //            {
+        //                // Define as colunas com base no cabeçalho
+        //                string[] colunas = linha.Split(',');
+        //                foreach (string coluna in colunas)
+        //                {
+        //                    tabela.Columns.Add(coluna.Trim());
+        //                }
 
-                        // Lê o restante das linhas
-                        while ((linha = leitor.ReadLine()) != null)
-                        {
-                            string[] dados = linha.Split(',');
-                            tabela.Rows.Add(dados);
-                        }
-                    }
-                }
+        //                // Lê o restante das linhas
+        //                while ((linha = leitor.ReadLine()) != null)
+        //                {
+        //                    string[] dados = linha.Split(',');
+        //                    tabela.Rows.Add(dados);
+        //                }
+        //            }
+        //        }
 
-                // Vincula a tabela ao DataGridView
-                dataGridView1.DataSource = tabela;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro ao ler o arquivo: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //        // Vincula a tabela ao DataGridView
+        //        dataGridView1.DataSource = tabela;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Erro ao ler o arquivo: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         private void toolStripButton_NewInvestment_Click(object sender, EventArgs e)
         {
@@ -101,7 +101,7 @@ namespace CryptoPortfolio.WinForms
 
         private void toolStripButton_ViewInvestments_Click(object sender, EventArgs e)
         {
-            var investmentsForm = new Investments();
+            var investmentsForm = new Investments(_investmentService);
 
             investmentsForm.Show();
         }

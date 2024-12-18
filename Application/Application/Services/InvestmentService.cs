@@ -1,4 +1,6 @@
-﻿using Application.Interfaces;
+﻿using System.ComponentModel.DataAnnotations;
+using Application.Interfaces;
+using Application.Models;
 using Domain.Entities;
 using Domain.Interfaces;
 
@@ -13,20 +15,39 @@ namespace Application.Services
             _investmentRepository = investmentRepository;
         }
 
-        public void AddInvestment(Investment investment)
+        public void AddInvestment(InvestmentDto investmentDto)
         {
-            if (investment == null)
-                throw new ArgumentNullException(nameof(investment));
+            var validationResults = new List<ValidationResult>();
+            var context = new ValidationContext(investmentDto);
 
-            if (investment.InvestedValue <= 0)
-                throw new ArgumentException("Invested value must be greater than zero.");
+            if (!Validator.TryValidateObject(investmentDto, context, validationResults, true))
+            {
+                throw new ValidationException("DTO validation failed.");
+            }
 
-            _investmentRepository.Add(investment);
+            _investmentRepository.Add(new Investment()  // need to create a better map here
+            {
+                Date = investmentDto.Date,
+                CryptoName = investmentDto.CryptoName,
+                InvestedValue = investmentDto.InvestedValue,
+                Notes = investmentDto.Notes
+            });
         }
 
-        public List<Investment> GetAllInvestments()
+        public List<InvestmentDto> GetAllInvestments()
         {
-            return _investmentRepository.GetAll();
+            var investments = _investmentRepository.GetAll();
+
+            var investmentDtos = investments.Select(investment => new InvestmentDto
+            {
+                Date = investment.Date,
+                CryptoName = investment.CryptoName,
+                InvestedValue = investment.InvestedValue,
+                Notes = investment.Notes
+            }).ToList();
+
+            return investmentDtos;
         }
+
     }
 }

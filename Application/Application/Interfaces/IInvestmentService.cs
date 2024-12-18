@@ -1,10 +1,10 @@
-﻿using Domain.Entities;
+﻿using Application.Models;
 
 namespace Application.Interfaces
 {
     public interface IInvestmentService
     {
-        void AddInvestment(Investment investment);
-        List<Investment> GetAllInvestments();
+        void AddInvestment(InvestmentDto investment);
+        List<InvestmentDto> GetAllInvestments();
     }
 }

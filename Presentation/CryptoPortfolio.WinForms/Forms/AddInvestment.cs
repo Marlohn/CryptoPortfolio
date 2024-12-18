@@ -1,5 +1,5 @@
 ﻿using Application.Interfaces;
-using Domain.Entities;
+using Application.Models;
 using UtilityExtensions;
 
 namespace CryptoPortfolio.WinForms.Forms
@@ -16,20 +16,29 @@ namespace CryptoPortfolio.WinForms.Forms
 
         private void AddInvestment_Load(object sender, EventArgs e)
         {
-            textBox_Date.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            textBox_Date.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
 
         private void buttonAddInvestment_Click(object sender, EventArgs e)
         {
-            var investment = new Investment
+            try
             {
-                Date = textBox_Date.Text,
-                CryptoName = textBox_CryptoName.Text,
-                InvestedValue = textBox_InvestedValue.Text.ToDecimal(),
-                Notes = textBox_Notes.Text,
-            };
+                var investment = new InvestmentDto
+                {
+                    Date = textBox_Date.Text,
+                    CryptoName = textBox_CryptoName.Text,
+                    InvestedValue = textBox_InvestedValue.Text.ToDecimal(),
+                    Notes = textBox_Notes.Text,
+                };
 
-            _investmentService.AddInvestment(investment);
+                _investmentService.AddInvestment(investment);
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding a new investment: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
