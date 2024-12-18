@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             dataGridView1 = new DataGridView();
             CryptoName = new DataGridViewTextBoxColumn();
@@ -45,33 +45,38 @@
             toolStrip1 = new ToolStrip();
             toolStripButton_NewInvestment = new ToolStripButton();
             toolStripButton_ViewInvestments = new ToolStripButton();
+            toolStripLabel1 = new ToolStripLabel();
             toolStripButton_Settings = new ToolStripButton();
             chart_Risk = new System.Windows.Forms.DataVisualization.Charting.Chart();
             pictureBox1 = new PictureBox();
             label1 = new Label();
-            groupBox1 = new GroupBox();
             label4 = new Label();
             comboBox_ChartFilterType = new ComboBox();
             chart_TotalCrypto = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            label2 = new Label();
+            label_TotalProfit = new Label();
             label3 = new Label();
             label_TotalInvested = new Label();
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart_Risk).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart_TotalCrypto).BeginInit();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { CryptoName, TotalInvested, CurrentValue, Profit, ProfitPercentage, Risk });
-            dataGridView1.Location = new Point(12, 35);
+            dataGridView1.Location = new Point(12, 72);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(804, 607);
+            dataGridView1.Size = new Size(804, 542);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellFormatting += dataGridView1_CellFormatting;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
@@ -127,10 +132,10 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(25, 25);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_NewInvestment, toolStripButton_ViewInvestments, toolStripButton_Settings });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_NewInvestment, toolStripButton_ViewInvestments, toolStripLabel1, toolStripButton_Settings });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1331, 32);
+            toolStrip1.Size = new Size(825, 32);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -152,6 +157,13 @@
             toolStripButton_ViewInvestments.Text = "View Investments";
             toolStripButton_ViewInvestments.Click += toolStripButton_ViewInvestments_Click;
             // 
+            // toolStripLabel1
+            // 
+            toolStripLabel1.Alignment = ToolStripItemAlignment.Right;
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new Size(73, 29);
+            toolStripLabel1.Text = "                ";
+            // 
             // toolStripButton_Settings
             // 
             toolStripButton_Settings.Alignment = ToolStripItemAlignment.Right;
@@ -163,17 +175,17 @@
             // 
             // chart_Risk
             // 
-            chartArea1.Name = "ChartArea1";
-            chart_Risk.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chart_Risk.Legends.Add(legend1);
-            chart_Risk.Location = new Point(8, 375);
+            chartArea3.Name = "ChartArea1";
+            chart_Risk.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            chart_Risk.Legends.Add(legend3);
+            chart_Risk.Location = new Point(6, 6);
             chart_Risk.Name = "chart_Risk";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chart_Risk.Series.Add(series1);
-            chart_Risk.Size = new Size(481, 223);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            chart_Risk.Series.Add(series3);
+            chart_Risk.Size = new Size(785, 400);
             chart_Risk.TabIndex = 3;
             chart_Risk.Text = "chart1";
             // 
@@ -181,9 +193,9 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = Properties.Resources.coin_statistics_2476;
-            pictureBox1.Location = new Point(404, 16);
+            pictureBox1.Location = new Point(751, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(90, 90);
+            pictureBox1.Size = new Size(70, 70);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
@@ -192,34 +204,16 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(22, 34);
+            label1.Location = new Point(12, 36);
             label1.Name = "label1";
             label1.Size = new Size(136, 28);
             label1.TabIndex = 5;
             label1.Text = "Total Invested:";
             // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(comboBox_ChartFilterType);
-            groupBox1.Controls.Add(chart_TotalCrypto);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(label_TotalInvested);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(chart_Risk);
-            groupBox1.Controls.Add(pictureBox1);
-            groupBox1.Location = new Point(822, 35);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(497, 608);
-            groupBox1.TabIndex = 6;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Wallet Details:";
-            // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(267, 115);
+            label4.Location = new Point(595, 623);
             label4.Name = "label4";
             label4.Size = new Size(65, 20);
             label4.TabIndex = 11;
@@ -230,7 +224,7 @@
             comboBox_ChartFilterType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_ChartFilterType.FormattingEnabled = true;
             comboBox_ChartFilterType.Items.AddRange(new object[] { "TotalInvested", "CurrentValue", "Profit" });
-            comboBox_ChartFilterType.Location = new Point(338, 112);
+            comboBox_ChartFilterType.Location = new Point(666, 620);
             comboBox_ChartFilterType.Name = "comboBox_ChartFilterType";
             comboBox_ChartFilterType.Size = new Size(151, 28);
             comboBox_ChartFilterType.TabIndex = 10;
@@ -238,35 +232,35 @@
             // 
             // chart_TotalCrypto
             // 
-            chartArea2.Name = "ChartArea1";
-            chart_TotalCrypto.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            chart_TotalCrypto.Legends.Add(legend2);
-            chart_TotalCrypto.Location = new Point(8, 146);
+            chartArea4.Name = "ChartArea1";
+            chart_TotalCrypto.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            chart_TotalCrypto.Legends.Add(legend4);
+            chart_TotalCrypto.Location = new Point(6, 6);
             chart_TotalCrypto.Name = "chart_TotalCrypto";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chart_TotalCrypto.Series.Add(series2);
-            chart_TotalCrypto.Size = new Size(481, 223);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            chart_TotalCrypto.Series.Add(series4);
+            chart_TotalCrypto.Size = new Size(785, 400);
             chart_TotalCrypto.TabIndex = 9;
             chart_TotalCrypto.Text = "chart1";
             // 
-            // label2
+            // label_TotalProfit
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(164, 62);
-            label2.Name = "label2";
-            label2.Size = new Size(23, 28);
-            label2.TabIndex = 8;
-            label2.Text = "0";
+            label_TotalProfit.AutoSize = true;
+            label_TotalProfit.Font = new Font("Segoe UI", 12F);
+            label_TotalProfit.Location = new Point(400, 36);
+            label_TotalProfit.Name = "label_TotalProfit";
+            label_TotalProfit.Size = new Size(23, 28);
+            label_TotalProfit.TabIndex = 8;
+            label_TotalProfit.Text = "0";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(22, 62);
+            label3.Location = new Point(283, 36);
             label3.Name = "label3";
             label3.Size = new Size(111, 28);
             label3.TabIndex = 7;
@@ -276,18 +270,57 @@
             // 
             label_TotalInvested.AutoSize = true;
             label_TotalInvested.Font = new Font("Segoe UI", 12F);
-            label_TotalInvested.Location = new Point(164, 34);
+            label_TotalInvested.Location = new Point(154, 36);
             label_TotalInvested.Name = "label_TotalInvested";
             label_TotalInvested.Size = new Size(23, 28);
             label_TotalInvested.TabIndex = 6;
             label_TotalInvested.Text = "0";
             // 
+            // tabControl1
+            // 
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Location = new Point(12, 620);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(805, 446);
+            tabControl1.TabIndex = 12;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(chart_TotalCrypto);
+            tabPage1.Location = new Point(4, 29);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(797, 413);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Crypto";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(chart_Risk);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(797, 413);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Risk";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1331, 655);
-            Controls.Add(groupBox1);
+            ClientSize = new Size(825, 1073);
+            Controls.Add(pictureBox1);
+            Controls.Add(label4);
+            Controls.Add(comboBox_ChartFilterType);
+            Controls.Add(tabControl1);
+            Controls.Add(label_TotalProfit);
+            Controls.Add(label3);
+            Controls.Add(label_TotalInvested);
+            Controls.Add(label1);
             Controls.Add(toolStrip1);
             Controls.Add(dataGridView1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -301,9 +334,10 @@
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)chart_Risk).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)chart_TotalCrypto).EndInit();
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -324,12 +358,15 @@
         private DataGridViewTextBoxColumn ProfitPercentage;
         private DataGridViewTextBoxColumn Risk;
         private Label label1;
-        private GroupBox groupBox1;
         private Label label_TotalInvested;
-        private Label label2;
+        private Label label_TotalProfit;
         private Label label3;
         private Label label4;
         private ComboBox comboBox_ChartFilterType;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_TotalCrypto;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private ToolStripLabel toolStripLabel1;
     }
 }

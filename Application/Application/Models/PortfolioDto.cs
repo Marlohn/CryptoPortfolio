@@ -4,5 +4,6 @@
     {
         public List<CryptoDto> Cryptos { get; set; }
         public decimal TotalInvested { get; set; }
+        public decimal TotalProfit { get; set; }
     }
 }

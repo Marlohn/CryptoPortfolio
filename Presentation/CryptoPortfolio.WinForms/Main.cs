@@ -76,6 +76,8 @@ namespace CryptoPortfolio.WinForms
                 var portfolio = _portfolioService.GetPortfolio();
 
                 label_TotalInvested.Text = portfolio.TotalInvested.ToString();
+                label_TotalProfit.Text = portfolio.TotalProfit.ToString();
+
                 UpdateDatagridViewValues(portfolio);
                 UpdateRiskDistributionChart(portfolio);
                 UpdateCryptoDistributionChart(portfolio);

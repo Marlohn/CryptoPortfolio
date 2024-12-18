@@ -77,11 +77,13 @@ public class PortfolioService : IPortfolioService
             .ToList();
 
         var totalInvested = cryptos.Sum(c => c.TotalInvested);
+        var totalProfit = cryptos.Sum(c => c.Profit);
 
         return new PortfolioDto
         {
             Cryptos = cryptos,
-            TotalInvested = totalInvested
+            TotalInvested = totalInvested,
+            TotalProfit = totalProfit ?? 0
         };
     }
 }
