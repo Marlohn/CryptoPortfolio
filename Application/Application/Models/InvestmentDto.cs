@@ -10,7 +10,8 @@ namespace Application.Models
         [Required(ErrorMessage = "CryptoName is required.")]
         public string CryptoName { get; set; }
 
-        [Range(0, double.MaxValue, ErrorMessage = "InvestedValue must be greater than 0.")] // review this validation
+        //[Range(double.MinValue, double.MaxValue, ErrorMessage = "InvestedValue must be greater than 0.")] // review this validation
+        [Required(ErrorMessage = "InvestedValue is required.")]
         public decimal InvestedValue { get; set; }
 
         //[Required(ErrorMessage = "Notes cannot be empty.")]

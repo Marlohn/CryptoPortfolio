@@ -6,5 +6,6 @@ namespace Application.Interfaces
     {
         void UpsertCryptoStatus(CryptoStatusDto investment);
         List<CryptoStatusDto> GetAllCryptoStatus();
+        CryptoStatusDto? GetCryptoStatusByName(string cryptoName);
     }
 }

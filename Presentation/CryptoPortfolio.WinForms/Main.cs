@@ -9,14 +9,17 @@ namespace CryptoPortfolio.WinForms
     {
         private readonly IInvestmentService _investmentService;
         private readonly IPortfolioService _portfolioService;
+        private readonly ICryptoStatusService _cryptoStatusService;
+
         private BindingSource _portfolioBindingSource;
 
-        public Main(IInvestmentService investmentService, IPortfolioService portfolioService)
+        public Main(IInvestmentService investmentService, IPortfolioService portfolioService, ICryptoStatusService cryptoStatusService)
         {
             InitializeComponent();
 
             _investmentService = investmentService;
             _portfolioService = portfolioService;
+            _cryptoStatusService = cryptoStatusService;
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -57,7 +60,7 @@ namespace CryptoPortfolio.WinForms
 
         private void toolStripButton_NewInvestment_Click(object sender, EventArgs e)
         {
-            var addInvestmentForm = new AddInvestment(_investmentService, this);
+            var addInvestmentForm = new AddInvestment(_investmentService, _cryptoStatusService, this);
 
             addInvestmentForm.Show();
         }

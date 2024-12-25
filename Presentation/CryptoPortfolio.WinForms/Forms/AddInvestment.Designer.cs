@@ -37,11 +37,13 @@
             label3 = new Label();
             textBox_Notes = new TextBox();
             label4 = new Label();
+            textBox_currentValue = new TextBox();
+            label5 = new Label();
             SuspendLayout();
             // 
             // buttonAddInvestment
             // 
-            buttonAddInvestment.Location = new Point(208, 162);
+            buttonAddInvestment.Location = new Point(208, 197);
             buttonAddInvestment.Name = "buttonAddInvestment";
             buttonAddInvestment.Size = new Size(177, 59);
             buttonAddInvestment.TabIndex = 0;
@@ -71,6 +73,7 @@
             textBox_CryptoName.Name = "textBox_CryptoName";
             textBox_CryptoName.Size = new Size(213, 27);
             textBox_CryptoName.TabIndex = 4;
+            textBox_CryptoName.TextChanged += textBox_CryptoName_TextChanged;
             // 
             // label2
             // 
@@ -87,6 +90,7 @@
             textBox_InvestedValue.Name = "textBox_InvestedValue";
             textBox_InvestedValue.Size = new Size(213, 27);
             textBox_InvestedValue.TabIndex = 6;
+            textBox_InvestedValue.TextChanged += textBox_InvestedValue_TextChanged;
             // 
             // label3
             // 
@@ -113,12 +117,30 @@
             label4.TabIndex = 7;
             label4.Text = "Notes:";
             // 
+            // textBox_currentValue
+            // 
+            textBox_currentValue.Location = new Point(172, 148);
+            textBox_currentValue.Name = "textBox_currentValue";
+            textBox_currentValue.Size = new Size(213, 27);
+            textBox_currentValue.TabIndex = 10;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(66, 151);
+            label5.Name = "label5";
+            label5.Size = new Size(96, 20);
+            label5.TabIndex = 9;
+            label5.Text = "CurrentValue:";
+            // 
             // AddInvestment
             // 
             AcceptButton = buttonAddInvestment;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(401, 233);
+            ClientSize = new Size(401, 268);
+            Controls.Add(textBox_currentValue);
+            Controls.Add(label5);
             Controls.Add(textBox_Notes);
             Controls.Add(label4);
             Controls.Add(textBox_InvestedValue);
@@ -150,5 +172,7 @@
         private Label label3;
         private TextBox textBox_Notes;
         private Label label4;
+        private TextBox textBox_currentValue;
+        private Label label5;
     }
 }

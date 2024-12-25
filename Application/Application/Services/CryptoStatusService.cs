@@ -29,6 +29,19 @@ namespace Application.Services
             return criptoStatusDto;
         }
 
+        public CryptoStatusDto? GetCryptoStatusByName(string cryptoName)
+        {
+            var cryptoStatusList = _cryptoStatusRepository.GetAll();
+            var cryptoStatus = cryptoStatusList.SingleOrDefault(x => x.CryptoName == cryptoName);
+
+            return cryptoStatus == null ? null : new CryptoStatusDto
+            {
+                CryptoName = cryptoStatus.CryptoName,
+                CurrentValue = cryptoStatus.CurrentValue,
+                Risk = cryptoStatus.Risk
+            };
+        }
+
         public void UpsertCryptoStatus(CryptoStatusDto cryptoStatusDto)
         {
             var validationResults = new List<ValidationResult>();
