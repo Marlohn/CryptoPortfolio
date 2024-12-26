@@ -41,49 +41,80 @@ public class PortfolioService : IPortfolioService
 
     private PortfolioDto ConsolidatePortfolio()
     {
+        // Retrieve all investments and cryptocurrency status
         var investments = _investmentService.GetAllInvestments();
         var cryptoStatusList = _cryptoStatusService.GetAllCryptoStatus();
 
+        // Throw an exception if no investments are found
         if (investments == null || !investments.Any())
             throw new InvalidOperationException("No investments found to consolidate.");
 
-        // Consolida os investimentos por criptomoeda
+        // Consolidate the investments by cryptocurrency
         var cryptos = investments
-            .GroupBy(i => i.CryptoName)
+            .GroupBy(i => i.CryptoName) // Group investments by cryptocurrency name
             .Select(group =>
             {
                 var cryptoName = group.Key;
-                var totalInvested = group.Sum(i => i.InvestedValue);
 
-                // Tenta encontrar o status atual da criptomoeda no arquivo CSV
+                // Calculate the net invested value (sum of positive and negative invested values)
+                var netInvested = group.Sum(i => i.InvestedValue);
+
+                //// Calculate the total withdrawn (negative values of InvestedValue)
+                //var totalWithdrawn = group.Where(i => i.InvestedValue < 0).Sum(i => Math.Abs(i.InvestedValue));
+
+                // Try to find the current status of the cryptocurrency from the CSV file
                 var status = cryptoStatusList.SingleOrDefault(cs => cs.CryptoName == cryptoName);
 
-                var currentValue = status?.CurrentValue ?? null;
-                var risk = status?.Risk ?? string.Empty;
-                var profit = currentValue - totalInvested;
-                var profitPercentage = totalInvested > 0 ? (profit / totalInvested) * 100 : null;
+                // Use the current value from the CSV as the base value
+                var currentValue = status?.CurrentValue ?? 0;
 
+                // Adjust the current value by subtracting the withdrawn amount
+                //currentValue -= totalWithdrawn;
+
+                //// Ensure the current value is not zero or negative
+                //if (currentValue <= 0)
+                //{
+                //    currentValue = 0;  // If it's zero or negative, set it to 0
+                //}
+
+                // Calculate profit or loss based on the adjusted current value
+                var profit = currentValue - netInvested;
+
+                // Calculate profit percentage only if there was an investment
+                var profitPercentage = netInvested > 0 ? (profit / netInvested) * 100 : (decimal?)null;
+                //var profitPercentage = netInvested > 0 ? ((profit / netInvested) - 1) * 100 : 0;
+
+                // Return a CryptoDto object with the calculated values
                 return new CryptoDto()
                 {
                     CryptoName = cryptoName,
-                    TotalInvested = totalInvested,
+                    TotalInvested = netInvested, // Displays the net invested value
                     CurrentValue = currentValue,
                     Profit = profit,
                     ProfitPercentage = profitPercentage,
-                    Risk = risk
+                    Risk = status?.Risk ?? string.Empty // If no risk info, set it as empty
                 };
             })
-            .OrderByDescending(x => x.TotalInvested)
+            .OrderByDescending(x => x.TotalInvested) // Order by total invested value in descending order
             .ToList();
 
+        // Sum the total invested and total profit across all cryptocurrencies
         var totalInvested = cryptos.Sum(c => c.TotalInvested);
         var totalProfit = cryptos.Sum(c => c.Profit);
 
+        // Return the portfolio DTO with the calculated values
         return new PortfolioDto
         {
             Cryptos = cryptos,
             TotalInvested = totalInvested,
-            TotalProfit = totalProfit ?? 0
+            TotalProfit = totalProfit ?? 0 // Ensure total profit is not null
         };
     }
+
+
+
+
+
+
+
 }

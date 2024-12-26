@@ -73,13 +73,16 @@ namespace CryptoPortfolio.WinForms.Forms
 
                 if (decimal.TryParse(textBox_InvestedValue.Text, out decimal investedValue))
                 {
-                    if (decimal.TryParse(textBox_currentValue.Text, out decimal currentValue))
+                    if (investedValue >= 0)
                     {
-                        textBox_currentValue.Text = (currentValue + investedValue).ToString();
-                    }
-                    else
-                    {
-                        textBox_currentValue.Text = investedValue.ToString();
+                        if (decimal.TryParse(textBox_currentValue.Text, out decimal currentValue))
+                        {
+                            textBox_currentValue.Text = (currentValue + investedValue).ToString();
+                        }
+                        else
+                        {
+                            textBox_currentValue.Text = investedValue.ToString();
+                        }
                     }
                 }
             }
