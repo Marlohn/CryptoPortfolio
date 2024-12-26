@@ -81,7 +81,7 @@ public class PortfolioService : IPortfolioService
                 var profit = currentValue - netInvested;
 
                 // Calculate profit percentage only if there was an investment
-                var profitPercentage = netInvested > 0 ? (profit / netInvested) * 100 : (decimal?)null;
+                var profitPercentage = netInvested > 0 ? (profit / netInvested) * 100 : 0;
                 //var profitPercentage = netInvested > 0 ? ((profit / netInvested) - 1) * 100 : 0;
 
                 // Return a CryptoDto object with the calculated values
@@ -100,14 +100,18 @@ public class PortfolioService : IPortfolioService
 
         // Sum the total invested and total profit across all cryptocurrencies
         var totalInvested = cryptos.Sum(c => c.TotalInvested);
+        var totalCurrent = cryptos.Sum(c => c.CurrentValue);
         var totalProfit = cryptos.Sum(c => c.Profit);
+        var totalProfitPercentage = totalInvested > 0 ? ((totalProfit / totalInvested) * 100) : 0;
 
         // Return the portfolio DTO with the calculated values
         return new PortfolioDto
         {
             Cryptos = cryptos,
             TotalInvested = totalInvested,
-            TotalProfit = totalProfit ?? 0 // Ensure total profit is not null
+            TotalCurrent = totalCurrent ?? 0, // check this
+            TotalProfit = totalProfit ?? 0, // Ensure total profit is not null
+            TotalProfitPercentage = totalProfitPercentage ?? 0 // check this
         };
     }
 

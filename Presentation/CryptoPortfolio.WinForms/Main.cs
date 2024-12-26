@@ -78,8 +78,20 @@ namespace CryptoPortfolio.WinForms
             {
                 var portfolio = _portfolioService.GetPortfolio();
 
-                label_TotalInvested.Text = portfolio.TotalInvested.ToString();
-                label_TotalProfit.Text = portfolio.TotalProfit.ToString();
+                string formattedProfitPercentage = Math.Abs(portfolio.TotalProfitPercentage).ToString("P2");
+
+                string formattedProfitPercentage2 = portfolio.TotalProfitPercentage.ToString("F2");
+
+                label_TotalInvested.Text = portfolio.TotalInvested.ToString("C", new System.Globalization.CultureInfo("en-US"));
+                label_totalCurrent.Text = portfolio.TotalCurrent.ToString("C", new System.Globalization.CultureInfo("en-US"));
+                label_TotalProfit.Text = portfolio.TotalProfit.ToString("C", new System.Globalization.CultureInfo("en-US")) +
+                                         $" ({portfolio.TotalProfitPercentage:F2}%)";
+
+                label_TotalProfit.ForeColor = Color.Green;
+                if (portfolio.TotalProfit < 0)
+                {
+                    label_TotalProfit.ForeColor = Color.DarkRed;
+                }
 
                 UpdateDatagridViewValues(portfolio);
                 UpdateRiskDistributionChart(portfolio);
@@ -289,6 +301,11 @@ namespace CryptoPortfolio.WinForms
         private void comboBox_ChartFilterType_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdatePortfolio();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

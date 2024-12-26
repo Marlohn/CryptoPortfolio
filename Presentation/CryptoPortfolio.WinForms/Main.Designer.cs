@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             dataGridView1 = new DataGridView();
             CryptoName = new DataGridViewTextBoxColumn();
@@ -59,6 +59,8 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
+            label_totalCurrent = new Label();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart_Risk).BeginInit();
@@ -175,16 +177,16 @@
             // 
             // chart_Risk
             // 
-            chartArea3.Name = "ChartArea1";
-            chart_Risk.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            chart_Risk.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            chart_Risk.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chart_Risk.Legends.Add(legend1);
             chart_Risk.Location = new Point(6, 6);
             chart_Risk.Name = "chart_Risk";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            chart_Risk.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chart_Risk.Series.Add(series1);
             chart_Risk.Size = new Size(785, 400);
             chart_Risk.TabIndex = 3;
             chart_Risk.Text = "chart1";
@@ -203,10 +205,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(12, 36);
+            label1.Font = new Font("Segoe UI", 10.2F);
+            label1.Location = new Point(12, 40);
             label1.Name = "label1";
-            label1.Size = new Size(136, 28);
+            label1.Size = new Size(119, 23);
             label1.TabIndex = 5;
             label1.Text = "Total Invested:";
             // 
@@ -232,16 +234,16 @@
             // 
             // chart_TotalCrypto
             // 
-            chartArea4.Name = "ChartArea1";
-            chart_TotalCrypto.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            chart_TotalCrypto.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            chart_TotalCrypto.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chart_TotalCrypto.Legends.Add(legend2);
             chart_TotalCrypto.Location = new Point(6, 6);
             chart_TotalCrypto.Name = "chart_TotalCrypto";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            chart_TotalCrypto.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chart_TotalCrypto.Series.Add(series2);
             chart_TotalCrypto.Size = new Size(785, 400);
             chart_TotalCrypto.TabIndex = 9;
             chart_TotalCrypto.Text = "chart1";
@@ -249,30 +251,30 @@
             // label_TotalProfit
             // 
             label_TotalProfit.AutoSize = true;
-            label_TotalProfit.Font = new Font("Segoe UI", 12F);
-            label_TotalProfit.Location = new Point(400, 36);
+            label_TotalProfit.Font = new Font("Segoe UI", 10.2F);
+            label_TotalProfit.Location = new Point(589, 40);
             label_TotalProfit.Name = "label_TotalProfit";
-            label_TotalProfit.Size = new Size(23, 28);
+            label_TotalProfit.Size = new Size(19, 23);
             label_TotalProfit.TabIndex = 8;
             label_TotalProfit.Text = "0";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(283, 36);
+            label3.Font = new Font("Segoe UI", 10.2F);
+            label3.Location = new Point(495, 40);
             label3.Name = "label3";
-            label3.Size = new Size(111, 28);
+            label3.Size = new Size(96, 23);
             label3.TabIndex = 7;
             label3.Text = "Total Profit:";
             // 
             // label_TotalInvested
             // 
             label_TotalInvested.AutoSize = true;
-            label_TotalInvested.Font = new Font("Segoe UI", 12F);
-            label_TotalInvested.Location = new Point(154, 36);
+            label_TotalInvested.Font = new Font("Segoe UI", 10.2F);
+            label_TotalInvested.Location = new Point(131, 40);
             label_TotalInvested.Name = "label_TotalInvested";
-            label_TotalInvested.Size = new Size(23, 28);
+            label_TotalInvested.Size = new Size(19, 23);
             label_TotalInvested.TabIndex = 6;
             label_TotalInvested.Text = "0";
             // 
@@ -308,11 +310,34 @@
             tabPage2.Text = "Risk";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label_totalCurrent
+            // 
+            label_totalCurrent.AutoSize = true;
+            label_totalCurrent.Font = new Font("Segoe UI", 10.2F);
+            label_totalCurrent.Location = new Point(365, 40);
+            label_totalCurrent.Name = "label_totalCurrent";
+            label_totalCurrent.Size = new Size(19, 23);
+            label_totalCurrent.TabIndex = 14;
+            label_totalCurrent.Text = "0";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10.2F);
+            label5.Location = new Point(254, 40);
+            label5.Name = "label5";
+            label5.Size = new Size(113, 23);
+            label5.TabIndex = 13;
+            label5.Text = "Total Current:";
+            label5.Click += label5_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(825, 1073);
+            Controls.Add(label_totalCurrent);
+            Controls.Add(label5);
             Controls.Add(pictureBox1);
             Controls.Add(label4);
             Controls.Add(comboBox_ChartFilterType);
@@ -368,5 +393,7 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private ToolStripLabel toolStripLabel1;
+        private Label label_totalCurrent;
+        private Label label5;
     }
 }
