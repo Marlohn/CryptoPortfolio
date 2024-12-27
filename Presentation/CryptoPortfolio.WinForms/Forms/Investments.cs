@@ -28,7 +28,7 @@ namespace CryptoPortfolio.WinForms
         {
             try // remove this try catch create a midlesware
             {
-                var investments = _investmentService.GetAllInvestments();
+                var investments = _investmentService.GetAll();
 
 
                 dataGridView1.AutoGenerateColumns = false;

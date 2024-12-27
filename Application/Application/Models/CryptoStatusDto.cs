@@ -11,7 +11,7 @@ namespace Application.Models
         //[Required(ErrorMessage = "CurrentValue is required.")] // CHECK IT
         public decimal? CurrentValue { get; set; }
 
-        //[Required(ErrorMessage = "Risk is required.")]
+        [Required(ErrorMessage = "Risk is required.")]
         public string Risk { get; set; }
     }
 }

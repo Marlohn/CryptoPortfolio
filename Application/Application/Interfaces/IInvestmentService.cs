@@ -4,7 +4,8 @@ namespace Application.Interfaces
 {
     public interface IInvestmentService
     {
-        void AddInvestment(InvestmentDto investment);
-        List<InvestmentDto> GetAllInvestments();
+        void Add(InvestmentDto investment);
+        void Delete(string cryptoName);
+        List<InvestmentDto> GetAll();
     }
 }

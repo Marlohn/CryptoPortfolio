@@ -4,8 +4,9 @@ namespace Application.Interfaces
 {
     public interface ICryptoStatusService
     {
-        void UpsertCryptoStatus(CryptoStatusDto investment);
-        List<CryptoStatusDto> GetAllCryptoStatus();
-        CryptoStatusDto? GetCryptoStatusByName(string cryptoName);
+        void Upsert(CryptoStatusDto cryptoStatus);
+        void Delete(string cryptoStatus);
+        List<CryptoStatusDto> GetAll();
+        CryptoStatusDto? GetByName(string cryptoName);
     }
 }

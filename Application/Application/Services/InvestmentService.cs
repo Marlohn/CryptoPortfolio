@@ -14,7 +14,8 @@ namespace Application.Services
         {
             _investmentRepository = investmentRepository;
         }
-        public List<InvestmentDto> GetAllInvestments()
+
+        public List<InvestmentDto> GetAll()
         {
             var investments = _investmentRepository.GetAll();
 
@@ -29,8 +30,7 @@ namespace Application.Services
             return investmentDtos;
         }
 
-
-        public void AddInvestment(InvestmentDto investmentDto)
+        public void Add(InvestmentDto investmentDto)
         {
             var validationResults = new List<ValidationResult>();
             var context = new ValidationContext(investmentDto);
@@ -47,6 +47,16 @@ namespace Application.Services
                 InvestedValue = investmentDto.InvestedValue,
                 Notes = investmentDto.Notes
             });
+        }
+
+        public void Delete(string cryptoName)
+        {
+            if (string.IsNullOrEmpty(cryptoName))
+            {
+                throw new ValidationException("DTO validation failed.");
+            }
+
+            _investmentRepository.Delete(cryptoName);
         }
     }
 }

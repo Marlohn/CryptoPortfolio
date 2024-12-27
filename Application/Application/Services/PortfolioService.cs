@@ -21,7 +21,7 @@ public class PortfolioService : IPortfolioService
 
     public void UpdateCrypto(CryptoStatusDto cryptoStatusDto)
     {
-        _cryptoStatusService.UpsertCryptoStatus(cryptoStatusDto);
+        _cryptoStatusService.Upsert(cryptoStatusDto);
 
         ////_portfolioService.UpdateCrypto(cryptoName, currentValue);
 
@@ -42,8 +42,8 @@ public class PortfolioService : IPortfolioService
     private PortfolioDto ConsolidatePortfolio()
     {
         // Retrieve all investments and cryptocurrency status
-        var investments = _investmentService.GetAllInvestments();
-        var cryptoStatusList = _cryptoStatusService.GetAllCryptoStatus();
+        var investments = _investmentService.GetAll();
+        var cryptoStatusList = _cryptoStatusService.GetAll();
 
         // Throw an exception if no investments are found
         if (investments == null || !investments.Any())

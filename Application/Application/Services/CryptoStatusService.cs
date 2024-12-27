@@ -15,7 +15,7 @@ namespace Application.Services
             _cryptoStatusRepository = cryptoStatusRepository;
         }
 
-        public List<CryptoStatusDto> GetAllCryptoStatus()
+        public List<CryptoStatusDto> GetAll()
         {
             var cryptoStatusList = _cryptoStatusRepository.GetAll();
 
@@ -29,7 +29,7 @@ namespace Application.Services
             return criptoStatusDto;
         }
 
-        public CryptoStatusDto? GetCryptoStatusByName(string cryptoName)
+        public CryptoStatusDto? GetByName(string cryptoName)
         {
             var cryptoStatusList = _cryptoStatusRepository.GetAll();
             var cryptoStatus = cryptoStatusList.SingleOrDefault(x => x.CryptoName == cryptoName);
@@ -42,7 +42,7 @@ namespace Application.Services
             };
         }
 
-        public void UpsertCryptoStatus(CryptoStatusDto cryptoStatusDto)
+        public void Upsert(CryptoStatusDto cryptoStatusDto)
         {
             var validationResults = new List<ValidationResult>();
             var context = new ValidationContext(cryptoStatusDto);
@@ -58,6 +58,16 @@ namespace Application.Services
                 CurrentValue = cryptoStatusDto.CurrentValue,
                 Risk = cryptoStatusDto.Risk
             });
+        }
+
+        public void Delete(string cryptoName)
+        {
+            if (string.IsNullOrEmpty(cryptoName))
+            {
+                throw new ValidationException("DTO validation failed.");
+            }
+
+            _cryptoStatusRepository.Delete(cryptoName);
         }
     }
 }

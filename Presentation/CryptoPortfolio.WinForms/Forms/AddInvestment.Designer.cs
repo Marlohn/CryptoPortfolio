@@ -39,11 +39,13 @@
             label4 = new Label();
             textBox_currentValue = new TextBox();
             label5 = new Label();
+            comboBox_Risk = new ComboBox();
+            label6 = new Label();
             SuspendLayout();
             // 
             // buttonAddInvestment
             // 
-            buttonAddInvestment.Location = new Point(208, 197);
+            buttonAddInvestment.Location = new Point(208, 236);
             buttonAddInvestment.Name = "buttonAddInvestment";
             buttonAddInvestment.Size = new Size(177, 59);
             buttonAddInvestment.TabIndex = 0;
@@ -127,18 +129,40 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(66, 151);
+            label5.Location = new Point(70, 151);
             label5.Name = "label5";
             label5.Size = new Size(96, 20);
             label5.TabIndex = 9;
             label5.Text = "CurrentValue:";
+            // 
+            // comboBox_Risk
+            // 
+            comboBox_Risk.DisplayMember = "None";
+            comboBox_Risk.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox_Risk.FormattingEnabled = true;
+            comboBox_Risk.Items.AddRange(new object[] { "Low", "Medium", "High", "Very High", "None" });
+            comboBox_Risk.Location = new Point(172, 181);
+            comboBox_Risk.Name = "comboBox_Risk";
+            comboBox_Risk.Size = new Size(213, 28);
+            comboBox_Risk.TabIndex = 23;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(128, 184);
+            label6.Name = "label6";
+            label6.Size = new Size(38, 20);
+            label6.TabIndex = 22;
+            label6.Text = "Risk:";
             // 
             // AddInvestment
             // 
             AcceptButton = buttonAddInvestment;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(401, 268);
+            ClientSize = new Size(401, 310);
+            Controls.Add(comboBox_Risk);
+            Controls.Add(label6);
             Controls.Add(textBox_currentValue);
             Controls.Add(label5);
             Controls.Add(textBox_Notes);
@@ -174,5 +198,7 @@
         private Label label4;
         private TextBox textBox_currentValue;
         private Label label5;
+        private ComboBox comboBox_Risk;
+        private Label label6;
     }
 }

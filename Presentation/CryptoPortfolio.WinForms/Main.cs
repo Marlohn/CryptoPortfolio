@@ -303,9 +303,48 @@ namespace CryptoPortfolio.WinForms
             UpdatePortfolio();
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    var row = dataGridView1.Rows[e.RowIndex];
 
+                    string cryptoName = row.Cells["CryptoName"].Value?.ToString() ?? string.Empty; // is that the best approach? maybe exeption
+                    string risk = row.Cells["Risk"].Value?.ToString() ?? string.Empty;  // is that the best approach?
+                    var currentValueString = row.Cells["CurrentValue"].Value?.ToString();
+
+                    decimal? currentValue = null;
+                    if (!string.IsNullOrWhiteSpace(currentValueString) && decimal.TryParse(currentValueString, out var parsedCurrentValue))
+                    {
+                        currentValue = parsedCurrentValue;
+                    }
+
+                    var cryptoStatus = new CryptoStatusDto()
+                    {
+                        CryptoName = cryptoName,
+                        CurrentValue = currentValue,
+                        Risk = risk
+                    };
+
+                    var addInvestmentForm = new EditCryptoStatus(_cryptoStatusService, _investmentService, this, cryptoStatus);
+
+                    addInvestmentForm.Show();
+
+                    //_portfolioService.UpdateCrypto(new CryptoStatusDto()
+                    //{
+                    //    CryptoName = cryptoName,
+                    //    Risk = risk,
+                    //    CurrentValue = currentValue,
+                    //});
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

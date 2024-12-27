@@ -54,5 +54,36 @@ namespace Infrastructure.Repositories
             var line = $"{investment.Date},{investment.CryptoName},{investment.InvestedValue},{investment.Notes}";
             File.AppendAllText(_filePath, line + "\n");
         }
+
+        public void Delete(string cryptoName)
+        {
+            var lines = new List<string>();
+
+            using (var reader = new StreamReader(_filePath))
+            {
+                string line;
+                bool isFirstLine = true;
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (isFirstLine)
+                    {
+                        lines.Add(line);
+                        isFirstLine = false;
+                        continue;
+                    }
+
+                    var values = line.Split(',');
+
+                    if (values[1] != cryptoName)
+                    {
+                        lines.Add(line);
+                    }
+                }
+            }
+
+            File.WriteAllLines(_filePath, lines);
+        }
+
     }
 }

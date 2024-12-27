@@ -87,5 +87,40 @@ namespace Infrastructure.Repositories
             // Reescreve o arquivo
             File.WriteAllLines(_filePath, lines);
         }
+        public void Delete(string cryptoName)
+        {
+            var lines = new List<string>();
+
+            using (var reader = new StreamReader(_filePath))
+            {
+                string line;
+                bool isFirstLine = true;
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (isFirstLine)
+                    {
+                        lines.Add(line);
+                        isFirstLine = false;
+                        continue;
+                    }
+
+                    var values = line.Split(',');
+
+                    if (values[0] != cryptoName)
+                    {
+                        lines.Add(line);
+                    }
+                }
+            }
+
+            bool isDeleted = lines.Count < File.ReadAllLines(_filePath).Length;
+
+            if (isDeleted)
+            {
+                File.WriteAllLines(_filePath, lines);
+            }
+        }
+
     }
 }

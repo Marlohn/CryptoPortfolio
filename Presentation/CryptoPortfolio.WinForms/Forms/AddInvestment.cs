@@ -23,7 +23,7 @@ namespace CryptoPortfolio.WinForms.Forms
         private void AddInvestment_Load(object sender, EventArgs e)
         {
             textBox_Date.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            _cryptoStatusList = _cryptoStatusService.GetAllCryptoStatus();
+            _cryptoStatusList = _cryptoStatusService.GetAll();
         }
 
         private void AddInvestment_FormClosing(object sender, FormClosingEventArgs e)
@@ -37,7 +37,7 @@ namespace CryptoPortfolio.WinForms.Forms
             {
                 CryptoStatusDto? cryptoStatus = _cryptoStatusList.FirstOrDefault(x => x.CryptoName == textBox_CryptoName.Text);
 
-                _investmentService.AddInvestment(new InvestmentDto
+                _investmentService.Add(new InvestmentDto
                 {
                     Date = textBox_Date.Text,
                     CryptoName = textBox_CryptoName.Text,
@@ -45,10 +45,10 @@ namespace CryptoPortfolio.WinForms.Forms
                     Notes = textBox_Notes.Text,
                 });
 
-                _cryptoStatusService.UpsertCryptoStatus(new CryptoStatusDto()
+                _cryptoStatusService.Upsert(new CryptoStatusDto()
                 {
                     CryptoName = textBox_CryptoName.Text,
-                    Risk = cryptoStatus?.Risk ?? string.Empty, // improve this
+                    Risk = comboBox_Risk.SelectedItem?.ToString() ?? string.Empty, // we have a service validation to avoid save it empty
                     CurrentValue = textBox_currentValue.Text.ToDecimal(),
                 });
 
@@ -67,9 +67,12 @@ namespace CryptoPortfolio.WinForms.Forms
 
             CryptoStatusDto? cryptoStatus = _cryptoStatusList.FirstOrDefault(x => x.CryptoName == textBox_CryptoName.Text);
 
+            comboBox_Risk.SelectedIndex = -1;
+
             if (cryptoStatus != null)
             {
                 textBox_currentValue.Text = cryptoStatus.CurrentValue.ToString();
+                comboBox_Risk.SelectedItem = cryptoStatus.Risk;
 
                 if (decimal.TryParse(textBox_InvestedValue.Text, out decimal investedValue))
                 {

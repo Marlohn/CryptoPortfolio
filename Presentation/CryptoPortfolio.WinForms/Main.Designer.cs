@@ -80,6 +80,7 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(804, 542);
             dataGridView1.TabIndex = 1;
+            dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             dataGridView1.CellFormatting += dataGridView1_CellFormatting;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
             // 
@@ -329,7 +330,6 @@
             label5.Size = new Size(113, 23);
             label5.TabIndex = 13;
             label5.Text = "Total Current:";
-            label5.Click += label5_Click;
             // 
             // Main
             // 
