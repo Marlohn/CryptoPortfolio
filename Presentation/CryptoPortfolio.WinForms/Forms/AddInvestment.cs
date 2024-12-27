@@ -23,6 +23,7 @@ namespace CryptoPortfolio.WinForms.Forms
         private void AddInvestment_Load(object sender, EventArgs e)
         {
             textBox_Date.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            comboBox_Risk.SelectedIndex = 0;
             _cryptoStatusList = _cryptoStatusService.GetAll();
         }
 
@@ -67,7 +68,7 @@ namespace CryptoPortfolio.WinForms.Forms
 
             CryptoStatusDto? cryptoStatus = _cryptoStatusList.FirstOrDefault(x => x.CryptoName == textBox_CryptoName.Text);
 
-            comboBox_Risk.SelectedIndex = -1;
+            comboBox_Risk.SelectedIndex = 0;
 
             if (cryptoStatus != null)
             {
