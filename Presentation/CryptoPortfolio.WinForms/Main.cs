@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms.DataVisualization.Charting;
 using Application.Interfaces;
@@ -9,8 +8,8 @@ namespace CryptoPortfolio.WinForms
 {
     public partial class Main : Form
     {
-        private readonly IInvestmentService _investmentService;
         private readonly IPortfolioService _portfolioService;
+        private readonly IInvestmentService _investmentService;
         private readonly ICryptoStatusService _cryptoStatusService;
 
         private BindingSource _portfolioBindingSource;
@@ -381,6 +380,13 @@ namespace CryptoPortfolio.WinForms
             {
                 MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void toolStripButton_Backup_Click(object sender, EventArgs e)
+        {
+            _portfolioService.BackupData(); // maybe it can return sussfull or not
+
+            MessageBox.Show("Backup completed successfully!", "Backup Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

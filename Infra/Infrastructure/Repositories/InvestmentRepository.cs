@@ -85,5 +85,21 @@ namespace Infrastructure.Repositories
             File.WriteAllLines(_filePath, lines);
         }
 
+        public void Backup()
+        {
+            var directory = Path.GetDirectoryName(_filePath) ?? Environment.CurrentDirectory;
+
+            var backupDirectory = Path.Combine(directory, "Backups");
+
+            if (!Directory.Exists(backupDirectory))
+            {
+                Directory.CreateDirectory(backupDirectory);
+            }
+
+            var backupFileName = $"{Path.GetFileNameWithoutExtension(_filePath)}_Backup_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
+            var backupFilePath = Path.Combine(backupDirectory, backupFileName);
+
+            File.Copy(_filePath, backupFilePath);
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace Domain.Interfaces
         void Upsert(CryptoStatus investment);
         public void Delete(string cryptoName);
         List<CryptoStatus> GetAll();
+        void Backup();
     }
 }

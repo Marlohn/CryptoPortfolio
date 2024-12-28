@@ -58,5 +58,10 @@ namespace Application.Services
 
             _investmentRepository.Delete(cryptoName);
         }
+
+        public void Backup()
+        {
+            _investmentRepository.Backup();
+        }
     }
 }

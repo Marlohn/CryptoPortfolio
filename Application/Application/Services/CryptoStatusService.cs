@@ -69,5 +69,10 @@ namespace Application.Services
 
             _cryptoStatusRepository.Delete(cryptoName);
         }
+
+        public void Backup()
+        {
+            _cryptoStatusRepository.Backup();
+        }
     }
 }

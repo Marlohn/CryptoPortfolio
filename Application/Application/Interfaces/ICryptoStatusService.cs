@@ -8,5 +8,6 @@ namespace Application.Interfaces
         void Delete(string cryptoStatus);
         List<CryptoStatusDto> GetAll();
         CryptoStatusDto? GetByName(string cryptoName);
+        void Backup();
     }
 }

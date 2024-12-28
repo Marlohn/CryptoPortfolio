@@ -11,32 +11,20 @@ public class PortfolioService : IPortfolioService
         _investmentService = investmentService;
         _cryptoStatusService = cryptoStatusService;
     }
-
     public PortfolioDto GetPortfolio()
     {
-        //return _portfolio;
-
         return ConsolidatePortfolio();
     }
 
     public void UpdateCrypto(CryptoStatusDto cryptoStatusDto)
     {
         _cryptoStatusService.Upsert(cryptoStatusDto);
+    }
 
-        ////_portfolioService.UpdateCrypto(cryptoName, currentValue);
-
-        //var crypto = _portfolio.Cryptos.SingleOrDefault(x => x.CryptoName == cryptoName);
-
-        //if (crypto == null)
-        //    throw new ArgumentException($"Crypto '{cryptoName}' not found.");
-
-        //crypto.CurrentValue = currentValue;
-        //crypto.Profit = crypto.CurrentValue - crypto.TotalInvested;
-
-        //if (crypto.TotalInvested > 0)
-        //{
-        //    crypto.ProfitPercentage = (crypto.Profit / crypto.TotalInvested) * 100;
-        //}
+    public void BackupData()
+    {
+        _cryptoStatusService.Backup();
+        _investmentService.Backup();
     }
 
     private PortfolioDto ConsolidatePortfolio()
@@ -114,11 +102,4 @@ public class PortfolioService : IPortfolioService
             TotalProfitPercentage = totalProfitPercentage ?? 0 // check this
         };
     }
-
-
-
-
-
-
-
 }

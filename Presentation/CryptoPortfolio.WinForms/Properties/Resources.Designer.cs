@@ -63,6 +63,16 @@ namespace CryptoPortfolio.WinForms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap backup_11549894 {
+            get {
+                object obj = ResourceManager.GetObject("backup_11549894", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap coin_statistics_2476 {
             get {
                 object obj = ResourceManager.GetObject("coin-statistics-2476", resourceCulture);

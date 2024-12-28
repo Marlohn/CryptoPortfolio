@@ -61,6 +61,7 @@
             tabPage2 = new TabPage();
             label_totalCurrent = new Label();
             label5 = new Label();
+            toolStripButton_Backup = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart_Risk).BeginInit();
@@ -141,7 +142,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(25, 25);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_NewInvestment, toolStripButton_ViewInvestments, toolStripLabel1, toolStripButton_Settings });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_NewInvestment, toolStripButton_ViewInvestments, toolStripLabel1, toolStripButton_Settings, toolStripButton_Backup });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(825, 32);
@@ -337,6 +338,16 @@
             label5.TabIndex = 13;
             label5.Text = "Total Current:";
             // 
+            // toolStripButton_Backup
+            // 
+            toolStripButton_Backup.Alignment = ToolStripItemAlignment.Right;
+            toolStripButton_Backup.Image = Properties.Resources.backup_11549894;
+            toolStripButton_Backup.ImageTransparentColor = Color.Magenta;
+            toolStripButton_Backup.Name = "toolStripButton_Backup";
+            toolStripButton_Backup.Size = new Size(86, 29);
+            toolStripButton_Backup.Text = "Backup";
+            toolStripButton_Backup.Click += toolStripButton_Backup_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -401,5 +412,6 @@
         private ToolStripLabel toolStripLabel1;
         private Label label_totalCurrent;
         private Label label5;
+        private ToolStripButton toolStripButton_Backup;
     }
 }
