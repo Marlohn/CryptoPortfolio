@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms.DataVisualization.Charting;
 using Application.Interfaces;
 using Application.Models;
@@ -106,17 +108,51 @@ namespace CryptoPortfolio.WinForms
 
         private void UpdateDatagridViewValues(PortfolioDto portfolio)
         {
+            //var bindingList = new BindingList<CryptoDto>(portfolio.Cryptos);
+            var bindingList = ConvertToDataTable(portfolio.Cryptos);
+
             if (_portfolioBindingSource == null)
             {
                 _portfolioBindingSource = new BindingSource();
-                _portfolioBindingSource.DataSource = portfolio.Cryptos;
+                _portfolioBindingSource.DataSource = bindingList;
                 dataGridView1.DataSource = _portfolioBindingSource;
+
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.Automatic;
+                }
             }
             else
             {
-                _portfolioBindingSource.DataSource = portfolio.Cryptos;
+                _portfolioBindingSource.DataSource = bindingList;
                 _portfolioBindingSource.ResetBindings(false);
             }
+        }
+
+        private DataTable ConvertToDataTable(List<CryptoDto> cryptos)
+        {
+            var dataTable = new DataTable();
+
+            dataTable.Columns.Add("CryptoName", typeof(string));
+            dataTable.Columns.Add("TotalInvested", typeof(decimal));
+            dataTable.Columns.Add("CurrentValue", typeof(decimal));
+            dataTable.Columns.Add("Profit", typeof(decimal));
+            dataTable.Columns.Add("ProfitPercentage", typeof(decimal));
+            dataTable.Columns.Add("Risk", typeof(string));
+
+            foreach (var crypto in cryptos)
+            {
+                dataTable.Rows.Add(
+                    crypto.CryptoName,
+                    crypto.TotalInvested,
+                    crypto.CurrentValue,
+                    crypto.Profit,
+                    crypto.ProfitPercentage,
+                    crypto.Risk
+                );
+            }
+
+            return dataTable;
         }
 
         private void UpdateRiskDistributionChart(PortfolioDto portfolio)
