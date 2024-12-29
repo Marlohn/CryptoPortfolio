@@ -86,6 +86,9 @@ public class PortfolioService : IPortfolioService
             .OrderByDescending(x => x.TotalInvested) // Order by total invested value in descending order
             .ToList();
 
+        int rank = 1;
+        cryptos.ForEach(c => c.Rank = rank++);
+
         // Sum the total invested and total profit across all cryptocurrencies
         var totalInvested = cryptos.Sum(c => c.TotalInvested);
         var totalCurrent = cryptos.Sum(c => c.CurrentValue);

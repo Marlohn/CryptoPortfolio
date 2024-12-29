@@ -36,17 +36,12 @@
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             dataGridView1 = new DataGridView();
-            CryptoName = new DataGridViewTextBoxColumn();
-            TotalInvested = new DataGridViewTextBoxColumn();
-            CurrentValue = new DataGridViewTextBoxColumn();
-            Profit = new DataGridViewTextBoxColumn();
-            ProfitPercentage = new DataGridViewTextBoxColumn();
-            Risk = new DataGridViewTextBoxColumn();
             toolStrip1 = new ToolStrip();
             toolStripButton_NewInvestment = new ToolStripButton();
             toolStripButton_ViewInvestments = new ToolStripButton();
             toolStripLabel1 = new ToolStripLabel();
             toolStripButton_Settings = new ToolStripButton();
+            toolStripButton_Backup = new ToolStripButton();
             chart_Risk = new System.Windows.Forms.DataVisualization.Charting.Chart();
             pictureBox1 = new PictureBox();
             label1 = new Label();
@@ -61,7 +56,13 @@
             tabPage2 = new TabPage();
             label_totalCurrent = new Label();
             label5 = new Label();
-            toolStripButton_Backup = new ToolStripButton();
+            Rank = new DataGridViewTextBoxColumn();
+            CryptoName = new DataGridViewTextBoxColumn();
+            TotalInvested = new DataGridViewTextBoxColumn();
+            CurrentValue = new DataGridViewTextBoxColumn();
+            Profit = new DataGridViewTextBoxColumn();
+            ProfitPercentage = new DataGridViewTextBoxColumn();
+            Risk = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart_Risk).BeginInit();
@@ -80,64 +81,20 @@
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { CryptoName, TotalInvested, CurrentValue, Profit, ProfitPercentage, Risk });
-            dataGridView1.Location = new Point(12, 72);
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Rank, CryptoName, TotalInvested, CurrentValue, Profit, ProfitPercentage, Risk });
+            dataGridView1.Location = new Point(12, 66);
+            dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(804, 542);
             dataGridView1.TabIndex = 1;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             dataGridView1.CellFormatting += dataGridView1_CellFormatting;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
-            // 
-            // CryptoName
-            // 
-            CryptoName.DataPropertyName = "CryptoName";
-            CryptoName.HeaderText = "CryptoName";
-            CryptoName.MinimumWidth = 6;
-            CryptoName.Name = "CryptoName";
-            CryptoName.Width = 125;
-            // 
-            // TotalInvested
-            // 
-            TotalInvested.DataPropertyName = "TotalInvested";
-            TotalInvested.HeaderText = "TotalInvested";
-            TotalInvested.MinimumWidth = 6;
-            TotalInvested.Name = "TotalInvested";
-            TotalInvested.Width = 125;
-            // 
-            // CurrentValue
-            // 
-            CurrentValue.DataPropertyName = "CurrentValue";
-            CurrentValue.HeaderText = "CurrentValue";
-            CurrentValue.MinimumWidth = 6;
-            CurrentValue.Name = "CurrentValue";
-            CurrentValue.Width = 125;
-            // 
-            // Profit
-            // 
-            Profit.DataPropertyName = "Profit";
-            Profit.HeaderText = "Profit";
-            Profit.MinimumWidth = 6;
-            Profit.Name = "Profit";
-            Profit.Width = 125;
-            // 
-            // ProfitPercentage
-            // 
-            ProfitPercentage.DataPropertyName = "ProfitPercentage";
-            ProfitPercentage.HeaderText = "ProfitPercentage";
-            ProfitPercentage.MinimumWidth = 6;
-            ProfitPercentage.Name = "ProfitPercentage";
-            ProfitPercentage.Width = 125;
-            // 
-            // Risk
-            // 
-            Risk.DataPropertyName = "Risk";
-            Risk.HeaderText = "Risk";
-            Risk.MinimumWidth = 6;
-            Risk.Name = "Risk";
-            Risk.Width = 125;
             // 
             // toolStrip1
             // 
@@ -183,6 +140,16 @@
             toolStripButton_Settings.Size = new Size(91, 29);
             toolStripButton_Settings.Text = "Settings";
             // 
+            // toolStripButton_Backup
+            // 
+            toolStripButton_Backup.Alignment = ToolStripItemAlignment.Right;
+            toolStripButton_Backup.Image = Properties.Resources.backup_11549894;
+            toolStripButton_Backup.ImageTransparentColor = Color.Magenta;
+            toolStripButton_Backup.Name = "toolStripButton_Backup";
+            toolStripButton_Backup.Size = new Size(86, 29);
+            toolStripButton_Backup.Text = "Backup";
+            toolStripButton_Backup.Click += toolStripButton_Backup_Click;
+            // 
             // chart_Risk
             // 
             chartArea1.Name = "ChartArea1";
@@ -203,9 +170,9 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = Properties.Resources.coin_statistics_2476;
-            pictureBox1.Location = new Point(751, 2);
+            pictureBox1.Location = new Point(756, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(70, 70);
+            pictureBox1.Size = new Size(60, 60);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
@@ -338,15 +305,68 @@
             label5.TabIndex = 13;
             label5.Text = "Total Current:";
             // 
-            // toolStripButton_Backup
+            // Rank
             // 
-            toolStripButton_Backup.Alignment = ToolStripItemAlignment.Right;
-            toolStripButton_Backup.Image = Properties.Resources.backup_11549894;
-            toolStripButton_Backup.ImageTransparentColor = Color.Magenta;
-            toolStripButton_Backup.Name = "toolStripButton_Backup";
-            toolStripButton_Backup.Size = new Size(86, 29);
-            toolStripButton_Backup.Text = "Backup";
-            toolStripButton_Backup.Click += toolStripButton_Backup_Click;
+            Rank.DataPropertyName = "Rank";
+            Rank.HeaderText = "#";
+            Rank.MinimumWidth = 6;
+            Rank.Name = "Rank";
+            Rank.ReadOnly = true;
+            Rank.Width = 35;
+            // 
+            // CryptoName
+            // 
+            CryptoName.DataPropertyName = "CryptoName";
+            CryptoName.HeaderText = "Crypto Name";
+            CryptoName.MinimumWidth = 6;
+            CryptoName.Name = "CryptoName";
+            CryptoName.ReadOnly = true;
+            CryptoName.Width = 135;
+            // 
+            // TotalInvested
+            // 
+            TotalInvested.DataPropertyName = "TotalInvested";
+            TotalInvested.HeaderText = "Total Invested";
+            TotalInvested.MinimumWidth = 6;
+            TotalInvested.Name = "TotalInvested";
+            TotalInvested.ReadOnly = true;
+            TotalInvested.Width = 135;
+            // 
+            // CurrentValue
+            // 
+            CurrentValue.DataPropertyName = "CurrentValue";
+            CurrentValue.HeaderText = "Current Value";
+            CurrentValue.MinimumWidth = 6;
+            CurrentValue.Name = "CurrentValue";
+            CurrentValue.ReadOnly = true;
+            CurrentValue.Width = 135;
+            // 
+            // Profit
+            // 
+            Profit.DataPropertyName = "Profit";
+            Profit.HeaderText = "Profit";
+            Profit.MinimumWidth = 6;
+            Profit.Name = "Profit";
+            Profit.ReadOnly = true;
+            Profit.Width = 125;
+            // 
+            // ProfitPercentage
+            // 
+            ProfitPercentage.DataPropertyName = "ProfitPercentage";
+            ProfitPercentage.HeaderText = "Profit %";
+            ProfitPercentage.MinimumWidth = 6;
+            ProfitPercentage.Name = "ProfitPercentage";
+            ProfitPercentage.ReadOnly = true;
+            ProfitPercentage.Width = 125;
+            // 
+            // Risk
+            // 
+            Risk.DataPropertyName = "Risk";
+            Risk.HeaderText = "Risk";
+            Risk.MinimumWidth = 6;
+            Risk.Name = "Risk";
+            Risk.ReadOnly = true;
+            Risk.Width = 90;
             // 
             // Main
             // 
@@ -393,12 +413,6 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_Risk;
         private ToolStripButton toolStripButton_Settings;
         private PictureBox pictureBox1;
-        private DataGridViewTextBoxColumn CryptoName;
-        private DataGridViewTextBoxColumn TotalInvested;
-        private DataGridViewTextBoxColumn CurrentValue;
-        private DataGridViewTextBoxColumn Profit;
-        private DataGridViewTextBoxColumn ProfitPercentage;
-        private DataGridViewTextBoxColumn Risk;
         private Label label1;
         private Label label_TotalInvested;
         private Label label_TotalProfit;
@@ -413,5 +427,12 @@
         private Label label_totalCurrent;
         private Label label5;
         private ToolStripButton toolStripButton_Backup;
+        private DataGridViewTextBoxColumn Rank;
+        private DataGridViewTextBoxColumn CryptoName;
+        private DataGridViewTextBoxColumn TotalInvested;
+        private DataGridViewTextBoxColumn CurrentValue;
+        private DataGridViewTextBoxColumn Profit;
+        private DataGridViewTextBoxColumn ProfitPercentage;
+        private DataGridViewTextBoxColumn Risk;
     }
 }

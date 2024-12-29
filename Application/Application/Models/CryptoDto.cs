@@ -2,6 +2,7 @@
 {
     public class CryptoDto
     {
+        public int Rank { get; set; }
         public string CryptoName { get; set; }
         public decimal TotalInvested { get; set; }
         public decimal? CurrentValue { get; set; }
