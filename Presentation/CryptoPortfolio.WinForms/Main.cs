@@ -2,7 +2,9 @@ using System.Data;
 using System.Windows.Forms.DataVisualization.Charting;
 using Application.Interfaces;
 using Application.Models;
+using Application.Models.Enums;
 using CryptoPortfolio.WinForms.Forms;
+using UtilityExtensions;
 
 namespace CryptoPortfolio.WinForms
 {
@@ -140,7 +142,7 @@ namespace CryptoPortfolio.WinForms
             dataTable.Columns.Add("CurrentValue", typeof(decimal));
             dataTable.Columns.Add("Profit", typeof(decimal));
             dataTable.Columns.Add("ProfitPercentage", typeof(decimal));
-            dataTable.Columns.Add("Risk", typeof(string));
+            dataTable.Columns.Add("Risk", typeof(int));
 
             foreach (var crypto in cryptos)
             {
@@ -198,7 +200,7 @@ namespace CryptoPortfolio.WinForms
                 // Adiciona os dados ao Chart
                 foreach (var group in riskGroups)
                 {
-                    series.Points.AddXY(group.Risk, group.Total);
+                    series.Points.AddXY(group.Risk.GetDescription(), group.Total);
                 }
 
                 // Configura os rótulos no gráfico
@@ -428,29 +430,34 @@ namespace CryptoPortfolio.WinForms
             {
                 if (e.Value != null)
                 {
-                    var riskValue = e.Value.ToString();
-                    switch (riskValue)
+                    switch ((RiskLevel)e.Value)
                     {
-                        case "Low":
-                            e.CellStyle.ForeColor = Color.DarkGreen; // Texto verde escuro
-                            e.CellStyle.BackColor = Color.FromArgb(198, 239, 206); // Fundo verde claro
-                            break;
-                        case "Medium":
-                            e.CellStyle.ForeColor = Color.DarkOrange; // Texto laranja
-                            e.CellStyle.BackColor = Color.FromArgb(255, 229, 153); // Fundo amarelo claro
-                            break;
-                        case "High":
-                            e.CellStyle.ForeColor = Color.Red; // Texto vermelho
-                            e.CellStyle.BackColor = Color.FromArgb(255, 199, 206); // Fundo vermelho claro
-                            break;
-                        case "Very High":
-                            e.CellStyle.ForeColor = Color.DarkRed; // Texto vermelho escuro
-                            e.CellStyle.BackColor = Color.FromArgb(255, 159, 159); // Fundo vermelho intenso
-                            break;
-                        case "None":
+                        case RiskLevel.None:
+                            e.Value = RiskLevel.None.GetDescription();
                             e.CellStyle.ForeColor = Color.Gray; // Texto cinza
                             e.CellStyle.BackColor = Color.FromArgb(224, 224, 224); // Fundo cinza claro
                             break;
+                        case RiskLevel.Low:
+                            e.Value = RiskLevel.Low.GetDescription();
+                            e.CellStyle.ForeColor = Color.DarkGreen; // Texto verde escuro
+                            e.CellStyle.BackColor = Color.FromArgb(198, 239, 206); // Fundo verde claro
+                            break;
+                        case RiskLevel.Medium:
+                            e.Value = RiskLevel.Medium.GetDescription();
+                            e.CellStyle.ForeColor = Color.DarkOrange; // Texto laranja
+                            e.CellStyle.BackColor = Color.FromArgb(255, 229, 153); // Fundo amarelo claro
+                            break;
+                        case RiskLevel.High:
+                            e.Value = RiskLevel.High.GetDescription();
+                            e.CellStyle.ForeColor = Color.Red; // Texto vermelho
+                            e.CellStyle.BackColor = Color.FromArgb(255, 199, 206); // Fundo vermelho claro
+                            break;
+                        case RiskLevel.VeryHigh:
+                            e.Value = RiskLevel.VeryHigh.GetDescription();
+                            e.CellStyle.ForeColor = Color.DarkRed; // Texto vermelho escuro
+                            e.CellStyle.BackColor = Color.FromArgb(255, 159, 159); // Fundo vermelho intenso
+                            break;
+
                     }
                 }
             }
@@ -497,7 +504,7 @@ namespace CryptoPortfolio.WinForms
                     var row = dataGridView1.Rows[e.RowIndex];
 
                     string cryptoName = row.Cells["CryptoName"].Value?.ToString() ?? string.Empty; // is that the best approach? maybe exeption
-                    string risk = row.Cells["Risk"].Value?.ToString() ?? string.Empty;  // is that the best approach?
+                    var risk = (RiskLevel)row.Cells["Risk"].Value!;
                     var currentValueString = row.Cells["CurrentValue"].Value?.ToString();
 
                     decimal? currentValue = null;
@@ -510,7 +517,7 @@ namespace CryptoPortfolio.WinForms
                     {
                         CryptoName = cryptoName,
                         CurrentValue = currentValue,
-                        Risk = risk
+                        Risk = risk.GetDescription()
                     };
 
                     var addInvestmentForm = new EditCryptoStatus(_cryptoStatusService, _investmentService, this, cryptoStatus);

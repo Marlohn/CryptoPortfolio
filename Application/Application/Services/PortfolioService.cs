@@ -1,6 +1,8 @@
 ﻿using Application.Interfaces;
 using Application.Models;
+using Application.Models.Enums;
 using Domain.Interfaces;
+using UtilityExtensions;
 
 public class PortfolioService : IPortfolioService
 {
@@ -105,7 +107,7 @@ public class PortfolioService : IPortfolioService
                     CurrentValue = currentValue,
                     Profit = profit,
                     ProfitPercentage = profitPercentage,
-                    Risk = status?.Risk ?? string.Empty // If no risk info, set it as empty
+                    Risk = (status?.Risk ?? string.Empty).ToEnum<RiskLevel>() // If no risk info error
                 };
             })
             .OrderByDescending(x => x.TotalInvested) // Order by total invested value in descending order
