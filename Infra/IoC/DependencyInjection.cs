@@ -14,11 +14,13 @@ namespace IoC
             services.AddScoped<IInvestmentRepository, InvestmentRepository>();
             services.AddScoped<IInvestmentRepository>(provider => new InvestmentRepository("investments.csv")); // change it 
             services.AddScoped<ICryptoStatusRepository>(provider => new CryptoStatusRepository("cryptostatus.csv")); // change it 
+            services.AddScoped<IExchangeRepository, BinanceRepository>();
 
             //Application
             services.AddScoped<IInvestmentService, InvestmentService>();
             services.AddScoped<IPortfolioService, PortfolioService>();
             services.AddScoped<ICryptoStatusService, CryptoStatusService>();
+            services.AddScoped<IBinanceService, BinanceService>();
 
             return services;
         }

@@ -7,5 +7,6 @@ namespace Application.Interfaces
         PortfolioDto GetPortfolio();
         void UpdateCrypto(CryptoStatusDto cryptoStatusDto);
         void BackupData();
+        Task RefreshBinanceData();
     }
 }

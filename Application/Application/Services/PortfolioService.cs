@@ -1,16 +1,22 @@
 ﻿using Application.Interfaces;
 using Application.Models;
+using Domain.Interfaces;
 
 public class PortfolioService : IPortfolioService
 {
     private readonly IInvestmentService _investmentService;
     private readonly ICryptoStatusService _cryptoStatusService;
+    private readonly IBinanceService _binanceService;
+    private readonly IExchangeRepository _exchangeRepository;
 
-    public PortfolioService(IInvestmentService investmentService, ICryptoStatusService cryptoStatusService)
+    public PortfolioService(IInvestmentService investmentService, ICryptoStatusService cryptoStatusService, IBinanceService binanceService, IExchangeRepository exchangeRepository)
     {
         _investmentService = investmentService;
         _cryptoStatusService = cryptoStatusService;
+        _binanceService = binanceService;
+        _exchangeRepository = exchangeRepository;
     }
+
     public PortfolioDto GetPortfolio()
     {
         return ConsolidatePortfolio();
@@ -25,6 +31,25 @@ public class PortfolioService : IPortfolioService
     {
         _cryptoStatusService.Backup();
         _investmentService.Backup();
+    }
+
+    public async Task RefreshBinanceData()
+    {
+        //_exchangeRepository.
+        var cryptoStatusList = await _binanceService.GetExchangeData();
+
+        foreach (var cryptoStatus in cryptoStatusList) 
+        {
+            //Update only existing cryptos and also we need the required risk to update it
+            var currentCryptoStatus = _cryptoStatusService.GetByName(cryptoStatus.CryptoName);
+            if (currentCryptoStatus != null)
+            {
+                cryptoStatus.Risk = currentCryptoStatus.Risk;
+
+                _cryptoStatusService.Upsert(cryptoStatus);
+            }
+            
+        }
     }
 
     private PortfolioDto ConsolidatePortfolio()

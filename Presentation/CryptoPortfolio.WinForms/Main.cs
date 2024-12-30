@@ -551,5 +551,11 @@ namespace CryptoPortfolio.WinForms
                 //MessageBox.Show($"Linha selecionada: {cryptoName}");
             }
         }
+
+        private async void toolStripButton_RefreshIntegrations_Click(object sender, EventArgs e)
+        {
+            await _portfolioService.RefreshBinanceData();
+            UpdatePortfolio();
+        }
     }
 }

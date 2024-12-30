@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using System.Globalization;
+using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Infrastructure.Repositories
@@ -38,7 +39,7 @@ namespace Infrastructure.Repositories
                     cryptoStatusList.Add(new CryptoStatus
                     {
                         CryptoName = values[0],
-                        CurrentValue = decimal.TryParse(values[1], out var investedValue) ? investedValue : null, // maybe error?
+                        CurrentValue = decimal.TryParse(values[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var investedValue) ? investedValue : (decimal?)null, // maybe error?
                         Risk = values[2]
                     });
                 }
@@ -71,7 +72,8 @@ namespace Infrastructure.Repositories
                     // Se a criptomoeda já existe, atualiza a linha
                     if (values[0] == cryptoStatus.CryptoName)
                     {
-                        line = $"{cryptoStatus.CryptoName},{cryptoStatus.CurrentValue},{cryptoStatus.Risk}";
+                        var currentValue = (cryptoStatus.CurrentValue ?? 0).ToString("F2", CultureInfo.InvariantCulture);
+                        line = $"{cryptoStatus.CryptoName},{currentValue},{cryptoStatus.Risk}";
                     }
 
                     lines.Add(line);
@@ -81,7 +83,8 @@ namespace Infrastructure.Repositories
             // Se a criptomoeda não foi encontrada, adiciona uma nova linha
             if (!lines.Any(l => l.StartsWith($"{cryptoStatus.CryptoName},")))
             {
-                lines.Add($"{cryptoStatus.CryptoName},{cryptoStatus.CurrentValue},{cryptoStatus.Risk}");
+                var currentValue = (cryptoStatus.CurrentValue ?? 0).ToString("F2", CultureInfo.InvariantCulture);
+                lines.Add($"{cryptoStatus.CryptoName},{currentValue},{cryptoStatus.Risk}");
             }
 
             // Reescreve o arquivo

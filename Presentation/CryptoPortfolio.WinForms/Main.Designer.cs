@@ -36,6 +36,13 @@
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             dataGridView1 = new DataGridView();
+            Rank = new DataGridViewTextBoxColumn();
+            CryptoName = new DataGridViewTextBoxColumn();
+            TotalInvested = new DataGridViewTextBoxColumn();
+            CurrentValue = new DataGridViewTextBoxColumn();
+            Profit = new DataGridViewTextBoxColumn();
+            ProfitPercentage = new DataGridViewTextBoxColumn();
+            Risk = new DataGridViewTextBoxColumn();
             toolStrip1 = new ToolStrip();
             toolStripButton_NewInvestment = new ToolStripButton();
             toolStripButton_ViewInvestments = new ToolStripButton();
@@ -56,13 +63,7 @@
             tabPage2 = new TabPage();
             label_totalCurrent = new Label();
             label5 = new Label();
-            Rank = new DataGridViewTextBoxColumn();
-            CryptoName = new DataGridViewTextBoxColumn();
-            TotalInvested = new DataGridViewTextBoxColumn();
-            CurrentValue = new DataGridViewTextBoxColumn();
-            Profit = new DataGridViewTextBoxColumn();
-            ProfitPercentage = new DataGridViewTextBoxColumn();
-            Risk = new DataGridViewTextBoxColumn();
+            toolStripButton_RefreshIntegrations = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart_Risk).BeginInit();
@@ -96,10 +97,73 @@
             dataGridView1.CellFormatting += dataGridView1_CellFormatting;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
             // 
+            // Rank
+            // 
+            Rank.DataPropertyName = "Rank";
+            Rank.HeaderText = "#";
+            Rank.MinimumWidth = 6;
+            Rank.Name = "Rank";
+            Rank.ReadOnly = true;
+            Rank.Width = 35;
+            // 
+            // CryptoName
+            // 
+            CryptoName.DataPropertyName = "CryptoName";
+            CryptoName.HeaderText = "Crypto Name";
+            CryptoName.MinimumWidth = 6;
+            CryptoName.Name = "CryptoName";
+            CryptoName.ReadOnly = true;
+            CryptoName.Width = 135;
+            // 
+            // TotalInvested
+            // 
+            TotalInvested.DataPropertyName = "TotalInvested";
+            TotalInvested.HeaderText = "Total Invested";
+            TotalInvested.MinimumWidth = 6;
+            TotalInvested.Name = "TotalInvested";
+            TotalInvested.ReadOnly = true;
+            TotalInvested.Width = 135;
+            // 
+            // CurrentValue
+            // 
+            CurrentValue.DataPropertyName = "CurrentValue";
+            CurrentValue.HeaderText = "Current Value";
+            CurrentValue.MinimumWidth = 6;
+            CurrentValue.Name = "CurrentValue";
+            CurrentValue.ReadOnly = true;
+            CurrentValue.Width = 135;
+            // 
+            // Profit
+            // 
+            Profit.DataPropertyName = "Profit";
+            Profit.HeaderText = "Profit";
+            Profit.MinimumWidth = 6;
+            Profit.Name = "Profit";
+            Profit.ReadOnly = true;
+            Profit.Width = 125;
+            // 
+            // ProfitPercentage
+            // 
+            ProfitPercentage.DataPropertyName = "ProfitPercentage";
+            ProfitPercentage.HeaderText = "Profit %";
+            ProfitPercentage.MinimumWidth = 6;
+            ProfitPercentage.Name = "ProfitPercentage";
+            ProfitPercentage.ReadOnly = true;
+            ProfitPercentage.Width = 125;
+            // 
+            // Risk
+            // 
+            Risk.DataPropertyName = "Risk";
+            Risk.HeaderText = "Risk";
+            Risk.MinimumWidth = 6;
+            Risk.Name = "Risk";
+            Risk.ReadOnly = true;
+            Risk.Width = 90;
+            // 
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(25, 25);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_NewInvestment, toolStripButton_ViewInvestments, toolStripLabel1, toolStripButton_Settings, toolStripButton_Backup });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_NewInvestment, toolStripButton_ViewInvestments, toolStripButton_RefreshIntegrations, toolStripLabel1, toolStripButton_Settings, toolStripButton_Backup });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(825, 32);
@@ -305,68 +369,14 @@
             label5.TabIndex = 13;
             label5.Text = "Total Current:";
             // 
-            // Rank
+            // toolStripButton_RefreshIntegrations
             // 
-            Rank.DataPropertyName = "Rank";
-            Rank.HeaderText = "#";
-            Rank.MinimumWidth = 6;
-            Rank.Name = "Rank";
-            Rank.ReadOnly = true;
-            Rank.Width = 35;
-            // 
-            // CryptoName
-            // 
-            CryptoName.DataPropertyName = "CryptoName";
-            CryptoName.HeaderText = "Crypto Name";
-            CryptoName.MinimumWidth = 6;
-            CryptoName.Name = "CryptoName";
-            CryptoName.ReadOnly = true;
-            CryptoName.Width = 135;
-            // 
-            // TotalInvested
-            // 
-            TotalInvested.DataPropertyName = "TotalInvested";
-            TotalInvested.HeaderText = "Total Invested";
-            TotalInvested.MinimumWidth = 6;
-            TotalInvested.Name = "TotalInvested";
-            TotalInvested.ReadOnly = true;
-            TotalInvested.Width = 135;
-            // 
-            // CurrentValue
-            // 
-            CurrentValue.DataPropertyName = "CurrentValue";
-            CurrentValue.HeaderText = "Current Value";
-            CurrentValue.MinimumWidth = 6;
-            CurrentValue.Name = "CurrentValue";
-            CurrentValue.ReadOnly = true;
-            CurrentValue.Width = 135;
-            // 
-            // Profit
-            // 
-            Profit.DataPropertyName = "Profit";
-            Profit.HeaderText = "Profit";
-            Profit.MinimumWidth = 6;
-            Profit.Name = "Profit";
-            Profit.ReadOnly = true;
-            Profit.Width = 125;
-            // 
-            // ProfitPercentage
-            // 
-            ProfitPercentage.DataPropertyName = "ProfitPercentage";
-            ProfitPercentage.HeaderText = "Profit %";
-            ProfitPercentage.MinimumWidth = 6;
-            ProfitPercentage.Name = "ProfitPercentage";
-            ProfitPercentage.ReadOnly = true;
-            ProfitPercentage.Width = 125;
-            // 
-            // Risk
-            // 
-            Risk.DataPropertyName = "Risk";
-            Risk.HeaderText = "Risk";
-            Risk.MinimumWidth = 6;
-            Risk.Name = "Risk";
-            Risk.ReadOnly = true;
-            Risk.Width = 90;
+            toolStripButton_RefreshIntegrations.Image = Properties.Resources.icons8_refresh_50;
+            toolStripButton_RefreshIntegrations.ImageTransparentColor = Color.Magenta;
+            toolStripButton_RefreshIntegrations.Name = "toolStripButton_RefreshIntegrations";
+            toolStripButton_RefreshIntegrations.Size = new Size(170, 29);
+            toolStripButton_RefreshIntegrations.Text = "Refresh Integrations";
+            toolStripButton_RefreshIntegrations.Click += toolStripButton_RefreshIntegrations_Click;
             // 
             // Main
             // 
@@ -434,5 +444,6 @@
         private DataGridViewTextBoxColumn Profit;
         private DataGridViewTextBoxColumn ProfitPercentage;
         private DataGridViewTextBoxColumn Risk;
+        private ToolStripButton toolStripButton_RefreshIntegrations;
     }
 }
