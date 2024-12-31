@@ -32,7 +32,7 @@ namespace CryptoPortfolio.WinForms.Forms
             _main.UpdatePortfolio();
         }
 
-        private void buttonAddInvestment_Click(object sender, EventArgs e)
+        private void ButtonAddInvestment_Click(object sender, EventArgs e)
         {
             try
             {
@@ -61,6 +61,15 @@ namespace CryptoPortfolio.WinForms.Forms
             }
         }
 
+        private void TextBox_CryptoName_TextChanged(object sender, EventArgs e)
+        {
+            UpdateCurrentValue();
+        }
+
+        private void TextBox_InvestedValue_TextChanged(object sender, EventArgs e)
+        {
+            UpdateCurrentValue();
+        }
 
         private void UpdateCurrentValue()
         {
@@ -90,16 +99,6 @@ namespace CryptoPortfolio.WinForms.Forms
                     }
                 }
             }
-        }
-
-        private void textBox_CryptoName_TextChanged(object sender, EventArgs e)
-        {
-            UpdateCurrentValue();
-        }
-
-        private void textBox_InvestedValue_TextChanged(object sender, EventArgs e)
-        {
-            UpdateCurrentValue();
         }
     }
 }

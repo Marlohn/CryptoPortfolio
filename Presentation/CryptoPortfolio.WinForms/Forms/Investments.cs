@@ -37,7 +37,7 @@ namespace CryptoPortfolio.WinForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao carregar os investimentos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading investments: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

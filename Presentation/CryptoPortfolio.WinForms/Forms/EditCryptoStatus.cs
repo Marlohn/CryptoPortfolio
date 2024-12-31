@@ -28,7 +28,7 @@ namespace CryptoPortfolio.WinForms.Forms
             comboBox_Risk.SelectedItem = _cryptoStatus.Risk;
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace CryptoPortfolio.WinForms.Forms
             }
         }
 
-        private void button_delete_Click(object sender, EventArgs e)
+        private void Button_delete_Click(object sender, EventArgs e)
         {
             try
             {

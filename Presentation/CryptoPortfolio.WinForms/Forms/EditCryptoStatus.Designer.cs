@@ -79,7 +79,7 @@
             buttonSave.TabIndex = 19;
             buttonSave.Text = "Save";
             buttonSave.UseVisualStyleBackColor = true;
-            buttonSave.Click += buttonSave_Click;
+            buttonSave.Click += ButtonSave_Click;
             // 
             // label1
             // 
@@ -109,7 +109,7 @@
             button_delete.TabIndex = 22;
             button_delete.Text = "Delete";
             button_delete.UseVisualStyleBackColor = false;
-            button_delete.Click += button_delete_Click;
+            button_delete.Click += Button_delete_Click;
             // 
             // EditCryptoStatus
             // 

@@ -51,7 +51,7 @@
             buttonAddInvestment.TabIndex = 0;
             buttonAddInvestment.Text = "Add";
             buttonAddInvestment.UseVisualStyleBackColor = true;
-            buttonAddInvestment.Click += buttonAddInvestment_Click;
+            buttonAddInvestment.Click += ButtonAddInvestment_Click;
             // 
             // label1
             // 
@@ -75,7 +75,7 @@
             textBox_CryptoName.Name = "textBox_CryptoName";
             textBox_CryptoName.Size = new Size(213, 27);
             textBox_CryptoName.TabIndex = 4;
-            textBox_CryptoName.TextChanged += textBox_CryptoName_TextChanged;
+            textBox_CryptoName.TextChanged += TextBox_CryptoName_TextChanged;
             // 
             // label2
             // 
@@ -92,7 +92,7 @@
             textBox_InvestedValue.Name = "textBox_InvestedValue";
             textBox_InvestedValue.Size = new Size(213, 27);
             textBox_InvestedValue.TabIndex = 6;
-            textBox_InvestedValue.TextChanged += textBox_InvestedValue_TextChanged;
+            textBox_InvestedValue.TextChanged += TextBox_InvestedValue_TextChanged;
             // 
             // label3
             // 
