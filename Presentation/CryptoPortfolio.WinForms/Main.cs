@@ -14,7 +14,7 @@ namespace CryptoPortfolio.WinForms
         private readonly IInvestmentService _investmentService;
         private readonly ICryptoStatusService _cryptoStatusService;
 
-        private BindingSource _portfolioBindingSource;
+        private readonly BindingSource _portfolioBindingSource = [];
 
         public Main(IInvestmentService investmentService, IPortfolioService portfolioService, ICryptoStatusService cryptoStatusService)
         {
@@ -111,53 +111,10 @@ namespace CryptoPortfolio.WinForms
 
         private void UpdateDatagridViewValues(PortfolioDto portfolio)
         {
-            //var bindingList = new BindingList<CryptoDto>(portfolio.Cryptos);
-            var bindingList = ConvertToDataTable(portfolio.Cryptos);
+            DataTable bindingList = portfolio.Cryptos.ToDataTable();
 
-            if (_portfolioBindingSource == null)
-            {
-                _portfolioBindingSource = new BindingSource();
-                _portfolioBindingSource.DataSource = bindingList;
-                dataGridView1.DataSource = _portfolioBindingSource;
-
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.SortMode = DataGridViewColumnSortMode.Automatic;
-                }
-            }
-            else
-            {
-                _portfolioBindingSource.DataSource = bindingList;
-                _portfolioBindingSource.ResetBindings(false);
-            }
-        }
-
-        private DataTable ConvertToDataTable(List<CryptoDto> cryptos)
-        {
-            var dataTable = new DataTable();
-
-            dataTable.Columns.Add("Rank", typeof(int));
-            dataTable.Columns.Add("CryptoName", typeof(string));
-            dataTable.Columns.Add("TotalInvested", typeof(decimal));
-            dataTable.Columns.Add("CurrentValue", typeof(decimal));
-            dataTable.Columns.Add("Profit", typeof(decimal));
-            dataTable.Columns.Add("ProfitPercentage", typeof(decimal));
-            dataTable.Columns.Add("Risk", typeof(int));
-
-            foreach (var crypto in cryptos)
-            {
-                dataTable.Rows.Add(
-                    crypto.Rank,
-                    crypto.CryptoName,
-                    crypto.TotalInvested,
-                    crypto.CurrentValue,
-                    crypto.Profit,
-                    crypto.ProfitPercentage,
-                    crypto.Risk
-                );
-            }
-
-            return dataTable;
+            _portfolioBindingSource.DataSource = bindingList;
+            dataGridView1.DataSource = _portfolioBindingSource;
         }
 
         private void UpdateRiskDistributionChart(PortfolioDto portfolio)
