@@ -41,11 +41,15 @@
             label5 = new Label();
             comboBox_Risk = new ComboBox();
             label6 = new Label();
+            label7 = new Label();
+            CheckBox_AutoDecreaseBTC = new CheckBox();
+            CheckBox_AutoDecreaseUSDT = new CheckBox();
+            CheckBox_AutoDecreaseNA = new CheckBox();
             SuspendLayout();
             // 
             // buttonAddInvestment
             // 
-            buttonAddInvestment.Location = new Point(208, 236);
+            buttonAddInvestment.Location = new Point(208, 264);
             buttonAddInvestment.Name = "buttonAddInvestment";
             buttonAddInvestment.Size = new Size(177, 59);
             buttonAddInvestment.TabIndex = 0;
@@ -155,12 +159,57 @@
             label6.TabIndex = 22;
             label6.Text = "Risk:";
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(23, 216);
+            label7.Name = "label7";
+            label7.Size = new Size(143, 20);
+            label7.TabIndex = 24;
+            label7.Text = "Auto decrease from:";
+            // 
+            // CheckBox_AutoDecreaseBTC
+            // 
+            CheckBox_AutoDecreaseBTC.AutoSize = true;
+            CheckBox_AutoDecreaseBTC.Location = new Point(173, 215);
+            CheckBox_AutoDecreaseBTC.Name = "CheckBox_AutoDecreaseBTC";
+            CheckBox_AutoDecreaseBTC.Size = new Size(55, 24);
+            CheckBox_AutoDecreaseBTC.TabIndex = 25;
+            CheckBox_AutoDecreaseBTC.Text = "BTC";
+            CheckBox_AutoDecreaseBTC.UseVisualStyleBackColor = true;
+            // 
+            // CheckBox_AutoDecreaseUSDT
+            // 
+            CheckBox_AutoDecreaseUSDT.AutoSize = true;
+            CheckBox_AutoDecreaseUSDT.Location = new Point(234, 215);
+            CheckBox_AutoDecreaseUSDT.Name = "CheckBox_AutoDecreaseUSDT";
+            CheckBox_AutoDecreaseUSDT.Size = new Size(67, 24);
+            CheckBox_AutoDecreaseUSDT.TabIndex = 26;
+            CheckBox_AutoDecreaseUSDT.Text = "USDT";
+            CheckBox_AutoDecreaseUSDT.UseVisualStyleBackColor = true;
+            // 
+            // CheckBox_AutoDecreaseNA
+            // 
+            CheckBox_AutoDecreaseNA.AutoSize = true;
+            CheckBox_AutoDecreaseNA.Checked = true;
+            CheckBox_AutoDecreaseNA.CheckState = CheckState.Checked;
+            CheckBox_AutoDecreaseNA.Location = new Point(307, 215);
+            CheckBox_AutoDecreaseNA.Name = "CheckBox_AutoDecreaseNA";
+            CheckBox_AutoDecreaseNA.Size = new Size(58, 24);
+            CheckBox_AutoDecreaseNA.TabIndex = 27;
+            CheckBox_AutoDecreaseNA.Text = "N/A";
+            CheckBox_AutoDecreaseNA.UseVisualStyleBackColor = true;
+            // 
             // AddInvestment
             // 
             AcceptButton = buttonAddInvestment;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(401, 310);
+            ClientSize = new Size(401, 336);
+            Controls.Add(CheckBox_AutoDecreaseNA);
+            Controls.Add(CheckBox_AutoDecreaseUSDT);
+            Controls.Add(CheckBox_AutoDecreaseBTC);
+            Controls.Add(label7);
             Controls.Add(comboBox_Risk);
             Controls.Add(label6);
             Controls.Add(textBox_currentValue);
@@ -200,5 +249,9 @@
         private Label label5;
         private ComboBox comboBox_Risk;
         private Label label6;
+        private Label label7;
+        private CheckBox CheckBox_AutoDecreaseBTC;
+        private CheckBox CheckBox_AutoDecreaseUSDT;
+        private CheckBox CheckBox_AutoDecreaseNA;
     }
 }

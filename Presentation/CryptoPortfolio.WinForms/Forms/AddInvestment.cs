@@ -25,6 +25,10 @@ namespace CryptoPortfolio.WinForms.Forms
             textBox_Date.Text = DateTime.Now.ToString("yyyy-MM-dd");
             comboBox_Risk.SelectedIndex = 0;
             _cryptoStatusList = _cryptoStatusService.GetAll();
+
+            CheckBox_AutoDecreaseBTC.CheckedChanged += CheckBox_AutoDecrease_CheckedChanged;
+            CheckBox_AutoDecreaseUSDT.CheckedChanged += CheckBox_AutoDecrease_CheckedChanged;
+            CheckBox_AutoDecreaseNA.CheckedChanged += CheckBox_AutoDecrease_CheckedChanged;
         }
 
         private void AddInvestment_FormClosing(object sender, FormClosingEventArgs e)
@@ -36,22 +40,19 @@ namespace CryptoPortfolio.WinForms.Forms
         {
             try
             {
-                CryptoStatusDto? cryptoStatus = _cryptoStatusList.FirstOrDefault(x => x.CryptoName == textBox_CryptoName.Text);
-
-                _investmentService.Add(new InvestmentDto
+                decimal investedValue = textBox_InvestedValue.Text.ToDecimal();
+                AddInvestments(textBox_CryptoName.Text, textBox_InvestedValue.Text.ToDecimal(), textBox_Notes.Text);
+                
+                if (CheckBox_AutoDecreaseBTC.Checked)
                 {
-                    Date = textBox_Date.Text,
-                    CryptoName = textBox_CryptoName.Text,
-                    InvestedValue = textBox_InvestedValue.Text.ToDecimal(),
-                    Notes = textBox_Notes.Text,
-                });
-
-                _cryptoStatusService.Upsert(new CryptoStatusDto()
+                    AddInvestments("BTC", -investedValue, $"Auto-decrease due to investment in {textBox_CryptoName.Text}");
+                }
+                else if (CheckBox_AutoDecreaseUSDT.Checked)
                 {
-                    CryptoName = textBox_CryptoName.Text,
-                    Risk = comboBox_Risk.SelectedItem?.ToString() ?? string.Empty, // we have a service validation to avoid save it empty
-                    CurrentValue = textBox_currentValue.Text.ToDecimal(),
-                });
+                    AddInvestments("USDT", -investedValue, $"Auto-decrease due to investment in {textBox_CryptoName.Text}");
+                }
+
+                AddCryptoStatus();
 
                 this.Close();
             }
@@ -59,6 +60,29 @@ namespace CryptoPortfolio.WinForms.Forms
             {
                 MessageBox.Show($"Error adding a new investment: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void AddInvestments(string cryptoName, decimal investedValue, string notes)
+        {
+            _investmentService.Add(new InvestmentDto
+            {
+                Date = textBox_Date.Text,
+                CryptoName = cryptoName,
+                InvestedValue = investedValue,
+                Notes = notes,
+            });
+        }
+
+        private void AddCryptoStatus()
+        {
+            CryptoStatusDto? cryptoStatus = _cryptoStatusList.FirstOrDefault(x => x.CryptoName == textBox_CryptoName.Text);
+
+            _cryptoStatusService.Upsert(new CryptoStatusDto()
+            {
+                CryptoName = textBox_CryptoName.Text,
+                Risk = comboBox_Risk.SelectedItem?.ToString() ?? string.Empty, // we have a service validation to avoid save it empty
+                CurrentValue = textBox_currentValue.Text.ToDecimal(),
+            });
         }
 
         private void TextBox_CryptoName_TextChanged(object sender, EventArgs e)
@@ -98,6 +122,21 @@ namespace CryptoPortfolio.WinForms.Forms
                         }
                     }
                 }
+            }
+        }
+
+        private void CheckBox_AutoDecrease_CheckedChanged(object? sender, EventArgs? e)
+        {
+            if (sender is CheckBox currentCheckbox && currentCheckbox.Checked)
+            {
+                CheckBox_AutoDecreaseBTC.Checked = currentCheckbox == CheckBox_AutoDecreaseBTC;
+                CheckBox_AutoDecreaseUSDT.Checked = currentCheckbox == CheckBox_AutoDecreaseUSDT;
+                CheckBox_AutoDecreaseNA.Checked = currentCheckbox == CheckBox_AutoDecreaseNA;
+            }
+
+            if (!CheckBox_AutoDecreaseBTC.Checked && !CheckBox_AutoDecreaseUSDT.Checked && !CheckBox_AutoDecreaseNA.Checked)
+            {
+                CheckBox_AutoDecreaseNA.Checked = true;
             }
         }
     }
