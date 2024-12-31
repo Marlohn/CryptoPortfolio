@@ -46,6 +46,7 @@
             toolStrip1 = new ToolStrip();
             toolStripButton_NewInvestment = new ToolStripButton();
             toolStripButton_ViewInvestments = new ToolStripButton();
+            toolStripButton_RefreshIntegrations = new ToolStripButton();
             toolStripLabel1 = new ToolStripLabel();
             toolStripButton_Settings = new ToolStripButton();
             toolStripButton_Backup = new ToolStripButton();
@@ -63,7 +64,6 @@
             tabPage2 = new TabPage();
             label_totalCurrent = new Label();
             label5 = new Label();
-            toolStripButton_RefreshIntegrations = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart_Risk).BeginInit();
@@ -165,7 +165,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_NewInvestment, toolStripButton_ViewInvestments, toolStripButton_RefreshIntegrations, toolStripLabel1, toolStripButton_Settings, toolStripButton_Backup });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(825, 32);
+            toolStrip1.Size = new Size(1491, 32);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -186,6 +186,15 @@
             toolStripButton_ViewInvestments.Size = new Size(152, 29);
             toolStripButton_ViewInvestments.Text = "View Investments";
             toolStripButton_ViewInvestments.Click += ToolStripButton_ViewInvestments_Click;
+            // 
+            // toolStripButton_RefreshIntegrations
+            // 
+            toolStripButton_RefreshIntegrations.Image = Properties.Resources.icons8_refresh_50;
+            toolStripButton_RefreshIntegrations.ImageTransparentColor = Color.Magenta;
+            toolStripButton_RefreshIntegrations.Name = "toolStripButton_RefreshIntegrations";
+            toolStripButton_RefreshIntegrations.Size = new Size(170, 29);
+            toolStripButton_RefreshIntegrations.Text = "Refresh Integrations";
+            toolStripButton_RefreshIntegrations.Click += ToolStripButton_RefreshIntegrations_Click;
             // 
             // toolStripLabel1
             // 
@@ -225,7 +234,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             chart_Risk.Series.Add(series1);
-            chart_Risk.Size = new Size(785, 400);
+            chart_Risk.Size = new Size(650, 500);
             chart_Risk.TabIndex = 3;
             chart_Risk.Text = "chart1";
             // 
@@ -233,7 +242,7 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = Properties.Resources.coin_statistics_2476;
-            pictureBox1.Location = new Point(756, 4);
+            pictureBox1.Location = new Point(1422, 1);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(60, 60);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -253,7 +262,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(595, 623);
+            label4.Location = new Point(1260, 64);
             label4.Name = "label4";
             label4.Size = new Size(65, 20);
             label4.TabIndex = 11;
@@ -264,7 +273,7 @@
             comboBox_ChartFilterType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_ChartFilterType.FormattingEnabled = true;
             comboBox_ChartFilterType.Items.AddRange(new object[] { "TotalInvested", "CurrentValue", "Profit" });
-            comboBox_ChartFilterType.Location = new Point(666, 620);
+            comboBox_ChartFilterType.Location = new Point(1331, 61);
             comboBox_ChartFilterType.Name = "comboBox_ChartFilterType";
             comboBox_ChartFilterType.Size = new Size(151, 28);
             comboBox_ChartFilterType.TabIndex = 10;
@@ -282,7 +291,7 @@
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             chart_TotalCrypto.Series.Add(series2);
-            chart_TotalCrypto.Size = new Size(785, 400);
+            chart_TotalCrypto.Size = new Size(650, 500);
             chart_TotalCrypto.TabIndex = 9;
             chart_TotalCrypto.Text = "chart1";
             // 
@@ -320,10 +329,10 @@
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(12, 620);
+            tabControl1.Location = new Point(822, 66);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(805, 446);
+            tabControl1.Size = new Size(668, 544);
             tabControl1.TabIndex = 12;
             // 
             // tabPage1
@@ -332,7 +341,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(797, 413);
+            tabPage1.Size = new Size(660, 511);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Crypto";
             tabPage1.UseVisualStyleBackColor = true;
@@ -343,7 +352,7 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(797, 413);
+            tabPage2.Size = new Size(660, 511);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Risk";
             tabPage2.UseVisualStyleBackColor = true;
@@ -368,20 +377,11 @@
             label5.TabIndex = 13;
             label5.Text = "Total Current:";
             // 
-            // toolStripButton_RefreshIntegrations
-            // 
-            toolStripButton_RefreshIntegrations.Image = Properties.Resources.icons8_refresh_50;
-            toolStripButton_RefreshIntegrations.ImageTransparentColor = Color.Magenta;
-            toolStripButton_RefreshIntegrations.Name = "toolStripButton_RefreshIntegrations";
-            toolStripButton_RefreshIntegrations.Size = new Size(170, 29);
-            toolStripButton_RefreshIntegrations.Text = "Refresh Integrations";
-            toolStripButton_RefreshIntegrations.Click += ToolStripButton_RefreshIntegrations_Click;
-            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(825, 1073);
+            ClientSize = new Size(1491, 622);
             Controls.Add(label_totalCurrent);
             Controls.Add(label5);
             Controls.Add(pictureBox1);
