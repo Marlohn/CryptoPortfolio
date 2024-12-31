@@ -92,10 +92,9 @@
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(804, 542);
             dataGridView1.TabIndex = 1;
-            dataGridView1.CellClick += dataGridView1_CellClick;
-            dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
-            dataGridView1.CellFormatting += dataGridView1_CellFormatting;
-            dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
+            dataGridView1.CellClick += DataGridView1_CellClick;
+            dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
+            dataGridView1.CellFormatting += DataGridView1_CellFormatting;
             // 
             // Rank
             // 
@@ -177,7 +176,7 @@
             toolStripButton_NewInvestment.Name = "toolStripButton_NewInvestment";
             toolStripButton_NewInvestment.Size = new Size(144, 29);
             toolStripButton_NewInvestment.Text = "New investment";
-            toolStripButton_NewInvestment.Click += toolStripButton_NewInvestment_Click;
+            toolStripButton_NewInvestment.Click += ToolStripButton_NewInvestment_Click;
             // 
             // toolStripButton_ViewInvestments
             // 
@@ -186,7 +185,7 @@
             toolStripButton_ViewInvestments.Name = "toolStripButton_ViewInvestments";
             toolStripButton_ViewInvestments.Size = new Size(152, 29);
             toolStripButton_ViewInvestments.Text = "View Investments";
-            toolStripButton_ViewInvestments.Click += toolStripButton_ViewInvestments_Click;
+            toolStripButton_ViewInvestments.Click += ToolStripButton_ViewInvestments_Click;
             // 
             // toolStripLabel1
             // 
@@ -212,7 +211,7 @@
             toolStripButton_Backup.Name = "toolStripButton_Backup";
             toolStripButton_Backup.Size = new Size(86, 29);
             toolStripButton_Backup.Text = "Backup";
-            toolStripButton_Backup.Click += toolStripButton_Backup_Click;
+            toolStripButton_Backup.Click += ToolStripButton_Backup_Click;
             // 
             // chart_Risk
             // 
@@ -269,7 +268,7 @@
             comboBox_ChartFilterType.Name = "comboBox_ChartFilterType";
             comboBox_ChartFilterType.Size = new Size(151, 28);
             comboBox_ChartFilterType.TabIndex = 10;
-            comboBox_ChartFilterType.SelectedIndexChanged += comboBox_ChartFilterType_SelectedIndexChanged;
+            comboBox_ChartFilterType.SelectedIndexChanged += ComboBox_ChartFilterType_SelectedIndexChanged;
             // 
             // chart_TotalCrypto
             // 

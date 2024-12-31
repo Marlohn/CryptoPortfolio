@@ -63,14 +63,14 @@ namespace CryptoPortfolio.WinForms
             }
         }
 
-        private void toolStripButton_NewInvestment_Click(object sender, EventArgs e)
+        private void ToolStripButton_NewInvestment_Click(object sender, EventArgs e)
         {
             var addInvestmentForm = new AddInvestment(_investmentService, _cryptoStatusService, this);
 
             addInvestmentForm.Show();
         }
 
-        private void toolStripButton_ViewInvestments_Click(object sender, EventArgs e)
+        private void ToolStripButton_ViewInvestments_Click(object sender, EventArgs e)
         {
             var investmentsForm = new Investments(_investmentService, this);
 
@@ -231,91 +231,52 @@ namespace CryptoPortfolio.WinForms
             }
         }
 
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            //try
-            //{
-            //    if (e.RowIndex >= 0)
-            //    {
-            //        var row = dataGridView1.Rows[e.RowIndex];
-            //        string cryptoName = row.Cells["CryptoName"].Value?.ToString() ?? string.Empty; // is that the best approach? maybe exeption
-
-            //        if (string.IsNullOrWhiteSpace(cryptoName))
-            //        {
-            //            MessageBox.Show("CryptoName is missing or invalid.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //            return;
-            //        }
-
-            //        string risk = row.Cells["Risk"].Value?.ToString() ?? string.Empty;  // is that the best approach?
-
-            //        decimal? currentValue = null;
-            //        var currentValueString = row.Cells["CurrentValue"].Value?.ToString();
-            //        if (!string.IsNullOrWhiteSpace(currentValueString) && decimal.TryParse(currentValueString, out var parsedCurrentValue))
-            //        {
-            //            currentValue = parsedCurrentValue;
-            //        }
-
-            //        _portfolioService.UpdateCrypto(new CryptoStatusDto()
-            //        {
-            //            CryptoName = cryptoName,
-            //            Risk = risk,
-            //            CurrentValue = currentValue,
-            //        });
-
-            //        UpdatePortfolio();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-        }
-
+        //ToDoÇ Maybe we can remove this method and keep all the settings in the component properties
         private void CustomizeDataGridView()
         {
-            // Desabilita estilos visuais padrão para personalização
+            // Disable default visual styles for custom styling
             dataGridView1.EnableHeadersVisualStyles = false;
 
-            // Configurações do cabeçalho
+            // Configure header styles
             DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle
             {
-                BackColor = Color.FromArgb(255, 223, 122), // Amarelo pastel
+                BackColor = Color.FromArgb(255, 223, 122), // Pastel yellow
                 ForeColor = Color.Black,
                 Font = new Font("Segoe UI", 10, FontStyle.Bold),
                 Alignment = DataGridViewContentAlignment.MiddleCenter,
-                SelectionBackColor = Color.FromArgb(255, 223, 122), // Sem alteração no cabeçalho ao selecionar
+                SelectionBackColor = Color.FromArgb(255, 223, 122), // No visual change on header selection
                 SelectionForeColor = Color.Black
             };
             dataGridView1.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
 
-            // Configurações padrão das células
+            // Configure default cell styles
             DataGridViewCellStyle cellStyle = new DataGridViewCellStyle
             {
-                BackColor = Color.White, // Fundo padrão
+                BackColor = Color.White, // Default background
                 ForeColor = Color.Black,
                 Font = new Font("Segoe UI", 9),
-                SelectionBackColor = Color.White, // Transparente ao selecionar
-                SelectionForeColor = Color.Black // Sem alteração no texto
+                SelectionBackColor = Color.White, // Transparent background on selection
+                SelectionForeColor = Color.Black // No change in text color
             };
             dataGridView1.DefaultCellStyle = cellStyle;
 
-            // Configurações de linhas alternadas
+            // Configure alternating row styles
             DataGridViewCellStyle alternatingCellStyle = new DataGridViewCellStyle
             {
-                BackColor = Color.FromArgb(255, 248, 220), // Amarelo claro
-                SelectionBackColor = Color.FromArgb(255, 248, 220), // Fundo igual mesmo ao selecionar
+                BackColor = Color.FromArgb(255, 248, 220), // Light yellow
+                SelectionBackColor = Color.FromArgb(255, 248, 220), // Same background when selected
                 SelectionForeColor = Color.Black
             };
             dataGridView1.AlternatingRowsDefaultCellStyle = alternatingCellStyle;
 
-            // Configuração de seleção e interatividade
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Seleção por linha
-            dataGridView1.MultiSelect = false; // Desativa múltiplas seleções
+            // Configure selection behavior
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Select entire row
+            dataGridView1.MultiSelect = false; // Disable multi-selection
 
-            // Remove seleção inicial
+            // Remove initial selection
             dataGridView1.ClearSelection();
 
-            // Evento opcional para remover visual de seleção durante interações
+            // Optional event to remove selection visuals during interactions
             dataGridView1.CellStateChanged += (s, e) =>
             {
                 if (e.Cell.RowIndex >= 0)
@@ -323,56 +284,9 @@ namespace CryptoPortfolio.WinForms
             };
         }
 
-
-
-        //private void CustomizeDataGridViewRowHeader()
-        //{
-        //    // Exibe o cabeçalho da linha
-        //    dataGridView1.RowHeadersVisible = true;
-        //    dataGridView1.RowHeadersWidth = 50; // Define uma largura consistente
-
-        //    // Configuração de estilo do cabeçalho da linha (RowHeader)
-        //    DataGridViewCellStyle rowHeaderStyle = new DataGridViewCellStyle
-        //    {
-        //        BackColor = Color.FromArgb(255, 223, 122), // Amarelo pastel para combinar com o cabeçalho
-        //        ForeColor = Color.Black, // Texto preto para contraste
-        //        Font = new Font("Segoe UI", 9, FontStyle.Bold), // Fonte moderna e em negrito
-        //        Alignment = DataGridViewContentAlignment.MiddleCenter, // Centraliza o texto
-        //        SelectionBackColor = Color.FromArgb(255, 223, 122), // Mesma cor ao selecionar
-        //        SelectionForeColor = Color.Black // Texto preto ao selecionar
-        //    };
-        //    dataGridView1.RowHeadersDefaultCellStyle = rowHeaderStyle;
-
-        //    // Evento para numerar as linhas no RowHeader
-        //    dataGridView1.RowPostPaint += (s, e) =>
-        //    {
-        //        // Obter o índice da linha
-        //        string rowIndex = (e.RowIndex + 1).ToString(); // Começa em 1
-
-        //        // Configuração do formato para centralizar o texto
-        //        var centerFormat = new StringFormat()
-        //        {
-        //            Alignment = StringAlignment.Center,
-        //            LineAlignment = StringAlignment.Center
-        //        };
-
-        //        // Desenhar o índice da linha na RowHeader
-        //        e.Graphics.DrawString(rowIndex, dataGridView1.Font, Brushes.Black,
-        //            new Rectangle(e.RowBounds.Left, e.RowBounds.Top, dataGridView1.RowHeadersWidth, e.RowBounds.Height),
-        //            centerFormat);
-        //    };
-        //}
-
-
-
-
-
-
-
-
-        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            // Formatação condicional para "Profit" e "ProfitPercentage"
+            // Conditional formatting for "Profit" and "ProfitPercentage"
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Profit" ||
                 dataGridView1.Columns[e.ColumnIndex].Name == "ProfitPercentage")
             {
@@ -382,7 +296,7 @@ namespace CryptoPortfolio.WinForms
                 }
             }
 
-            // Formatação condicional para "Risk"
+            // Conditional formatting for "Risk"
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Risk")
             {
                 if (e.Value != null)
@@ -391,35 +305,34 @@ namespace CryptoPortfolio.WinForms
                     {
                         case RiskLevel.None:
                             e.Value = RiskLevel.None.GetDescription();
-                            e.CellStyle.ForeColor = Color.Gray; // Texto cinza
-                            e.CellStyle.BackColor = Color.FromArgb(224, 224, 224); // Fundo cinza claro
+                            e.CellStyle.ForeColor = Color.Gray; // Gray text
+                            e.CellStyle.BackColor = Color.FromArgb(224, 224, 224); // Light gray background
                             break;
                         case RiskLevel.Low:
                             e.Value = RiskLevel.Low.GetDescription();
-                            e.CellStyle.ForeColor = Color.DarkGreen; // Texto verde escuro
-                            e.CellStyle.BackColor = Color.FromArgb(198, 239, 206); // Fundo verde claro
+                            e.CellStyle.ForeColor = Color.DarkGreen; // Dark green text
+                            e.CellStyle.BackColor = Color.FromArgb(198, 239, 206); // Light green background
                             break;
                         case RiskLevel.Medium:
                             e.Value = RiskLevel.Medium.GetDescription();
-                            e.CellStyle.ForeColor = Color.DarkOrange; // Texto laranja
-                            e.CellStyle.BackColor = Color.FromArgb(255, 229, 153); // Fundo amarelo claro
+                            e.CellStyle.ForeColor = Color.DarkOrange; // Orange text
+                            e.CellStyle.BackColor = Color.FromArgb(255, 229, 153); // Light yellow background
                             break;
                         case RiskLevel.High:
                             e.Value = RiskLevel.High.GetDescription();
-                            e.CellStyle.ForeColor = Color.Red; // Texto vermelho
-                            e.CellStyle.BackColor = Color.FromArgb(255, 199, 206); // Fundo vermelho claro
+                            e.CellStyle.ForeColor = Color.Red; // Red text
+                            e.CellStyle.BackColor = Color.FromArgb(255, 199, 206); // Light red background
                             break;
                         case RiskLevel.VeryHigh:
                             e.Value = RiskLevel.VeryHigh.GetDescription();
-                            e.CellStyle.ForeColor = Color.DarkRed; // Texto vermelho escuro
-                            e.CellStyle.BackColor = Color.FromArgb(255, 159, 159); // Fundo vermelho intenso
+                            e.CellStyle.ForeColor = Color.DarkRed; // Dark red text
+                            e.CellStyle.BackColor = Color.FromArgb(255, 159, 159); // Intense red background
                             break;
-
                     }
                 }
             }
 
-            // Formatação de porcentagens
+            // Formatting for percentages
             if (dataGridView1.Columns[e.ColumnIndex].Name == "ProfitPercentage")
             {
                 if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value2))
@@ -429,7 +342,7 @@ namespace CryptoPortfolio.WinForms
                 }
             }
 
-            // Formatação de valores monetários
+            // Formatting for monetary values
             if (dataGridView1.Columns[e.ColumnIndex].Name == "TotalInvested" ||
                 dataGridView1.Columns[e.ColumnIndex].Name == "CurrentValue" ||
                 dataGridView1.Columns[e.ColumnIndex].Name == "Profit")
@@ -441,18 +354,21 @@ namespace CryptoPortfolio.WinForms
                 }
             }
 
-            // Mantém o estilo personalizado durante a seleção
+            // Maintain custom style during selection
             e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
             e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
         }
 
 
-        private void comboBox_ChartFilterType_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBox_ChartFilterType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdatePortfolio();
+            if (_portfolioBindingSource.DataSource != null)
+            {
+                UpdatePortfolio();
+            }            
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -480,14 +396,6 @@ namespace CryptoPortfolio.WinForms
                     var addInvestmentForm = new EditCryptoStatus(_cryptoStatusService, _investmentService, this, cryptoStatus);
 
                     addInvestmentForm.Show();
-
-                    //_portfolioService.UpdateCrypto(new CryptoStatusDto()
-                    //{
-                    //    CryptoName = cryptoName,
-                    //    Risk = risk,
-                    //    CurrentValue = currentValue,
-                    //});
-
                 }
             }
             catch (Exception ex)
@@ -496,23 +404,18 @@ namespace CryptoPortfolio.WinForms
             }
         }
 
-        private void toolStripButton_Backup_Click(object sender, EventArgs e)
+        private void ToolStripButton_Backup_Click(object sender, EventArgs e)
         {
             _portfolioService.BackupData(); // maybe it can return sussfull or not
 
             MessageBox.Show("Backup completed successfully!", "Backup Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                // Seleciona a linha inteira
                 dataGridView1.Rows[e.RowIndex].Selected = true;
-
-                //// Exemplo: obtendo os valores da linha selecionada
-                //string cryptoName = dataGridView1.Rows[e.RowIndex].Cells["CryptoName"].Value.ToString();
-                //MessageBox.Show($"Linha selecionada: {cryptoName}");
             }
         }
 
