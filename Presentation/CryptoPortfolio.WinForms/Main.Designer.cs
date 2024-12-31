@@ -375,7 +375,7 @@
             toolStripButton_RefreshIntegrations.Name = "toolStripButton_RefreshIntegrations";
             toolStripButton_RefreshIntegrations.Size = new Size(170, 29);
             toolStripButton_RefreshIntegrations.Text = "Refresh Integrations";
-            toolStripButton_RefreshIntegrations.Click += toolStripButton_RefreshIntegrations_Click;
+            toolStripButton_RefreshIntegrations.Click += ToolStripButton_RefreshIntegrations_Click;
             // 
             // Main
             // 

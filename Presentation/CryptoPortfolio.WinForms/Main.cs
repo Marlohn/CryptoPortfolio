@@ -27,40 +27,10 @@ namespace CryptoPortfolio.WinForms
 
         private void Main_Load(object sender, EventArgs e)
         {
-            string filePath = "investments.csv"; // check this
-
             comboBox_ChartFilterType.SelectedIndex = 1; // CurrentValue
 
-            CreateExampleCSV(filePath);
             UpdatePortfolio();
             CustomizeDataGridView();
-            //CustomizeDataGridViewRowHeader();
-        }
-
-        private void CreateExampleCSV(string filePath)
-        {
-            if (!File.Exists(filePath))
-            {
-                try
-                {
-                    using (StreamWriter writer = new StreamWriter(filePath))
-                    {
-                        writer.WriteLine("Date,Crypto Name,Invested Value (USD),Notes");
-
-                        writer.WriteLine("2024-06-01,BTC,5000,Initial purchase");
-                        writer.WriteLine("2024-06-03,ETH,3000,Monthly investment");
-                        writer.WriteLine("2024-06-05,ADA,100,Extra ADA");
-                        writer.WriteLine("2024-06-07,SOL,2000,Strategic investment");
-                        writer.WriteLine("2024-06-10,DOT,1000,Test");
-                        writer.WriteLine("2024-06-15,ADA,200,Extra ADA 2");
-                        writer.WriteLine("2024-06-19,BTC,10000,New investment");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error creating the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
         }
 
         private void ToolStripButton_NewInvestment_Click(object sender, EventArgs e)
@@ -105,7 +75,7 @@ namespace CryptoPortfolio.WinForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao carregar os investimentos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading investments: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -231,7 +201,7 @@ namespace CryptoPortfolio.WinForms
             }
         }
 
-        //ToDo« Maybe we can remove this method and keep all the settings in the component properties
+        //ToDo: Maybe we can remove this method and keep all the settings in the component properties
         private void CustomizeDataGridView()
         {
             // Disable default visual styles for custom styling
@@ -365,7 +335,7 @@ namespace CryptoPortfolio.WinForms
             if (_portfolioBindingSource.DataSource != null)
             {
                 UpdatePortfolio();
-            }            
+            }
         }
 
         private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -419,7 +389,7 @@ namespace CryptoPortfolio.WinForms
             }
         }
 
-        private async void toolStripButton_RefreshIntegrations_Click(object sender, EventArgs e)
+        private async void ToolStripButton_RefreshIntegrations_Click(object sender, EventArgs e)
         {
             await _portfolioService.RefreshBinanceData();
             UpdatePortfolio();
