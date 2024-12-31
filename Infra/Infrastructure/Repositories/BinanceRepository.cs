@@ -1,5 +1,4 @@
-﻿using Binance.Net.Clients;
-using CryptoExchange.Net.Authentication;
+﻿using Binance.Net.Interfaces.Clients;
 using Domain.Entities;
 using Domain.Interfaces;
 
@@ -7,14 +6,19 @@ namespace Infrastructure.Repositories
 {
     public class BinanceRepository : IExchangeRepository
     {
+        private readonly IBinanceRestClient _binanceRestClient;
+
+        public BinanceRepository(IBinanceRestClient binanceRestClient)
+        {
+            _binanceRestClient = binanceRestClient;
+        }
+
         public async Task<List<ExchangeBalance>> GetBalances()
         {
-            var binanceClient = new BinanceRestClient(options =>
-            {
-                options.ApiCredentials = new ApiCredentials("3zC3rGReD5jNRC5cnEmUxf66JAUo3n0QN3h8Xz3bbQGbsw2iXC1U3zvmV2gajnRS", "HuCjx8CLNTFiOJUSVUrLWjyKEpOBbnKBxysrvSioMCgNkDYU1COBu1D5ErxEMHgR");
-            });
+            var result = await _binanceRestClient.SpotApi.Account.GetBalancesAsync();
 
-            var result = await binanceClient.SpotApi.Account.GetBalancesAsync();
+            if (!result.Success || result.Data == null)
+                throw new Exception($"Failed to retrieve balances: {result.Error?.Message}");
 
             return result.Data
                 .Select(b => new ExchangeBalance
@@ -27,12 +31,10 @@ namespace Infrastructure.Repositories
 
         public async Task<List<ExchangeCryptoPrice>> GetPrices()
         {
-            var binanceClient = new BinanceRestClient(options =>
-            {
-                options.ApiCredentials = new ApiCredentials("3zC3rGReD5jNRC5cnEmUxf66JAUo3n0QN3h8Xz3bbQGbsw2iXC1U3zvmV2gajnRS", "HuCjx8CLNTFiOJUSVUrLWjyKEpOBbnKBxysrvSioMCgNkDYU1COBu1D5ErxEMHgR");
-            });
+            var result = await _binanceRestClient.UsdFuturesApi.ExchangeData.GetBookPricesAsync();
 
-            var result = await binanceClient.UsdFuturesApi.ExchangeData.GetBookPricesAsync();
+            if (!result.Success || result.Data == null)
+                throw new Exception($"Failed to retrieve prices: {result.Error?.Message}");
 
             return result.Data
                 .Select(b => new ExchangeCryptoPrice
