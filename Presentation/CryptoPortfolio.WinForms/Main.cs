@@ -4,6 +4,7 @@ using Application.Interfaces;
 using Application.Models;
 using Application.Models.Enums;
 using CryptoPortfolio.WinForms.Forms;
+using CryptoPortfolio.WinForms.Properties;
 using UtilityExtensions;
 
 namespace CryptoPortfolio.WinForms
@@ -391,8 +392,14 @@ namespace CryptoPortfolio.WinForms
 
         private async void ToolStripButton_RefreshIntegrations_Click(object sender, EventArgs e)
         {
+            pictureBox_logo.Image = Resources.loading;
+            toolStripButton_RefreshIntegrations.Enabled = false;
+
             await _portfolioService.RefreshBinanceData();
             UpdatePortfolio();
+
+            pictureBox_logo.Image = Resources.coin_statistics_2476;
+            toolStripButton_RefreshIntegrations.Enabled = true;
         }
     }
 }

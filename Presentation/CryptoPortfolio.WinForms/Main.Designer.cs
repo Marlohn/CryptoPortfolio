@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             dataGridView1 = new DataGridView();
             Rank = new DataGridViewTextBoxColumn();
@@ -51,7 +51,7 @@
             toolStripButton_Settings = new ToolStripButton();
             toolStripButton_Backup = new ToolStripButton();
             chart_Risk = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            pictureBox1 = new PictureBox();
+            pictureBox_logo = new PictureBox();
             label1 = new Label();
             label4 = new Label();
             comboBox_ChartFilterType = new ComboBox();
@@ -67,7 +67,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart_Risk).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox_logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chart_TotalCrypto).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -224,30 +224,30 @@
             // 
             // chart_Risk
             // 
-            chartArea1.Name = "ChartArea1";
-            chart_Risk.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chart_Risk.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            chart_Risk.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            chart_Risk.Legends.Add(legend3);
             chart_Risk.Location = new Point(6, 6);
             chart_Risk.Name = "chart_Risk";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chart_Risk.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            chart_Risk.Series.Add(series3);
             chart_Risk.Size = new Size(650, 500);
             chart_Risk.TabIndex = 3;
             chart_Risk.Text = "chart1";
             // 
-            // pictureBox1
+            // pictureBox_logo
             // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox1.Image = Properties.Resources.coin_statistics_2476;
-            pictureBox1.Location = new Point(1422, 1);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(60, 60);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 4;
-            pictureBox1.TabStop = false;
+            pictureBox_logo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox_logo.Image = Properties.Resources.coin_statistics_2476;
+            pictureBox_logo.Location = new Point(1422, 1);
+            pictureBox_logo.Name = "pictureBox_logo";
+            pictureBox_logo.Size = new Size(60, 60);
+            pictureBox_logo.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox_logo.TabIndex = 4;
+            pictureBox_logo.TabStop = false;
             // 
             // label1
             // 
@@ -281,16 +281,16 @@
             // 
             // chart_TotalCrypto
             // 
-            chartArea2.Name = "ChartArea1";
-            chart_TotalCrypto.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            chart_TotalCrypto.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            chart_TotalCrypto.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            chart_TotalCrypto.Legends.Add(legend4);
             chart_TotalCrypto.Location = new Point(6, 6);
             chart_TotalCrypto.Name = "chart_TotalCrypto";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chart_TotalCrypto.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            chart_TotalCrypto.Series.Add(series4);
             chart_TotalCrypto.Size = new Size(650, 500);
             chart_TotalCrypto.TabIndex = 9;
             chart_TotalCrypto.Text = "chart1";
@@ -384,7 +384,7 @@
             ClientSize = new Size(1491, 622);
             Controls.Add(label_totalCurrent);
             Controls.Add(label5);
-            Controls.Add(pictureBox1);
+            Controls.Add(pictureBox_logo);
             Controls.Add(label4);
             Controls.Add(comboBox_ChartFilterType);
             Controls.Add(tabControl1);
@@ -404,7 +404,7 @@
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)chart_Risk).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox_logo).EndInit();
             ((System.ComponentModel.ISupportInitialize)chart_TotalCrypto).EndInit();
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
@@ -421,7 +421,7 @@
         private ToolStripButton toolStripButton_ViewInvestments;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_Risk;
         private ToolStripButton toolStripButton_Settings;
-        private PictureBox pictureBox1;
+        private PictureBox pictureBox_logo;
         private Label label1;
         private Label label_TotalInvested;
         private Label label_TotalProfit;
