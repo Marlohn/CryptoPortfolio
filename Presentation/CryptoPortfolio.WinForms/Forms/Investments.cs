@@ -14,22 +14,21 @@ namespace CryptoPortfolio.WinForms
             _main = main;
         }
 
-        private void Investments_Load(object sender, EventArgs e)
+        private async void Investments_Load(object sender, EventArgs e)
         {
-            LoadInvestments();
+            await LoadInvestments();
         }
 
-        private void Investments_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Investments_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _main.UpdatePortfolio();
+            await _main.UpdatePortfolio();
         }
 
-        private void LoadInvestments()
+        private async Task LoadInvestments()
         {
             try // remove this try catch create a midlesware
             {
-                var investments = _investmentService.GetAll();
-
+                var investments = await _investmentService.GetAll();
 
                 dataGridView1.AutoGenerateColumns = false;
                 dataGridView1.DataSource = investments;

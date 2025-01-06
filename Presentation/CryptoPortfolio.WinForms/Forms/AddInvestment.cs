@@ -36,23 +36,23 @@ namespace CryptoPortfolio.WinForms.Forms
             await _main.UpdatePortfolio();
         }
 
-        private void ButtonAddInvestment_Click(object sender, EventArgs e)
+        private async void ButtonAddInvestment_Click(object sender, EventArgs e)
         {
             try
             {
                 decimal investedValue = textBox_InvestedValue.Text.ToDecimal();
-                AddInvestments(textBox_CryptoName.Text, textBox_InvestedValue.Text.ToDecimal(), textBox_Notes.Text);
+                await AddInvestments(textBox_CryptoName.Text, textBox_InvestedValue.Text.ToDecimal(), textBox_Notes.Text);
 
                 if (CheckBox_AutoDecreaseBTC.Checked)
                 {
-                    AddInvestments("BTC", -investedValue, $"Auto-decrease due to investment in {textBox_CryptoName.Text}");
+                    await AddInvestments("BTC", -investedValue, $"Auto-decrease due to investment in {textBox_CryptoName.Text}");
                 }
                 else if (CheckBox_AutoDecreaseUSDT.Checked)
                 {
-                    AddInvestments("USDT", -investedValue, $"Auto-decrease due to investment in {textBox_CryptoName.Text}");
+                    await AddInvestments("USDT", -investedValue, $"Auto-decrease due to investment in {textBox_CryptoName.Text}");
                 }
 
-                AddCryptoStatus();
+                await AddCryptoStatus();
 
                 this.Close();
             }
@@ -62,9 +62,9 @@ namespace CryptoPortfolio.WinForms.Forms
             }
         }
 
-        private void AddInvestments(string cryptoName, decimal investedValue, string notes)
+        private async Task AddInvestments(string cryptoName, decimal investedValue, string notes)
         {
-            _investmentService.Add(new InvestmentDto
+            await _investmentService.Add(new InvestmentDto
             {
                 Date = textBox_Date.Text,
                 CryptoName = cryptoName,
@@ -73,11 +73,11 @@ namespace CryptoPortfolio.WinForms.Forms
             });
         }
 
-        private void AddCryptoStatus()
+        private async Task AddCryptoStatus()
         {
             CryptoStatusDto? cryptoStatus = _cryptoStatusList.FirstOrDefault(x => x.CryptoName == textBox_CryptoName.Text);
 
-            _cryptoStatusService.Upsert(new CryptoStatusDto()
+            await _cryptoStatusService.Upsert(new CryptoStatusDto()
             {
                 CryptoName = textBox_CryptoName.Text,
                 Risk = comboBox_Risk.SelectedItem?.ToString() ?? string.Empty, // we have a service validation to avoid save it empty
