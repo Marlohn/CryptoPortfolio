@@ -59,6 +59,8 @@ namespace CryptoPortfolio.WinForms
         {
             try // remove this try catch create a midlesware
             {
+                Loading();
+
                 var portfolio = await _portfolioService.GetPortfolio();
 
                 string formattedProfitPercentage = Math.Abs(portfolio.TotalProfitPercentage).ToString("P2");
@@ -84,6 +86,10 @@ namespace CryptoPortfolio.WinForms
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading investments: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                LoadingCompleted();
             }
         }
 
@@ -399,15 +405,33 @@ namespace CryptoPortfolio.WinForms
 
         private async void ToolStripButton_RefreshIntegrations_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Loading();
+
+                await _portfolioService.RefreshBinanceData();
+                await UpdatePortfolio();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error refreshing integrations: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                LoadingCompleted();
+            }
+        }
+
+        private void Loading()
+        {
             pictureBox_logo.Image = Resources.loading;
             toolStripButton_RefreshIntegrations.Enabled = false;
+        }
 
-            await _portfolioService.RefreshBinanceData();
-            await UpdatePortfolio();
-
+        private void LoadingCompleted()
+        {
             pictureBox_logo.Image = Resources.coin_statistics_2476;
             toolStripButton_RefreshIntegrations.Enabled = true;
         }
-
     }
 }
