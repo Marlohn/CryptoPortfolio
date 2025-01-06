@@ -2,13 +2,13 @@
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Infrastructure.Repositories
+namespace Infrastructure.Repositories.Data
 {
-    public class CryptoStatusRepository : ICryptoStatusRepository
+    public class CsvCryptoStatusRepository : ICryptoStatusRepository
     {
         private readonly string _filePath;
 
-        public CryptoStatusRepository(string filePath)
+        public CsvCryptoStatusRepository(string filePath)
         {
             _filePath = filePath;
 
@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories
                     cryptoStatusList.Add(new CryptoStatus
                     {
                         CryptoName = values[0],
-                        CurrentValue = decimal.TryParse(values[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var investedValue) ? investedValue : (decimal?)null, // maybe error?
+                        CurrentValue = decimal.TryParse(values[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var investedValue) ? investedValue : null, // maybe error?
                         Risk = values[2]
                     });
                 }

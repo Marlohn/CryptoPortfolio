@@ -2,7 +2,7 @@
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Infrastructure.Repositories
+namespace Infrastructure.Repositories.Exchanges
 {
     public class BinanceRepository : IExchangeRepository
     {

@@ -1,13 +1,13 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Infrastructure.Repositories
+namespace Infrastructure.Repositories.Data
 {
-    public class InvestmentRepository : IInvestmentRepository
+    public class CsvInvestmentRepository : IInvestmentRepository
     {
         private readonly string _filePath;
 
-        public InvestmentRepository(string filePath)
+        public CsvInvestmentRepository(string filePath)
         {
             _filePath = filePath;
 

@@ -4,7 +4,8 @@ using Binance.Net.Clients;
 using Binance.Net.Interfaces.Clients;
 using CryptoExchange.Net.Authentication;
 using Domain.Interfaces;
-using Infrastructure.Repositories;
+using Infrastructure.Repositories.Data;
+using Infrastructure.Repositories.Exchanges;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace IoC
@@ -14,9 +15,9 @@ namespace IoC
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             //Domain
-            services.AddScoped<IInvestmentRepository, InvestmentRepository>();
-            services.AddScoped<IInvestmentRepository>(provider => new InvestmentRepository("investments.csv")); // change it 
-            services.AddScoped<ICryptoStatusRepository>(provider => new CryptoStatusRepository("cryptostatus.csv")); // change it 
+            services.AddScoped<IInvestmentRepository, CsvInvestmentRepository>();
+            services.AddScoped<IInvestmentRepository>(provider => new CsvInvestmentRepository("investments.csv")); // change it 
+            services.AddScoped<ICryptoStatusRepository>(provider => new CsvCryptoStatusRepository("cryptostatus.csv")); // change it 
             services.AddScoped<IExchangeRepository, BinanceRepository>();
             services.AddSingleton<IBinanceRestClient>(provider => new BinanceRestClient(options =>
             {
