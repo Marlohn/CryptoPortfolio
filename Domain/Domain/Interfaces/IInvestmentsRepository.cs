@@ -4,9 +4,9 @@ namespace Domain.Interfaces
 {
     public interface IInvestmentsRepository
     {
-        void Add(Investment investment);        
-        void Delete(string cryptoName);
-        List<Investment> GetAll();
-        void Backup();
+        Task Add(Investment investment);
+        Task Delete(string cryptoName);
+        Task<List<Investment>> GetAll();
+        Task Backup();
     }
 }

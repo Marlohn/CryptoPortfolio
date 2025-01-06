@@ -4,9 +4,9 @@ namespace Domain.Interfaces
 {
     public interface ICryptoStatusRepository
     {
-        void Upsert(CryptoStatus investment);
-        public void Delete(string cryptoName);
-        List<CryptoStatus> GetAll();
-        void Backup();
+        Task Upsert(CryptoStatus investment);
+        Task Delete(string cryptoName);
+        Task<List<CryptoStatus>> GetAll();
+        Task Backup();
     }
 }

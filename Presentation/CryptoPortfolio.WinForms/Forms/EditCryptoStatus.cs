@@ -28,18 +28,18 @@ namespace CryptoPortfolio.WinForms.Forms
             comboBox_Risk.SelectedItem = _cryptoStatus.Risk;
         }
 
-        private void ButtonSave_Click(object sender, EventArgs e)
+        private async void ButtonSave_Click(object sender, EventArgs e)
         {
             try
             {
-                _cryptoStatusService.Upsert(new CryptoStatusDto()
+                await _cryptoStatusService.Upsert(new CryptoStatusDto()
                 {
                     CryptoName = _cryptoStatus.CryptoName,
                     CurrentValue = textBox_currentValue.Text.ToDecimal(),
                     Risk = comboBox_Risk.SelectedItem!.ToString()!
                 });
 
-                _main.UpdatePortfolio();
+                await _main.UpdatePortfolio();
 
                 this.Close();
             }
@@ -49,7 +49,7 @@ namespace CryptoPortfolio.WinForms.Forms
             }
         }
 
-        private void Button_delete_Click(object sender, EventArgs e)
+        private async void Button_delete_Click(object sender, EventArgs e)
         {
             try
             {
@@ -57,10 +57,10 @@ namespace CryptoPortfolio.WinForms.Forms
 
                 if (result == DialogResult.Yes)
                 {
-                    _investmentService.Delete(_cryptoStatus.CryptoName); // maybe it should return boolean sucesss 
-                    _cryptoStatusService.Delete(_cryptoStatus.CryptoName);
+                    await _investmentService.Delete(_cryptoStatus.CryptoName); // maybe it should return boolean sucesss 
+                    await _cryptoStatusService.Delete(_cryptoStatus.CryptoName);
 
-                    _main.UpdatePortfolio();
+                    await _main.UpdatePortfolio();
 
                     this.Close();
                 }
