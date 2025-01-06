@@ -20,20 +20,20 @@ namespace CryptoPortfolio.WinForms.Forms
             _main = main;
         }
 
-        private void AddInvestment_Load(object sender, EventArgs e)
+        private async void AddInvestment_Load(object sender, EventArgs e)
         {
             textBox_Date.Text = DateTime.Now.ToString("yyyy-MM-dd");
             comboBox_Risk.SelectedIndex = 0;
-            _cryptoStatusList = _cryptoStatusService.GetAll();
+            _cryptoStatusList = await _cryptoStatusService.GetAll();
 
             CheckBox_AutoDecreaseBTC.CheckedChanged += CheckBox_AutoDecrease_CheckedChanged;
             CheckBox_AutoDecreaseUSDT.CheckedChanged += CheckBox_AutoDecrease_CheckedChanged;
             CheckBox_AutoDecreaseNA.CheckedChanged += CheckBox_AutoDecrease_CheckedChanged;
         }
 
-        private void AddInvestment_FormClosing(object sender, FormClosingEventArgs e)
+        private async void AddInvestment_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _main.UpdatePortfolio();
+            await _main.UpdatePortfolio();
         }
 
         private void ButtonAddInvestment_Click(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace CryptoPortfolio.WinForms.Forms
             {
                 decimal investedValue = textBox_InvestedValue.Text.ToDecimal();
                 AddInvestments(textBox_CryptoName.Text, textBox_InvestedValue.Text.ToDecimal(), textBox_Notes.Text);
-                
+
                 if (CheckBox_AutoDecreaseBTC.Checked)
                 {
                     AddInvestments("BTC", -investedValue, $"Auto-decrease due to investment in {textBox_CryptoName.Text}");

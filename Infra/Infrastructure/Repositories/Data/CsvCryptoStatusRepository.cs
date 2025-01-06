@@ -17,16 +17,16 @@ namespace Infrastructure.Repositories.Data
                 File.WriteAllText(_filePath, "CryptoName,CurrentValue,Risk");
             }
         }
-        public List<CryptoStatus> GetAll()
+        public async Task<List<CryptoStatus>> GetAll()
         {
             var cryptoStatusList = new List<CryptoStatus>();
 
             using (var reader = new StreamReader(_filePath))
             {
-                string line;
+                string? line;
                 bool isFirstLine = true;
 
-                while ((line = reader.ReadLine()) != null)
+                while ((line = await reader.ReadLineAsync()) != null)
                 {
                     if (isFirstLine)
                     {
@@ -48,17 +48,17 @@ namespace Infrastructure.Repositories.Data
             return cryptoStatusList;
         }
 
-        public void Upsert(CryptoStatus cryptoStatus) // test it
+        public async Task Upsert(CryptoStatus cryptoStatus) // test it
         {
             var lines = new List<string>();
 
             // Lê todas as linhas do arquivo
             using (var reader = new StreamReader(_filePath))
             {
-                string line;
+                string? line;
                 bool isFirstLine = true;
 
-                while ((line = reader.ReadLine()) != null)
+                while ((line = await reader.ReadLineAsync()) != null)
                 {
                     if (isFirstLine)
                     {
@@ -90,16 +90,16 @@ namespace Infrastructure.Repositories.Data
             // Reescreve o arquivo
             File.WriteAllLines(_filePath, lines);
         }
-        public void Delete(string cryptoName)
+        public async Task Delete(string cryptoName)
         {
             var lines = new List<string>();
 
             using (var reader = new StreamReader(_filePath))
             {
-                string line;
+                string? line;
                 bool isFirstLine = true;
 
-                while ((line = reader.ReadLine()) != null)
+                while ((line = await reader.ReadLineAsync()) != null)
                 {
                     if (isFirstLine)
                     {
@@ -125,7 +125,7 @@ namespace Infrastructure.Repositories.Data
             }
         }
 
-        public void Backup()
+        public Task Backup()
         {
             var directory = Path.GetDirectoryName(_filePath) ?? Environment.CurrentDirectory;
 
@@ -140,6 +140,8 @@ namespace Infrastructure.Repositories.Data
             var backupFilePath = Path.Combine(backupDirectory, backupFileName);
 
             File.Copy(_filePath, backupFilePath);
+
+            return Task.CompletedTask;
         }
     }
 }

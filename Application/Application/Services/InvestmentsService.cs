@@ -15,9 +15,9 @@ namespace Application.Services
             _investmentRepository = investmentRepository;
         }
 
-        public List<InvestmentDto> GetAll()
+        public async Task<List<InvestmentDto>> GetAll()
         {
-            var investments = _investmentRepository.GetAll();
+            var investments = await _investmentRepository.GetAll();
 
             var investmentDtos = investments.Select(investment => new InvestmentDto
             {
@@ -30,7 +30,7 @@ namespace Application.Services
             return investmentDtos;
         }
 
-        public void Add(InvestmentDto investmentDto)
+        public async Task Add(InvestmentDto investmentDto)
         {
             var validationResults = new List<ValidationResult>();
             var context = new ValidationContext(investmentDto);
@@ -40,7 +40,7 @@ namespace Application.Services
                 throw new ValidationException("DTO validation failed.");
             }
 
-            _investmentRepository.Add(new Investment()  // need to create a better map here
+            await _investmentRepository.Add(new Investment()  // need to create a better map here
             {
                 Date = investmentDto.Date,
                 CryptoName = investmentDto.CryptoName,
@@ -49,19 +49,19 @@ namespace Application.Services
             });
         }
 
-        public void Delete(string cryptoName)
+        public async Task Delete(string cryptoName)
         {
             if (string.IsNullOrEmpty(cryptoName))
             {
                 throw new ValidationException("DTO validation failed.");
             }
 
-            _investmentRepository.Delete(cryptoName);
+            await _investmentRepository.Delete(cryptoName);
         }
 
-        public void Backup()
+        public async Task Backup()
         {
-            _investmentRepository.Backup();
+            await _investmentRepository.Backup();
         }
     }
 }

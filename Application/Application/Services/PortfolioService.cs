@@ -19,20 +19,20 @@ public class PortfolioService : IPortfolioService
         _exchangeRepository = exchangeRepository;
     }
 
-    public PortfolioDto GetPortfolio()
+    public async Task<PortfolioDto> GetPortfolio()
     {
-        return ConsolidatePortfolio();
+        return await ConsolidatePortfolio();
     }
 
-    public void UpdateCrypto(CryptoStatusDto cryptoStatusDto)
+    public async Task UpdateCrypto(CryptoStatusDto cryptoStatusDto)
     {
-        _cryptoStatusService.Upsert(cryptoStatusDto);
+        await _cryptoStatusService.Upsert(cryptoStatusDto);
     }
 
-    public void BackupData()
+    public async Task BackupData()
     {
-        _cryptoStatusService.Backup();
-        _investmentService.Backup();
+        await _cryptoStatusService.Backup();
+        await _investmentService.Backup();
     }
 
     public async Task RefreshBinanceData()
@@ -43,22 +43,22 @@ public class PortfolioService : IPortfolioService
         foreach (var cryptoStatus in cryptoStatusList) 
         {
             //Update only existing cryptos and also we need the required risk to update it
-            var currentCryptoStatus = _cryptoStatusService.GetByName(cryptoStatus.CryptoName);
+            var currentCryptoStatus = await _cryptoStatusService.GetByName(cryptoStatus.CryptoName);
             if (currentCryptoStatus != null)
             {
                 cryptoStatus.Risk = currentCryptoStatus.Risk;
 
-                _cryptoStatusService.Upsert(cryptoStatus);
+                await _cryptoStatusService.Upsert(cryptoStatus);
             }
             
         }
     }
 
-    private PortfolioDto ConsolidatePortfolio()
+    private async Task<PortfolioDto> ConsolidatePortfolio()
     {
         // Retrieve all investments and cryptocurrency status
-        var investments = _investmentService.GetAll();
-        var cryptoStatusList = _cryptoStatusService.GetAll();
+        var investments = await _investmentService.GetAll();
+        var cryptoStatusList = await _cryptoStatusService.GetAll();
 
         // Throw an exception if no investments are found
         if (investments == null || !investments.Any())

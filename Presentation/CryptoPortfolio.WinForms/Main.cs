@@ -26,11 +26,11 @@ namespace CryptoPortfolio.WinForms
             _cryptoStatusService = cryptoStatusService;
         }
 
-        private void Main_Load(object sender, EventArgs e)
+        private async void Main_Load(object sender, EventArgs e)
         {
             comboBox_ChartFilterType.SelectedIndex = 1; // CurrentValue
 
-            UpdatePortfolio();
+            await UpdatePortfolio();
             CustomizeDataGridView();
         }
 
@@ -55,11 +55,11 @@ namespace CryptoPortfolio.WinForms
             walletManagement.Show();
         }
 
-        public void UpdatePortfolio()
+        public async Task UpdatePortfolio()
         {
             try // remove this try catch create a midlesware
             {
-                var portfolio = _portfolioService.GetPortfolio();
+                var portfolio = await _portfolioService.GetPortfolio();
 
                 string formattedProfitPercentage = Math.Abs(portfolio.TotalProfitPercentage).ToString("P2");
 
@@ -338,11 +338,11 @@ namespace CryptoPortfolio.WinForms
         }
 
 
-        private void ComboBox_ChartFilterType_SelectedIndexChanged(object sender, EventArgs e)
+        private async void ComboBox_ChartFilterType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_portfolioBindingSource.DataSource != null)
             {
-                UpdatePortfolio();
+                await UpdatePortfolio();
             }
         }
 
@@ -403,7 +403,7 @@ namespace CryptoPortfolio.WinForms
             toolStripButton_RefreshIntegrations.Enabled = false;
 
             await _portfolioService.RefreshBinanceData();
-            UpdatePortfolio();
+            await UpdatePortfolio();
 
             pictureBox_logo.Image = Resources.coin_statistics_2476;
             toolStripButton_RefreshIntegrations.Enabled = true;

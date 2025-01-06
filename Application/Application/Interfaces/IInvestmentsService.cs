@@ -4,9 +4,9 @@ namespace Application.Interfaces
 {
     public interface IInvestmentsService
     {
-        void Add(InvestmentDto investment);        
-        void Delete(string cryptoName);
-        List<InvestmentDto> GetAll();
-        void Backup();
+        Task Add(InvestmentDto investment);
+        Task Delete(string cryptoName);
+        Task<List<InvestmentDto>> GetAll();
+        Task Backup();
     }
 }

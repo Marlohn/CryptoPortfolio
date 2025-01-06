@@ -17,16 +17,16 @@ namespace Infrastructure.Repositories.Data
             }
         }
 
-        public List<Investment> GetAll()
+        public async Task<List<Investment>> GetAll()
         {
             var investments = new List<Investment>();
 
             using (var reader = new StreamReader(_filePath))
             {
-                string line;
+                string? line;
                 bool isFirstLine = true;
 
-                while ((line = reader.ReadLine()) != null)
+                while ((line = await reader.ReadLineAsync()) != null)
                 {
                     if (isFirstLine)
                     {
@@ -49,22 +49,22 @@ namespace Infrastructure.Repositories.Data
             return investments;
         }
 
-        public void Add(Investment investment)
+        public async Task Add(Investment investment)
         {
             var line = $"{investment.Date},{investment.CryptoName},{investment.InvestedValue},{investment.Notes}";
-            File.AppendAllText(_filePath, line + "\n");
+            await File.AppendAllTextAsync(_filePath, line + "\n");
         }
 
-        public void Delete(string cryptoName)
+        public async Task Delete(string cryptoName)
         {
             var lines = new List<string>();
 
             using (var reader = new StreamReader(_filePath))
             {
-                string line;
+                string? line;
                 bool isFirstLine = true;
 
-                while ((line = reader.ReadLine()) != null)
+                while ((line = await reader.ReadLineAsync()) != null)
                 {
                     if (isFirstLine)
                     {
@@ -85,7 +85,7 @@ namespace Infrastructure.Repositories.Data
             File.WriteAllLines(_filePath, lines);
         }
 
-        public void Backup()
+        public Task Backup() // async no used
         {
             var directory = Path.GetDirectoryName(_filePath) ?? Environment.CurrentDirectory;
 
@@ -100,6 +100,8 @@ namespace Infrastructure.Repositories.Data
             var backupFilePath = Path.Combine(backupDirectory, backupFileName);
 
             File.Copy(_filePath, backupFilePath);
+
+            return Task.CompletedTask;
         }
     }
 }

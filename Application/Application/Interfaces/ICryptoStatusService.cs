@@ -4,10 +4,10 @@ namespace Application.Interfaces
 {
     public interface ICryptoStatusService
     {
-        void Upsert(CryptoStatusDto cryptoStatus);
-        void Delete(string cryptoStatus);
-        List<CryptoStatusDto> GetAll();
-        CryptoStatusDto? GetByName(string cryptoName);
-        void Backup();
+        Task Upsert(CryptoStatusDto cryptoStatus);
+        Task Delete(string cryptoStatus);
+        Task<List<CryptoStatusDto>> GetAll();
+        Task<CryptoStatusDto?> GetByName(string cryptoName);
+        Task Backup();
     }
 }

@@ -4,9 +4,9 @@ namespace Application.Interfaces
 {
     public interface IPortfolioService
     {
-        PortfolioDto GetPortfolio();
-        void UpdateCrypto(CryptoStatusDto cryptoStatusDto);
-        void BackupData();
+        Task<PortfolioDto> GetPortfolio();
+        Task UpdateCrypto(CryptoStatusDto cryptoStatusDto);
+        Task BackupData();
         Task RefreshBinanceData();
     }
 }

@@ -15,9 +15,9 @@ namespace Application.Services
             _cryptoStatusRepository = cryptoStatusRepository;
         }
 
-        public List<CryptoStatusDto> GetAll()
+        public async Task<List<CryptoStatusDto>> GetAll()
         {
-            var cryptoStatusList = _cryptoStatusRepository.GetAll();
+            var cryptoStatusList = await _cryptoStatusRepository.GetAll();
 
             var criptoStatusDto = cryptoStatusList.Select(investment => new CryptoStatusDto
             {
@@ -29,9 +29,9 @@ namespace Application.Services
             return criptoStatusDto;
         }
 
-        public CryptoStatusDto? GetByName(string cryptoName)
+        public async Task<CryptoStatusDto?> GetByName(string cryptoName)
         {
-            var cryptoStatusList = _cryptoStatusRepository.GetAll();
+            var cryptoStatusList = await _cryptoStatusRepository.GetAll();
             var cryptoStatus = cryptoStatusList.SingleOrDefault(x => x.CryptoName == cryptoName);
 
             return cryptoStatus == null ? null : new CryptoStatusDto
@@ -42,7 +42,7 @@ namespace Application.Services
             };
         }
 
-        public void Upsert(CryptoStatusDto cryptoStatusDto)
+        public async Task Upsert(CryptoStatusDto cryptoStatusDto)
         {
             var validationResults = new List<ValidationResult>();
             var context = new ValidationContext(cryptoStatusDto);
@@ -52,7 +52,7 @@ namespace Application.Services
                 throw new ValidationException("DTO validation failed.");
             }
 
-            _cryptoStatusRepository.Upsert(new CryptoStatus()  // need to create a better map here
+            await _cryptoStatusRepository.Upsert(new CryptoStatus()  // need to create a better map here
             {
                 CryptoName = cryptoStatusDto.CryptoName,
                 CurrentValue = cryptoStatusDto.CurrentValue,
@@ -60,19 +60,19 @@ namespace Application.Services
             });
         }
 
-        public void Delete(string cryptoName)
+        public async Task Delete(string cryptoName)
         {
             if (string.IsNullOrEmpty(cryptoName))
             {
                 throw new ValidationException("DTO validation failed.");
             }
 
-            _cryptoStatusRepository.Delete(cryptoName);
+            await _cryptoStatusRepository.Delete(cryptoName);
         }
 
-        public void Backup()
+        public async Task Backup()
         {
-            _cryptoStatusRepository.Backup();
+            await _cryptoStatusRepository.Backup();
         }
     }
 }
