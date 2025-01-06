@@ -6,12 +6,12 @@ using UtilityExtensions;
 
 public class PortfolioService : IPortfolioService
 {
-    private readonly IInvestmentService _investmentService;
+    private readonly IInvestmentsService _investmentService;
     private readonly ICryptoStatusService _cryptoStatusService;
     private readonly IBinanceService _binanceService;
     private readonly IExchangeRepository _exchangeRepository;
 
-    public PortfolioService(IInvestmentService investmentService, ICryptoStatusService cryptoStatusService, IBinanceService binanceService, IExchangeRepository exchangeRepository)
+    public PortfolioService(IInvestmentsService investmentService, ICryptoStatusService cryptoStatusService, IBinanceService binanceService, IExchangeRepository exchangeRepository)
     {
         _investmentService = investmentService;
         _cryptoStatusService = cryptoStatusService;

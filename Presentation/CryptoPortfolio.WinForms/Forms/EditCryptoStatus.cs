@@ -7,11 +7,11 @@ namespace CryptoPortfolio.WinForms.Forms
     public partial class EditCryptoStatus : Form
     {
         private readonly ICryptoStatusService _cryptoStatusService;
-        private readonly IInvestmentService _investmentService;
+        private readonly IInvestmentsService _investmentService;
         private readonly Main _main;
         private readonly CryptoStatusDto _cryptoStatus;
 
-        public EditCryptoStatus(ICryptoStatusService cryptoStatusService, IInvestmentService investmentService, Main main, CryptoStatusDto cryptoStatus)
+        public EditCryptoStatus(ICryptoStatusService cryptoStatusService, IInvestmentsService investmentService, Main main, CryptoStatusDto cryptoStatus)
         {
             _cryptoStatus = cryptoStatus;
             _cryptoStatusService = cryptoStatusService;

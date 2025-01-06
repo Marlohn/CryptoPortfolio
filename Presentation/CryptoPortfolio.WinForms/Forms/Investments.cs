@@ -4,10 +4,10 @@ namespace CryptoPortfolio.WinForms
 {
     public partial class Investments : Form
     {
-        private readonly IInvestmentService _investmentService;
+        private readonly IInvestmentsService _investmentService;
         private readonly Main _main;
 
-        public Investments(IInvestmentService investmentService, Main main)
+        public Investments(IInvestmentsService investmentService, Main main)
         {
             InitializeComponent();
             _investmentService = investmentService;

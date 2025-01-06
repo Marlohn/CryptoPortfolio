@@ -6,11 +6,11 @@ using Domain.Interfaces;
 
 namespace Application.Services
 {
-    public class InvestmentService : IInvestmentService
+    public class InvestmentsService : IInvestmentsService
     {
-        private readonly IInvestmentRepository _investmentRepository;
+        private readonly IInvestmentsRepository _investmentRepository;
 
-        public InvestmentService(IInvestmentRepository investmentRepository)
+        public InvestmentsService(IInvestmentsRepository investmentRepository)
         {
             _investmentRepository = investmentRepository;
         }

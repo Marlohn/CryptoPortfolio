@@ -15,8 +15,8 @@ namespace IoC
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             //Domain
-            services.AddScoped<IInvestmentRepository, CsvInvestmentRepository>();
-            services.AddScoped<IInvestmentRepository>(provider => new CsvInvestmentRepository("investments.csv")); // change it 
+            services.AddScoped<IInvestmentsRepository, CsvInvestmentsRepository>();
+            services.AddScoped<IInvestmentsRepository>(provider => new CsvInvestmentsRepository("investments.csv")); // change it 
             services.AddScoped<ICryptoStatusRepository>(provider => new CsvCryptoStatusRepository("cryptostatus.csv")); // change it 
             services.AddScoped<IExchangeRepository, BinanceRepository>();
             services.AddSingleton<IBinanceRestClient>(provider => new BinanceRestClient(options =>
@@ -26,7 +26,7 @@ namespace IoC
             }));
 
             //Application
-            services.AddScoped<IInvestmentService, InvestmentService>();
+            services.AddScoped<IInvestmentsService, InvestmentsService>();
             services.AddScoped<IPortfolioService, PortfolioService>();
             services.AddScoped<ICryptoStatusService, CryptoStatusService>();
             services.AddScoped<IBinanceService, BinanceService>();

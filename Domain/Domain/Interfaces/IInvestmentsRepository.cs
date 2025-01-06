@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces
 {
-    public interface IInvestmentRepository
+    public interface IInvestmentsRepository
     {
         void Add(Investment investment);        
         void Delete(string cryptoName);

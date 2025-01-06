@@ -6,13 +6,13 @@ namespace CryptoPortfolio.WinForms.Forms
 {
     public partial class AddInvestment : Form
     {
-        private readonly IInvestmentService _investmentService;
+        private readonly IInvestmentsService _investmentService;
         private readonly ICryptoStatusService _cryptoStatusService;
         private readonly Main _main;
 
         private List<CryptoStatusDto> _cryptoStatusList = new();
 
-        public AddInvestment(IInvestmentService investmentService, ICryptoStatusService cryptoStatusService, Main main)
+        public AddInvestment(IInvestmentsService investmentService, ICryptoStatusService cryptoStatusService, Main main)
         {
             InitializeComponent();
             _investmentService = investmentService;

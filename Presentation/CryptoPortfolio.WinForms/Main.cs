@@ -12,12 +12,12 @@ namespace CryptoPortfolio.WinForms
     public partial class Main : Form
     {
         private readonly IPortfolioService _portfolioService;
-        private readonly IInvestmentService _investmentService;
+        private readonly IInvestmentsService _investmentService;
         private readonly ICryptoStatusService _cryptoStatusService;
 
         private readonly BindingSource _portfolioBindingSource = [];
 
-        public Main(IInvestmentService investmentService, IPortfolioService portfolioService, ICryptoStatusService cryptoStatusService)
+        public Main(IInvestmentsService investmentService, IPortfolioService portfolioService, ICryptoStatusService cryptoStatusService)
         {
             InitializeComponent();
 

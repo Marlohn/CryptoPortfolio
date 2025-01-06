@@ -2,7 +2,7 @@
 
 namespace Application.Interfaces
 {
-    public interface IInvestmentService
+    public interface IInvestmentsService
     {
         void Add(InvestmentDto investment);        
         void Delete(string cryptoName);

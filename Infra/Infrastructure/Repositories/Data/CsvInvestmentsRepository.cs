@@ -3,11 +3,11 @@ using Domain.Interfaces;
 
 namespace Infrastructure.Repositories.Data
 {
-    public class CsvInvestmentRepository : IInvestmentRepository
+    public class CsvInvestmentsRepository : IInvestmentsRepository
     {
         private readonly string _filePath;
 
-        public CsvInvestmentRepository(string filePath)
+        public CsvInvestmentsRepository(string filePath)
         {
             _filePath = filePath;
 
