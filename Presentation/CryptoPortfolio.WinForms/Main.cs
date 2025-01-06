@@ -48,6 +48,13 @@ namespace CryptoPortfolio.WinForms
             investmentsForm.Show();
         }
 
+        private void toolStripButton_wallets_Click(object sender, EventArgs e)
+        {
+            var walletManagement = new WalletManagement(this);
+
+            walletManagement.Show();
+        }
+
         public void UpdatePortfolio()
         {
             try // remove this try catch create a midlesware
@@ -401,5 +408,6 @@ namespace CryptoPortfolio.WinForms
             pictureBox_logo.Image = Resources.coin_statistics_2476;
             toolStripButton_RefreshIntegrations.Enabled = true;
         }
+
     }
 }

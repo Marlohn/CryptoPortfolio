@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             dataGridView1 = new DataGridView();
             Rank = new DataGridViewTextBoxColumn();
@@ -50,6 +50,7 @@
             toolStripLabel1 = new ToolStripLabel();
             toolStripButton_Settings = new ToolStripButton();
             toolStripButton_Backup = new ToolStripButton();
+            toolStripButton_wallets = new ToolStripButton();
             chart_Risk = new System.Windows.Forms.DataVisualization.Charting.Chart();
             pictureBox_logo = new PictureBox();
             label1 = new Label();
@@ -162,7 +163,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(25, 25);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_NewInvestment, toolStripButton_ViewInvestments, toolStripButton_RefreshIntegrations, toolStripLabel1, toolStripButton_Settings, toolStripButton_Backup });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_NewInvestment, toolStripButton_ViewInvestments, toolStripButton_RefreshIntegrations, toolStripLabel1, toolStripButton_Settings, toolStripButton_Backup, toolStripButton_wallets });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1491, 32);
@@ -222,18 +223,28 @@
             toolStripButton_Backup.Text = "Backup";
             toolStripButton_Backup.Click += ToolStripButton_Backup_Click;
             // 
+            // toolStripButton_wallets
+            // 
+            toolStripButton_wallets.Alignment = ToolStripItemAlignment.Right;
+            toolStripButton_wallets.Image = Properties.Resources.wallet_2527572;
+            toolStripButton_wallets.ImageTransparentColor = Color.Magenta;
+            toolStripButton_wallets.Name = "toolStripButton_wallets";
+            toolStripButton_wallets.Size = new Size(86, 29);
+            toolStripButton_wallets.Text = "Wallets";
+            toolStripButton_wallets.Click += toolStripButton_wallets_Click;
+            // 
             // chart_Risk
             // 
-            chartArea3.Name = "ChartArea1";
-            chart_Risk.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            chart_Risk.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            chart_Risk.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chart_Risk.Legends.Add(legend1);
             chart_Risk.Location = new Point(6, 6);
             chart_Risk.Name = "chart_Risk";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            chart_Risk.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chart_Risk.Series.Add(series1);
             chart_Risk.Size = new Size(650, 500);
             chart_Risk.TabIndex = 3;
             chart_Risk.Text = "chart1";
@@ -281,16 +292,16 @@
             // 
             // chart_TotalCrypto
             // 
-            chartArea4.Name = "ChartArea1";
-            chart_TotalCrypto.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            chart_TotalCrypto.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            chart_TotalCrypto.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chart_TotalCrypto.Legends.Add(legend2);
             chart_TotalCrypto.Location = new Point(6, 6);
             chart_TotalCrypto.Name = "chart_TotalCrypto";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            chart_TotalCrypto.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chart_TotalCrypto.Series.Add(series2);
             chart_TotalCrypto.Size = new Size(650, 500);
             chart_TotalCrypto.TabIndex = 9;
             chart_TotalCrypto.Text = "chart1";
@@ -444,5 +455,6 @@
         private DataGridViewTextBoxColumn ProfitPercentage;
         private DataGridViewTextBoxColumn Risk;
         private ToolStripButton toolStripButton_RefreshIntegrations;
+        private ToolStripButton toolStripButton_wallets;
     }
 }
