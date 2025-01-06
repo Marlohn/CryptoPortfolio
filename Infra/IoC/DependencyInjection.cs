@@ -15,9 +15,17 @@ namespace IoC
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             //Domain
-            services.AddScoped<IInvestmentsRepository, CsvInvestmentsRepository>();
-            services.AddScoped<IInvestmentsRepository>(provider => new CsvInvestmentsRepository("investments.csv")); // change it 
-            services.AddScoped<ICryptoStatusRepository>(provider => new CsvCryptoStatusRepository("cryptostatus.csv")); // change it 
+            //services.AddScoped<IInvestmentsRepository>(provider => new CsvInvestmentsRepository("investments.csv")); // change it 
+            //services.AddScoped<ICryptoStatusRepository>(provider => new CsvCryptoStatusRepository("cryptostatus.csv")); // change it 
+
+            services.AddSingleton<IInvestmentsRepository>(provider => new SupabaseInvestmentsRepository(
+                new Supabase.Client("https://lgnimnzxhdgcguenpfii.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxnbmltbnp4aGRnY2d1ZW5wZmlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzYxNzAzNTUsImV4cCI6MjA1MTc0NjM1NX0.eEp4VXJgXDneF1bwBvUlRc_YalGwDxpmohuT4XtxpF0")
+            ));
+
+            services.AddSingleton<ICryptoStatusRepository>(provider => new SupabaseCryptoStatusRepository(
+                new Supabase.Client("https://lgnimnzxhdgcguenpfii.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxnbmltbnp4aGRnY2d1ZW5wZmlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzYxNzAzNTUsImV4cCI6MjA1MTc0NjM1NX0.eEp4VXJgXDneF1bwBvUlRc_YalGwDxpmohuT4XtxpF0")
+            ));
+
             services.AddScoped<IExchangeRepository, BinanceRepository>();
             services.AddSingleton<IBinanceRestClient>(provider => new BinanceRestClient(options =>
             {
